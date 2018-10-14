@@ -29,7 +29,7 @@ class Room:
         print("----------------------------------------------------")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
-            print("The " + room.get_name() + " is to the " + direction)
+            print("The " + room.get_name() + " is " + direction)
 
     def move(self, direction):
         if direction in self.linked_rooms:
