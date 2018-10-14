@@ -1,11 +1,15 @@
 from room_sets import *
+from player import *
 
 ################################
 #           MAIN CODE          #
 ################################
+main_player = Player()
+
 current_room = foyer
 
 while True:
-    current_room.get_details()
+    main_player.current_room.get_details()
+    # command = (input("\nWhat would you like to do?\n> ")).lower()
     command = (input("\nWhere to?\n> ")).lower()
-    current_room = current_room.move(command)
+    main_player.move(command)
