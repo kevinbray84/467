@@ -3,6 +3,8 @@ class Room:
         self.name = room_name
         self.description = "This is the " + room_name
         self.linked_rooms = {}
+        self.items_in_room = {}
+        self.is_locked = False
 
     def get_name(self):
         return self.name

@@ -1,4 +1,5 @@
 from room import Room
+from item_sets import *
 
 ################################
 #       INITIALIZE ROOMS       #
@@ -33,7 +34,7 @@ panic_room = Room("Panic Room")
 unknown_room = Room("Unknown Room")
 
 ################################
-#           LINK ROOMS         #
+#           ROOM SETUP         #
 ################################
 
 ###############
