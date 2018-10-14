@@ -25,7 +25,7 @@ class Room:
     def get_details(self):
         print("\n====================================================\n" + self.get_name())
         print("====================================================")
-        print(self.describe())
+        self.describe()
         print("----------------------------------------------------")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
