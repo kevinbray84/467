@@ -19,7 +19,7 @@ grand = Room("Grand Room")
 family = Room("Family Room")
 garage = Room("Garage")
 dining = Room("Dining Room")
-secret_stairwell = Room("Secret Library Storage Room")
+secret_stairwell = Room("Secret Library Storage Room", True)
 pantry = Room("Pantry")
 stairwell = Room("Stairwell")
 
