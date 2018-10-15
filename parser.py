@@ -6,6 +6,8 @@ objects = ['candle', 'key', 'map', 'chest']
 directions = ['north', 'south', 'east', 'west']
 prepositions = ['in', 'on']
 
+# TODO: Change to a single function taht takes 'word_type' to look for
+
 
 def find_verb(input):
     num_found = 0
@@ -18,10 +20,8 @@ def find_verb(input):
     if num_found == 1:
         return (0, verb)
     elif num_found == 0:
-        # print '    Verb: VERB NOT FOUND'
         return (-1, 'ERR: verb not found')
     elif num_found > 1:
-        # print '    Verb: TOO MANY VERBS FOUND'
         return (-2, 'ERR: too many verbs')
 
 
@@ -70,21 +70,21 @@ def find_prep(input):
         return (-2, 'ERR: too many directions found')
 
 
-for user_input in input:
-    print ('INPUT: %s' % user_input)
+def process_input(input):
+    print ('INPUT: %s' % input)
     verb = 'NULL'
     obj = 'NULL'
     prep = 'NULL'
     direction = 'NULL'
 
-    (code, direction) = find_direction(user_input)
+    (code, direction) = find_direction(input)
     if code == 0:
         print ("Moving %s" % direction)
     else:
         direction = 'NULL'
 
     if direction == 'NULL':
-        (code, verb) = find_verb(user_input)
+        (code, verb) = find_verb(input)
         if code == -1:
             print 'ERR: I can\'t tell what you\'re trying to do'
             verb = 'NULL'
@@ -92,7 +92,7 @@ for user_input in input:
             print 'ERR: You\'re trying to do too many things at once'
             verb = 'NULL'
 
-        (code, obj) = find_object(user_input)
+        (code, obj) = find_object(input)
         if code == -1:
             print 'ERR: I can\'t tell what you\'re trying to interact with'
             obj = 'NULL'
@@ -100,7 +100,7 @@ for user_input in input:
             print 'ERR: You\'re trying to interact with too many things at once'
             obj = 'NULL'
 
-        (code, prep) = find_prep(user_input)
+        (code, prep) = find_prep(input)
         if code == -1:
             prep = 'NULL'
         if code == -2:
@@ -108,3 +108,12 @@ for user_input in input:
 
     command = [verb, obj, prep]
     print command
+
+
+for user_input in input:
+    process_input(user_input)
+
+
+while True:
+    input = raw_input('Enter Command> ')
+    process_input(input)
