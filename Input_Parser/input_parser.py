@@ -35,16 +35,14 @@ class Input_Parser:
         self.objects = ['candle', 'key', 'map', 'chest']
 
     def _find_command(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.commands:
+        for word in self.commands:
+            if word in self.input:
                 self.num_commands += 1
                 self.command = word
 
     def _find_direction(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.directions:
+        for word in self.directions:
+            if word in self.input:
                 self.num_directions += 1
                 self.direction = word
 
@@ -55,31 +53,34 @@ class Input_Parser:
                 self.room_name = word
 
     def _find_verb(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.verbs:
+        for word in self.verbs:
+            if word in self.input:
                 self.num_verbs += 1
                 self.verb = word
 
     def _find_prep(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.preps:
+        for word in self.preps:
+            if word in self.input:
                 self.num_preps += 1
                 self.prep = word
 
     def _find_object(self):
-        words = self.input.split()
-        words.reverse()
-        for word in words:
-            if word in self.objects:
+        loc = len(self.input)
+        if self.num_preps == 1:
+            loc = self.input.find(self.prep)
+            print 'prep at %d' % loc
+        for word in self.objects:
+            if word in self.input[0:loc]:
                 self.num_objs += 1
                 self.obj = word
 
     def _find_object_of_prep(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.objects and word != self.obj:
+        loc = len(self.input)
+        if self.num_preps == 1:
+            loc = self.input.find(self.prep)
+        for word in self.objects:
+            if word in self.input[loc:len(self.input)]:
+                self.num_objs += 1
                 self.obj_of_prep = word
 
     def _check_errors(self):
