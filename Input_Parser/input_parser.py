@@ -31,8 +31,50 @@ class Input_Parser:
                            'secret library storage room', 'pantry',
                            'stairwell', 'second floor foyer']
         self.preps = [' in ', ' on ']
-        self.verbs = ['go', 'take', 'drop', 'get', 'put']
-        self.objects = ['candle', 'key', 'map', 'chest']
+        self.verbs = ['look',
+                      'grab', 'get', 'take',
+                      'put', 'use',
+                      'try'
+                      'go',
+                      'drop',
+                      'move',
+                      'turn on',
+                      'watch']
+        self.objects = ['key', 'keys',
+                        'coded key',
+                        'silver key',
+                        'car key', 'car keys'
+                        'desk',
+                        'slot',
+                        'keypad',
+                        'statue',
+                        'food tray', 'tray',
+                        'back table',
+                        'flashlight',
+                        'bmw', 'car',
+                        'bolt cutters',
+                        'truck',
+                        'portrait',
+                        'combination', 'safe combination',
+                        'passcode',
+                        'end table',
+                        'fireplace',
+                        'wine bottle', 'wine',
+                        'wine reciept', 'receipt',
+                        'jacket',
+                        'sofa',
+                        'pocket',
+                        'piece of paper', 'paper',
+                        'newspaper', 'headline',
+                        'diary', 'sarah\' diary',
+                        'computer',
+                        'computer password',
+                        'letter',
+                        'generator',
+                        'camera', 'video', 'video playback',
+                        'sarah',
+                        'chains', 'chain'
+                        ]
 
     def _find_command(self):
         for word in self.commands:
