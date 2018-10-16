@@ -21,9 +21,15 @@ class Input_Parser:
         self.obj = ''
         self.obj_of_prep = ''
 
-        self.commands = ['savegame', 'loadgame']
+        self.commands = ['savegame', 'loadgame', 'exit', 'explore']
         self.directions = ['north', 'south', 'east', 'west']
-        self.room_names = ['cellar', 'dungeon']
+        self.room_names = ['foyer', 'central staircase',
+                           'library',  'southern patio', 'northern patio',
+                           'master suite', 'veranda left', 'veranda middle',
+                           'veranda right', 'grand room', 'family room',
+                           'garage', 'dining room',
+                           'secret library storage room', 'pantry',
+                           'stairwell']
         self.preps = ['in', 'on']
         self.verbs = ['go', 'take', 'drop', 'get', 'put']
         self.objects = ['candle', 'key', 'map', 'chest']
@@ -43,9 +49,8 @@ class Input_Parser:
                 self.direction = word
 
     def _find_room_name(self):
-        words = self.input.split()
-        for word in words:
-            if word in self.room_names:
+        for word in self.room_names:
+            if word in self.input:
                 self.num_room_names += 1
                 self.room_name = word
 
@@ -121,19 +126,3 @@ class Input_Parser:
         if self.num_preps == 1:
             self._find_object_of_prep()
         self._check_errors()
-
-
-parser = Input_Parser()
-
-while True:
-    parser.get_input()
-
-    print ("Found %d command: %s" % (parser.num_commands, parser.command))
-    print ("Found %d direction: %s" %
-           (parser.num_directions, parser.direction))
-    print ("Found %d room names: %s" %
-           (parser.num_room_names, parser.room_name))
-    print ("Found %d preps: %s" % (parser.num_preps, parser.prep))
-    print ("Found %d verbs: %s" % (parser.num_verbs, parser.verb))
-    print ("Found %d objects: \n\t object: %s \n\t object of prep: %s" %
-           (parser.num_objs, parser.obj, parser.obj_of_prep))

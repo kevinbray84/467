@@ -1,4 +1,4 @@
-from input_parser import *
+from Input_Parser.input_parser import *
 
 parser = Input_Parser()
 
