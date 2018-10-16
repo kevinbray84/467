@@ -25,4 +25,4 @@ while True:
         main_player.move(parser.direction)
 
     elif parser.num_room_names == 1:
-        print 'move to %s' % parser.room_name
+        main_player.move_to(parser.room_name)

@@ -22,15 +22,15 @@ class Input_Parser:
         self.obj_of_prep = ''
 
         self.commands = ['savegame', 'loadgame', 'exit', 'explore']
-        self.directions = ['north', 'south', 'east', 'west']
+        self.directions = ['north ', 'south ', 'east ', 'west ']
         self.room_names = ['foyer', 'central staircase',
                            'library',  'southern patio', 'northern patio',
                            'master suite', 'veranda left', 'veranda middle',
                            'veranda right', 'grand room', 'family room',
                            'garage', 'dining room',
                            'secret library storage room', 'pantry',
-                           'stairwell']
-        self.preps = ['in', 'on']
+                           'stairwell', 'second floor foyer']
+        self.preps = [' in ', ' on ']
         self.verbs = ['go', 'take', 'drop', 'get', 'put']
         self.objects = ['candle', 'key', 'map', 'chest']
 
@@ -44,7 +44,7 @@ class Input_Parser:
         for word in self.directions:
             if word in self.input:
                 self.num_directions += 1
-                self.direction = word
+                self.direction = word.strip()
 
     def _find_room_name(self):
         for word in self.room_names:
@@ -114,7 +114,7 @@ class Input_Parser:
     def get_input(self):
         self.__init__()
         self.input = raw_input("Enter command> ")
-        self.input = self.input.lower()
+        self.input = self.input.lower() + ' '
         self._process_input()
 
     def _process_input(self):
