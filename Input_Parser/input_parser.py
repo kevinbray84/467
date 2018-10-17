@@ -107,7 +107,7 @@ class Input_Parser:
 
     def _find_prep(self):
         for word in self.preps:
-            if word in self.input:
+            if word in self.input and self.verb != 'turn on':  # need special case for turn on
                 self.num_preps += 1
                 self.prep = word.strip()
 
@@ -173,8 +173,8 @@ class Input_Parser:
         self._find_command()
         self._find_direction()
         self._find_room_name()
-        self._find_prep()
         self._find_verb()
+        self._find_prep()
         self._find_object()
         if self.num_preps == 1:
             self._find_object_of_prep()
