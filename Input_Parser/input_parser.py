@@ -21,66 +21,67 @@ class Input_Parser:
         self.obj = ''
         self.obj_of_prep = ''
 
-        self.commands = ['savegame', 'loadgame', 'exit', 'explore']
-        self.directions = ['north ', 'south ', 'east ', 'west ']
-        self.room_names = ['foyer', 'central staircase',
-                           'library',  'southern patio', 'northern patio',
-                           'master suite', 'veranda left', 'veranda middle',
-                           'veranda right', 'grand room', 'family room',
-                           'garage', 'dining room',
-                           'secret library storage room', 'pantry',
-                           'stairwell', 'second floor foyer']
+        self.commands = [' savegame ', ' loadgame ', ' exit ']
+        self.directions = [' north ', ' south ', ' east ', ' west ']
+        self.room_names = [' foyer ', ' central staircase ',
+                           ' library ',  ' southern patio ', ' northern patio ',
+                           ' master suite ', ' veranda left ', ' veranda middle ',
+                           ' veranda right ', ' grand room ', ' family room ',
+                           ' garage ', ' dining room ',
+                           ' secret library storage room ', ' pantry ',
+                           ' stairwell ', ' second floor foyer ']
         self.preps = [' in ', ' on ']
-        self.verbs = ['look',
-                      'grab', 'get', 'take',
-                      'put', 'use',
-                      'try'
-                      'go',
-                      'drop',
-                      'move',
-                      'turn on',
-                      'watch']
-        self.objects = ['key', 'keys',
-                        'coded key',
-                        'silver key',
-                        'car key', 'car keys'
-                        'desk',
-                        'slot',
-                        'keypad',
-                        'statue',
-                        'food tray', 'tray',
-                        'back table',
-                        'flashlight',
-                        'bmw', 'car',
-                        'bolt cutters',
-                        'truck',
-                        'portrait',
-                        'combination', 'safe combination',
-                        'passcode',
-                        'end table',
-                        'fireplace',
-                        'wine bottle', 'wine',
-                        'wine reciept', 'receipt',
-                        'jacket',
-                        'sofa',
-                        'pocket',
-                        'piece of paper', 'paper',
-                        'newspaper', 'headline',
-                        'diary', 'sarah\' diary',
-                        'computer',
-                        'computer password',
-                        'letter',
-                        'generator',
-                        'camera', 'video', 'video playback',
-                        'sarah',
-                        'chains', 'chain'
+        self.verbs = [' look ',
+                      ' grab ', ' get ', ' take ', ' pick up ',
+                      ' put ', ' use ',
+                      ' try '
+                      ' go ',
+                      ' drop ',
+                      ' move ',
+                      ' turn on ',
+                      ' watch ',
+                      ' explore ']
+        self.objects = [' key ', ' keys ',
+                        ' coded key ',
+                        ' silver key ',
+                        ' car key ', ' car keys ',
+                        ' desk ',
+                        ' slot ',
+                        ' keypad ',
+                        ' statue ',
+                        ' food tray ', ' tray ',
+                        ' back table ',
+                        ' flashlight ',
+                        ' bmw ', ' car ',
+                        ' bolt cutters ',
+                        ' truck ',
+                        ' portrait ',
+                        ' combination ', ' safe combination ',
+                        ' passcode ',
+                        ' end table ',
+                        ' fireplace ',
+                        ' wine bottle ', ' wine ',  ' bottle ',
+                        ' wine receipt ', ' receipt ',
+                        ' jacket ',
+                        ' sofa ',
+                        ' pocket ',
+                        ' piece of paper ', ' paper ',
+                        ' newspaper ', ' headline ',
+                        ' diary ', ' sarah\'s diary ',
+                        ' computer ',
+                        ' computer password ',  # computer password fails
+                        ' letter ',
+                        ' generator ',
+                        ' camera ', ' video ', ' video playback ',  # video playback fails
+                        ' sarah ',
+                        ' chains ', ' chain '
                         ]
 
     def _find_command(self):
         for word in self.commands:
             if word in self.input:
                 self.num_commands += 1
-                self.command = word
+                self.command = word.strip()
 
     def _find_direction(self):
         for word in self.directions:
@@ -91,30 +92,37 @@ class Input_Parser:
     def _find_room_name(self):
         for word in self.room_names:
             if word in self.input:
-                self.num_room_names += 1
-                self.room_name = word
+                if len(word) > len(self.room_name):  # only get longest matching word
+                    if len(self.room_name) == 0:     # dont double count long match
+                        self.num_room_names += 1
+                    self.room_name = word.strip()
 
     def _find_verb(self):
         for word in self.verbs:
             if word in self.input:
-                self.num_verbs += 1
-                self.verb = word
+                if len(word) > len(self.verb):  # only get longest matching word
+                    if len(self.verb) == 0:     # dont double count long match
+                        self.num_verbs += 1
+                    self.verb = word.strip()
 
     def _find_prep(self):
         for word in self.preps:
             if word in self.input:
                 self.num_preps += 1
-                self.prep = word
+                self.prep = word.strip()
 
     def _find_object(self):
         loc = len(self.input)
         if self.num_preps == 1:
             loc = self.input.find(self.prep)
-            print 'prep at %d' % loc
         for word in self.objects:
             if word in self.input[0:loc]:
-                self.num_objs += 1
-                self.obj = word
+                # print '%d: found %s in %s' % (
+                #    self.num_objs, word, self.input[0:loc])
+                if len(word) > len(self.obj):  # only get longest matching word
+                    if len(self.obj) == 0:     # dont double count long match
+                        self.num_objs += 1
+                    self.obj = word.strip()
 
     def _find_object_of_prep(self):
         loc = len(self.input)
@@ -122,8 +130,10 @@ class Input_Parser:
             loc = self.input.find(self.prep)
         for word in self.objects:
             if word in self.input[loc:len(self.input)]:
-                self.num_objs += 1
-                self.obj_of_prep = word
+                if len(word) > len(self.obj_of_prep):  # only get longest matching word
+                    if len(self.obj_of_prep) == 0:     # dont double count long match
+                        self.num_objs += 1
+                    self.obj_of_prep = word.strip()
 
     def _check_errors(self):
         if self.num_directions + self.num_commands + self.num_room_names > 1:
@@ -156,7 +166,7 @@ class Input_Parser:
     def get_input(self):
         self.__init__()
         self.input = raw_input("Enter command> ")
-        self.input = self.input.lower() + ' '
+        self.input = ' ' + self.input.lower() + ' '
         self._process_input()
 
     def _process_input(self):

@@ -30,13 +30,13 @@ while True:
     elif parser.num_verbs == 1:
         if parser.verb == 'look':
             # TODO: Implmenet:
-            # look_at(obj)   # should display info about  the thing being looked at
+            # look_at(parser.obj)   # should display info about  the thing being looked at
             print 'LOOKING at %s' % parser.obj
-        elif parser.verb == 'take' or parser.verb == 'get' or parser.verb == 'grab':
+        elif parser.verb == 'take' or parser.verb == 'get' or parser.verb == 'grab' or parser.verb == 'pick up':
             # TODO: Implement:
-            # get(obj)    # should add the object to the player's inventory
+            # get(parser.obj)    # should add the object to the player's inventory
             print 'GETTING %s' % parser.obj
         elif parser.verb == 'put' or parser.verb == 'use':
             # TODO: Implement:
-            # get(obj)    # should use the object if it's in the inventory
+            # get(parser.obj)    # should use the object if it's in the inventory
             print 'Using %s' % parser.obj
