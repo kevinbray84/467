@@ -8,35 +8,43 @@ from Input_Parser.input_parser import *
 #           MAIN CODE          #
 ################################
 main_player = Player()
-parser = Input_Parser()
+cmd = Input_Parser()
 
 
 current_room = foyer
 
-while True:
-    main_player.current_room.get_details()
-    parser.get_input()
 
-    if parser.num_commands == 1:
-        if parser.command == 'exit':
+def process_cmd(cmd):
+    if cmd.num_commands == 1:
+        if cmd.command == 'exit':
             exit()
+        elif cmd.command == 'savegame':
+            print "Saving game..."
+        elif cmd.command == 'loadgame':
+            print "Loading game..."
 
-    elif parser.num_directions == 1:
-        main_player.move(parser.direction)
+    elif cmd.num_directions == 1:
+        main_player.move(cmd.direction)
 
-    elif parser.num_room_names == 1:
-        main_player.move_to(parser.room_name)
+    elif cmd.num_room_names == 1:
+        main_player.move_to(cmd.room_name)
 
-    elif parser.num_verbs == 1:
-        if parser.verb == 'look':
+    elif cmd.num_verbs == 1:
+        if cmd.verb == 'look':
             # TODO: Implmenet:
             # look_at(parser.obj)   # should display info about  the thing being looked at
-            print 'LOOKING at %s' % parser.obj
-        elif parser.verb == 'take' or parser.verb == 'get' or parser.verb == 'grab' or parser.verb == 'pick up':
+            print 'LOOKING at %s' % cmd.obj
+        elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
             # TODO: Implement:
             # get(parser.obj)    # should add the object to the player's inventory
-            print 'GETTING %s' % parser.obj
-        elif parser.verb == 'put' or parser.verb == 'use':
+            print 'GETTING %s' % cmd.obj
+        elif cmd.verb == 'put' or cmd.verb == 'use':
             # TODO: Implement:
             # get(parser.obj)    # should use the object if it's in the inventory
-            print 'Using %s' % parser.obj
+            print 'Using %s' % cmd.obj
+
+
+while True:
+    main_player.current_room.get_details()
+    cmd.get_input()
+    process_cmd(cmd)

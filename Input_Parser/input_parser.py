@@ -22,7 +22,8 @@ class Input_Parser:
         self.obj_of_prep = ''
 
         self.commands = [' savegame ', ' loadgame ', ' exit ']
-        self.directions = [' north ', ' south ', ' east ', ' west ']
+        self.directions = [' north ', ' south ', ' east ',
+                           ' west ', ' upstairs ', ' downstairs ']
         self.room_names = [' foyer ', ' central staircase ',
                            ' library ',  ' southern patio ', ' northern patio ',
                            ' master suite ', ' veranda left ', ' veranda middle ',
