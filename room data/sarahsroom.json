@@ -1,12 +1,12 @@
 {
-    "location": "Child's Bedroom",
+    "location": "Sarah's Bedroom",
     "long description": "",
     "short description": "",
     "feature 1": "",
     "feature 2": "",
     "exits": {
         "north":"",
-        "east":"",
+        "east":"Second Floor Foyer",
         "south":"",
         "west":""
     }
