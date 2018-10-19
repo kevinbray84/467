@@ -1,0 +1,15 @@
+{
+    "location": "Veranda",
+    "long description": "You step outside into the Veranda. The air is humid and the sky is dark on this July evening. It seems like a summer storm is setting in. Along with the sky, you notice a porch table situated in the center of the Veranda with a perfect view of the stormy weather.  On the southern wall is a door leading back into the Family Room. The door on the eastern wall leads back indoors as well, opening into the Grand Room. ",
+    "short description": "You are on the Veranda. To the south is the Family Room and to the west is the Grand Room. There is a storm in the sky and a patio table in the center of the Veranda.",
+   "look at": {
+        "patio table":"You approach the patio table and notice a half finished bottle of wine on the table. Looking under the bottle you notice a folded piece of paper. Moving the bottle, you take a better look at the paper and see that it is a receipt for an astonishingly large wine order. Your jaw drops at the amount of wine ordered and the size of the bill. Just how can they afford all this extravagance?",
+        "sky":"Your gaze trends upwards into the clouds as you take a close look at the storm brewing overhead. Suddenly the sky is filled with a flash of lightning and the roar of thunder.The lightning bolt seemed to strike uncomfortably close and you can’t help but feel a sense of foreboding from this storm."
+    },
+    "exits": {
+        "north":"",
+        "east":"",
+        "south":"Family Room",
+        "west":"Grand Room"
+    }
+}
