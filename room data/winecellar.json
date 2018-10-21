@@ -1,0 +1,13 @@
+{
+    "location": "Wine Cellar",
+    "long description": "",
+    "short description": "",
+    "feature 1": "",
+    "feature 2": "",
+    "exits": {
+        "north":"",
+        "east":"",
+        "south":"",
+        "west":""
+    }
+}

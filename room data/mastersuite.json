@@ -1,0 +1,21 @@
+{
+    "location": "Master Suite",
+    "long description": "The Master Suite is decorated in a display of obscene wealth as the rest of the house. You have never seen such an extravagant display of wealth before. On the western wall there is portrait of the couple. Next to the bed are several small vials on an end table. On the north wall is an opened door leading the Grand Room. The solid oak door located on the east wall leads into the Family Room. To the south is the door leading toward the Library.",
+    "short description": "You are in the Master Suite. To the north is the Grand Room, to the South is the Library, and the oak door to the east leads to the Family Room. In the room you see a portrait and vials on an end table.",
+    "look at": {
+        "portrait":{
+            "not moved": "The portrait is of the Mayor and his wife and seems recently commissioned based on their ages. While moving closer to the portrait to get a better look, you notice that the frame seems to be hanging slightly farther away from the wall than you would expect. It seems like it can be moved.",
+            "moved":"The portrait has been moved and reveals a hidden safe that is located behind it."
+        },
+        "safe":{
+            "locked": "The safe sits locked in the wall, awaiting the correct combination.",
+            "unlocked":"The safe sits in the wall unlocked."
+        }
+    },
+    "exits": {
+        "north":"Grand Room",
+        "east":"Family Room",
+        "south":"Library",
+        "west":""
+    }
+}
