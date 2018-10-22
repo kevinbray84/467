@@ -6,7 +6,7 @@
         "table": "You approach the table and notice that a copy of yesterdays newspaper has been left here. Glancing at the front page you read the headline Day 4: Kidnapping investigation still underway. Has it really only been 4 days you think to yourself. You were proud at first to have been detailed to the investigation team but quickly found the couple to be surprisingly uncooperative when trying to question them. Your superiors said they must just be in shock, but when you continued to press them suddenly you found yourself stuck on desk duty doing grunt work. You have always relied on your instincts and they were now screaming at you that something didnt add up in this case. Snapping out of your thoughts, you further resolve yourself to get to the bottom of this case. ",
         "drawers":{
             "before taking key": "Opening up one of the drawers, you notice an engraved key rolling around at the bottom of the drawer. Perhaps this could be helpful later on.",
-            "reexamining without haing taken key":"Opening up one of the drawers, you notice the engraved key still rolling about inside. Perhaps this could be of use.",
+            "reexamining without having taken key":"Opening up one of the drawers, you notice the engraved key still rolling about inside. Perhaps this could be of use.",
             "after taking coded key": "Opening the drawers, you find nothing else of value."
         }
     },
