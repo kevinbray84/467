@@ -1,6 +1,6 @@
 {
     "location": "Panic Room",
-    "long description": "You walk through the passcode locked door and find yourself in a a room the size of a bedroom. Within the room you see a wall of video surveillance monitors and a stockpile of food and bottled water in the corner. This it the first time you have ever seen a genuine panic room and looking around it looks like a person could hold out for quite some time in here. The only exit is the steel door you came in through on the east wall.",
+    "long description": "You walk through the passcode locked door and find yourself in a room the size of a bedroom. Within the room you see a wall of video surveillance monitors and a stockpile of food and bottled water in the corner. This it the first time you have ever seen a genuine panic room and looking around it looks like a person could hold out for quite some time in here. The only exit is the steel door you came in through on the east wall.",
     "short description": "You are in the Panic Room. There is food in the corner and video monitors on the wall. The only exit is the steel door to the east.",
     "look at":{
         "food":"You approach the food and see that it is a bunch of canned goods and bottled water. This amount should easily last a family enough time for help to arrive.",
