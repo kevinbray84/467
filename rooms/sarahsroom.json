@@ -1,0 +1,22 @@
+{
+    "location": "Sarah's Room",
+    "long description": "Pushing open the decorated door, you enter a surprisingly stark room. Aside from the lack of decor, you notice that the room is impeccably clean. This wasn’t like any child’s room that you had ever seen. The only furniture in the room is the single twin bed and a side table. The door you just used, which was on the eastern wall, appears to be the single entryway in or out.",
+    "short description": "You are in Sarah's room. The only furnishings you see are a bed and a side table. The only exit is the door to the east.",
+    "look at": {
+        "bed":{
+            "not taken diary key":"You approach the bed and don't notice anything unusual. Getting on your hands and knees, you check under the bed and see a glint of gold in the far corner. Stretching towards the object, it appears to be a very small key on a golden chain. Now what is this going here and does this unlock you wonder?",
+            "reexamining not taken diary key": "You approach the bed and don't notice anything unusual. Getting on your hands and knees, you see the key is still there. This could be useful later.",
+            "taken diary key": "You approach the bed and take another look around and under it, but don't notice anything out of place."
+        },
+        "side table":{
+            "locked":"You approach the side table and see a small bound book sitting on top. You examine the book and are surprised to find that it has a lock on it. This must be Sarah's diary, you think to yourself.",
+            "unlocked":"You approach the side table and reexamine Sarah's diary. Glancing through it, you reread the passage where Sarah explains how her father showed her there was a panic room located behind a bookshelf in the library that could be accessed by inserting an engraved key into a slot on top of the desk located in the room."
+        }
+    },
+    "exits": {
+        "north":"",
+        "east":"Second Floor Foyer",
+        "south":"",
+        "west":""
+    }
+}

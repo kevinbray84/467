@@ -1,0 +1,15 @@
+{
+    "location": "Basement",
+    "long description": "Walking down the stairs, you descend into the Basement. The Basement is surprisingly poorly lit given how gradiose and perfect the rest of the mansion seems to be. While looking around, you spot a large trunk tucked away in a corner and notice some footprints on the ground. To the west is the staircase that leads to the Family Room and to the south is a glass door that opens into a Wine Cellar.",
+    "short description": "You are in the Basement. To the south is a glass door to the Wine Cellar and to the west is the staircase to the Family Room. In the Basement, you see a trunk and notice some footprints.",
+    "look at":{
+        "trunk":"You approach the trunk, unlatch the straps, and throw open then lid. What you find is a mountain of clothing. Lifting out some of the shirts and dresses you realize that the trunks contents are made up almost entirely of Sarah's clothing. Also, judging by the sizes, these should be relatively new as well. Why would the family pack up some perfectly good children's clothes?... unless the family believe they will have no more use for them... a chill runs down your spine as a worst case scenario plays through your end.",
+        "footprints":"On the ground, you notice a lot of boot prints that have been made in the dust, both coming and going. Placing your shoe next to one of the imprints, you judge the shoe size to be roughly equal to a men's 11 or 12. This was most likely a result of the Mayor coming down into the basement."
+    },
+    "exits": {
+        "north":"",
+        "east":"",
+        "south":"Wine Cellar",
+        "west":"Family Room"
+    }
+}

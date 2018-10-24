@@ -1,0 +1,22 @@
+{
+    "location": "Library",
+    "long description": "Stepping into the library, you are amazed at the vast collection of volumes of books that seem to take up the entirety of the room. Within the sea of books is a desk with a large tome lying upon it. Scanning the rest of the room, you notice a statue in the corner. In the north end of the room there is a sliding door that stands ajar. Peering in, it looks to be the entrance into the master suite of the mansion. On the eastern wall the double doors open into the First Floor Foyer.",
+    "short description": "You are in the Library. To the north is the Mster Suite and to the east is the First Floor Foyer. There is a Statue and a desk within the room.",
+    "look at": {
+        "statue": "The statue is a towering piece that depicts a proud king.  The plaque at the base reads King Midas. You notice next to the plaque are several scuff marks on the floor. These marks look to have been made by the moving of a nearby bookcase.",
+        "desk": {
+            "untouched": "On the desk is a family photo album. Taking a glance through the album, you notice there are very few photos of Sarah, the kidnapped daughter. How very odd. Setting the book aside, you notice there is a slot on the corner of the desk, almost like a vending machine coin slot. Maybe something can be inserted into it.",
+            "used": "On the desk sits the family photo album as well as the inserted coded key."
+        },
+        "panic room":{
+            "locked":"The formidable Panic Room door stands before you, keypad at the ready.",
+            "unlocked": "The formidable Panic Room door stands ajar, awaiting your entry."
+        }
+    },
+    "exits": {
+        "north":"Master Suite",
+        "east":"First Floor Foyer",
+        "south":"",
+        "west":""
+    }
+}
