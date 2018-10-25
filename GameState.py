@@ -1,5 +1,5 @@
 from player import Player
-from room_sets import *
+#from room_sets import *
 from item_sets import *
 from Input_Parser.input_parser import *
 from dataparse import *
@@ -17,149 +17,6 @@ class GameState:
         self.game_items["keys"] = Item(
             "keys", "Rusty golden key, looks like it could open anything.")
 
-    def build_mansion(self):
-
-        self.mansion["foyer"] = Room("Foyer")
-        self.mansion["central"] = Room("Central staircase")
-        self.mansion["library"] = Room("Library")
-        self.mansion["southern_patio"] = Room("Southern Patio")
-        self.mansion["northern_patio"] = Room("Northern Patio")
-        self.mansion["master_suite"] = Room("Master Suite")
-        self.mansion["veranda_left"] = Room("Veranda Left")
-        self.mansion["veranda_middle"] = Room("Veranda Middle")
-        self.mansion["veranda_right"] = Room("Veranda Right")
-        self.mansion["grand"] = Room("Grand Room")
-        self.mansion["family"] = Room("Family Room")
-        self.mansion["garage"] = Room("Garage")
-        self.mansion["dining"] = Room("Dining Room")
-        self.mansion["secret_stairwell"] = Room(
-            "Secret Library Storage Room", True)
-        self.mansion["pantry"] = Room("Pantry")
-        self.mansion["stairwell"] = Room("Stairwell")
-
-        # Second Floor
-        self.mansion["foyer_second"] = Room("Second floor foyer")
-        self.mansion["loft"] = Room("Loft")
-        self.mansion["bedroom_second"] = Room("Bedroom on the second floor")
-
-        # Basement
-        self.mansion["speakeasy"] = Room("Speakeasy")
-        self.mansion["panic_room"] = Room("Panic Room")
-        self.mansion["unknown_room"] = Room("Unknown Room")
-
-        ################################
-        #           ROOM SETUP         #
-        ################################
-
-        ###############
-        # FIRST FLOOR #
-        ###############
-
-        # FOYER
-        self.mansion["foyer"].link_room(central, "north")
-        self.mansion["foyer"].link_room(library, "west")
-        self.mansion["foyer"].link_room(dining, "east")
-
-        self.mansion["foyer"].set_description('You are standing in the Foyer of the mansion. The interior seems to sparkle, and you marvel at the grandeur\n of the entrance with its marble floors and dark mahogany woodwork. In front of you, to the north, is a grand \nstaircase leading to the second floor. Peering into the room to the west, you see books that line the walls \nfrom the floor to the ceiling. You make a mental note that this is the location of the library. To the east \nyou can see what appears to be the dining room with an elongated table adorned with expensive china and fancy \nglassware. In the Foyer, next to the door you see a stack of mail and on the wall hang a set of keys.')
-
-        self.mansion["foyer"].add_feature("mailbox", mailbox)
-        self.mansion["foyer"].add_feature("keys", foyer_keys)
-
-        # CENTRAL
-        self.mansion["central"].link_room(grand, "north")
-        self.mansion["central"].link_room(foyer, "south")
-        self.mansion["central"].link_room(master_suite, "west")
-        self.mansion["central"].link_room(family, "east")
-        self.mansion["central"].link_room(foyer_second, "upstairs")
-
-        # LIBRARY
-        self.mansion["library"].link_room(secret_stairwell, "north")
-        self.mansion["library"].link_room(southern_patio, "west")
-        self.mansion["library"].link_room(foyer, "east")
-
-        # SECRET STAIRWELL
-        self.mansion["secret_stairwell"].link_room(library, "upstairs")
-        self.mansion["secret_stairwell"].link_room(panic_room, "downstairs")
-
-        # SOUTHERN PATIO
-        self.mansion["southern_patio"].link_room(northern_patio, "north")
-        self.mansion["southern_patio"].link_room(library, "east")
-
-        # NORTHERN PATIO
-        self.mansion["northern_patio"].link_room(southern_patio, "south")
-        self.mansion["northern_patio"].link_room(master_suite, "east")
-
-        # MASTER SUITE
-        self.mansion["master_suite"].link_room(veranda_left, "north")
-        self.mansion["master_suite"].link_room(northern_patio, "west")
-        self.mansion["master_suite"].link_room(central, "east")
-
-        # VERANDA LEFT
-        self.mansion["veranda_left"].link_room(master_suite, "south")
-        self.mansion["veranda_left"].link_room(veranda_middle, "east")
-
-        # VERANDA MIDDLE
-        self.mansion["veranda_middle"].link_room(grand, "south")
-        self.mansion["veranda_middle"].link_room(veranda_left, "west")
-        self.mansion["veranda_middle"].link_room(veranda_right, "east")
-
-        # VERANDA RIGHT
-        self.mansion["veranda_right"].link_room(family, "south")
-        self.mansion["veranda_right"].link_room(veranda_middle, "west")
-        self.mansion["veranda_right"].link_room(stairwell, "east")
-
-        # GRAND ROOM
-        self.mansion["grand"].link_room(veranda_middle, "north")
-        self.mansion["grand"].link_room(central, "south")
-        self.mansion["grand"].link_room(family, "east")
-
-        # FAMILY ROOM
-        self.mansion["family"].link_room(veranda_right, "north")
-        self.mansion["family"].link_room(garage, "south")
-        self.mansion["family"].link_room(central, "west")
-
-        # GARAGE
-        self.mansion["garage"].link_room(family, "north")
-        self.mansion["garage"].link_room(dining, "west")
-
-        # DINING ROOM
-        self.mansion["dining"].link_room(pantry, "north")
-        self.mansion["dining"].link_room(foyer, "west")
-        self.mansion["dining"].link_room(garage, "east")
-
-        self.mansion["dining"].set_description("The dining room has a very lavish feel to it. The table is arranged with only the very best china and cutlery. \nOn the edge of the table you spot a serving tray. Glancing around the rest of the room, you spot something yellow \nsitting on the side table. At the eastern wall you see a door leading out to the Garage. To the north, the \nadjacent room seems to be the Family Room.")
-        self.mansion["dining"].add_feature("food tray", food_tray)
-        self.mansion["dining"].add_feature("side table", side_table)
-
-        ################
-        # SECOND FLOOR #
-        ################
-
-        # FOYER SECOND  FLOOR
-        foyer_second.link_room(loft, "west")
-        foyer_second.link_room(bedroom_second, "east")
-        foyer_second.link_room(central, "downstairs")
-
-        # LOFT
-        loft.link_room(foyer_second, "east")
-
-        # BEDROOM
-        bedroom_second.link_room(foyer_second, "west")
-
-        #################
-        #   BASEMENT    #
-        #################
-        stairwell.link_room(veranda_right, "west")
-        stairwell.link_room(speakeasy, "south")
-
-        speakeasy.link_room(stairwell, "north")
-        speakeasy.link_room(unknown_room, "east")
-        speakeasy.link_room(panic_room, "south")
-
-        panic_room.link_room(speakeasy, "north")
-        panic_room.link_room(secret_stairwell, "stairwell")
-
-        self.current_room = self.mansion["foyer"]
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
@@ -274,6 +131,7 @@ class GameState:
  #           print(self.current_room.get_details())
             if self.current_room.first_visit == True:
                 print(self.current_room.long_description)
+                self.current_room.first_visit == False
             else:
                 print(self.current_room.short_description)
             cmd.get_input()
