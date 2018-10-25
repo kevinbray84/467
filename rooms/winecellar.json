@@ -1,0 +1,21 @@
+{
+    "location": "Wine Cellar",
+    "long description": "Walking into the Wine Cellar, you are are astonished by the vast collection of wine bottles that fill the multitude of wine racks surrounding the room. You also notice that the temperature decreased when you stepped into this room. It must be climate controlled you think to yourself. Looking around the room, other than the various wine racks the only noticeable feature is a bare wall. Will they continue to expand their collection until the entire room is completely filled? The only exit seems to be the glass door to the north that leads back into the Basement.",
+    "short description": {
+        "locked":"You are in the Wine Cellar. You are surrounded by wine racks with only one wall left bare. To the north is the glass door leading to the Basement.",
+        "unlocked": "You are in the Wine Cellar. You are surrounded by wine racks with only one wall left bare. To the north is the glass door leading to the Basement and to the east it the hidden door to the Secret Room.",
+    },
+    "look at":{
+        "wall":{
+            "locked":"You approach the back wall and notice that it is poorly lit back here. However, after examining the wall you don't notice anything unusual.",
+            "unlocked":"You approach the now unlocked wall and give it a slight push, revealing a Secret Room."
+        },
+        "wine rack":"Walking over to a random wine rack, you pick up a bottle and wonder just how expensive this was? You are also very curious what it tastes like. Could the taste really justify the price? You carefully place the bottle back on the rack. You am not here to admire the wine vintage you remind yourself."
+    },
+    "exits": {
+        "north":"Basement",
+        "east":"Secret Room",
+        "south":"",
+        "west":""
+    }
+}

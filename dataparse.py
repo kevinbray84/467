@@ -65,3 +65,11 @@ def newgameStart(gameName):
 	name = "basement.json"
 	new_room_dict = inputData(name)
 	gameName.basement.populate(new_room_dict['location'], new_room_dict['long description'], new_room_dict['short description'], new_room_dict['look at'], new_room_dict['exits'])
+	
+	name = "winecellar.json"
+	new_room_dict = inputData(name)
+	gameName.winecellar.populate(new_room_dict['location'], new_room_dict['long description'], new_room_dict['short description'], new_room_dict['look at'], new_room_dict['exits'])
+	
+	name = "secretroom.json"
+	new_room_dict = inputData(name)
+	gameName.secretRoom.populate(new_room_dict['location'], new_room_dict['long description'], new_room_dict['short description'], new_room_dict['look at'], new_room_dict['exits'])
