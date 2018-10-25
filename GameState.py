@@ -271,8 +271,11 @@ class GameState:
         cmd = Input_Parser()
 
         while True:
-            print(self.current_room.get_details())
-
+ #           print(self.current_room.get_details())
+            if self.current_room.first_visit == True:
+                print(self.current_room.long_description)
+            else:
+                print(self.current_room.short_description)
             cmd.get_input()
             self._process_cmd(cmd)
 
