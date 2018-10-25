@@ -19,31 +19,76 @@ class GameState:
 
         self.mansion["foyer"] = Room("Foyer")
         self.mansion["foyer"].add_item(Item("keys", "Rusty golden key...."))
+
         self.mansion["central"] = Room("Central staircase")
+
         self.mansion["library"] = Room("Library")
+        self.mansion["library"].add_item(
+            Item("slot", "A good place to put a coded key..."))
+        self.mansion["library"].add_item(
+            Item("bookshelf", "A good thing to hide a slot behind..."))
+
         self.mansion["southern_patio"] = Room("Southern Patio")
+
         self.mansion["northern_patio"] = Room("Northern Patio")
+
         self.mansion["master_suite"] = Room("Master Suite")
+        self.mansion["master_suite"].add_item(
+            Item("portrait", "A creepy portrait..."))
+        self.mansion["master_suite"].add_item(Item("safe", "A secure safe..."))
+        self.mansion["master_suite"].add_item(
+            Item("passphrase", "A secure passphrase..."))
+
         self.mansion["veranda_left"] = Room("Veranda Left")
+
         self.mansion["veranda_middle"] = Room("Veranda Middle")
+
         self.mansion["veranda_right"] = Room("Veranda Right")
+
         self.mansion["grand"] = Room("Grand Room")
+
         self.mansion["family"] = Room("Family Room")
+        self.mansion["family"].add_item(Item("jacket", "A stylish jacket..."))
+        self.mansion["family"].add_item(
+            Item("safe combination", "A cryptic code..."))
+
         self.mansion["garage"] = Room("Garage")
+        self.mansion["garage"].add_item(Item("bmw", "Fancy BMW..."))
+        self.mansion["garage"].add_item(
+            Item("bolt cutters", "Big sharp bolt cutters..."))
+
         self.mansion["dining"] = Room("Dining Room")
+        self.mansion["dining"].add_item(
+            Item("flashlight", "A bright flashlight..."))
+        self.mansion["dining"].add_item(Item("silver key", "Fancy BMW..."))
+
         self.mansion["secret_stairwell"] = Room(
             "Secret Library Storage Room", True)
+
         self.mansion["pantry"] = Room("Pantry")
+
         self.mansion["stairwell"] = Room("Stairwell")
 
         # Second Floor
         self.mansion["foyer_second"] = Room("Second floor foyer")
+        self.mansion["foyer_second"].add_item(
+            Item("engraved key", "A key that's engraved..."))
+        self.mansion["foyer_second"].add_item(
+            Item("drawers", "Some drawers in a table..."))
+
         self.mansion["loft"] = Room("Loft")
+
         self.mansion["bedroom_second"] = Room("Bedroom on the second floor")
+        self.mansion["bedroom_second"].add_item(
+            Item("diary key", "A key that's engraved..."))
+        self.mansion["bedroom_second"].add_item(
+            Item("diary", "A key that's engraved..."))
 
         # Basement
         self.mansion["speakeasy"] = Room("Speakeasy")
+
         self.mansion["panic_room"] = Room("Panic Room")
+
         self.mansion["unknown_room"] = Room("Unknown Room")
 
         ################################
