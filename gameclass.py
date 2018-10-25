@@ -17,6 +17,8 @@ class game:
 	study = roomclass.Room()
 	panicRoom = roomclass.Room()
 	basement = roomclass.Room()
+	secretRoom = roomclass.Room()
+	winecellar = roomclass.Room()
 	def __init__(self):
 		self.diningRoom = roomclass.Room()
 		self.familyRoom = roomclass.Room()
@@ -30,6 +32,8 @@ class game:
 		self.secondfloorfoyer = roomclass.Room()
 		self.study = roomclass.Room()
 		self.basementRoom = roomclass.Room()
+		self.secretRoom = roomclass.Room()
+		self.winecellar = roomclass.Room()
 	
 
 	
