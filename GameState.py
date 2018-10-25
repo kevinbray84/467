@@ -20,70 +20,31 @@ class GameState:
     def build_mansion(self):
 
         self.mansion["foyer"] = Room("Foyer")
-        self.mansion["foyer"].add_item(
-            Item("keys", "Rusty golden key....", True))
-
         self.mansion["central"] = Room("Central staircase")
-
         self.mansion["library"] = Room("Library")
-
         self.mansion["southern_patio"] = Room("Southern Patio")
-
         self.mansion["northern_patio"] = Room("Northern Patio")
-
         self.mansion["master_suite"] = Room("Master Suite")
-        # not gettable until safe is opened
-        self.mansion["master_suite"].add_item(
-            Item("passphrase", "A secure passphrase...", False))
-
         self.mansion["veranda_left"] = Room("Veranda Left")
-
         self.mansion["veranda_middle"] = Room("Veranda Middle")
-
         self.mansion["veranda_right"] = Room("Veranda Right")
-
         self.mansion["grand"] = Room("Grand Room")
-
         self.mansion["family"] = Room("Family Room")
-        # not getable until jacket is examined
-        self.mansion["family"].add_item(
-            Item("safe combination", "A cryptic code...", False))
-
         self.mansion["garage"] = Room("Garage")
-        # not getable until BMW trunk is opened
-        self.mansion["garage"].add_item(
-            Item("bolt cutters", "Big sharp bolt cutters...", False))
-
         self.mansion["dining"] = Room("Dining Room")
-        self.mansion["dining"].add_item(
-            Item("flashlight", "A bright flashlight...", True))
-        self.mansion["dining"].add_item(
-            Item("silver key", "A key that is silver...", True))
-
         self.mansion["secret_stairwell"] = Room(
             "Secret Library Storage Room")
-
         self.mansion["pantry"] = Room("Pantry")
-
         self.mansion["stairwell"] = Room("Stairwell")
 
         # Second Floor
         self.mansion["foyer_second"] = Room("Second floor foyer")
-        # not getable until you look in the drawers
-        self.mansion["foyer_second"].add_item(
-            Item("engraved key", "A key that's engraved...", False))
-
         self.mansion["loft"] = Room("Loft")
-
         self.mansion["bedroom_second"] = Room("Bedroom on the second floor")
-        self.mansion["bedroom_second"].add_item(
-            Item("diary key", "A key that's engraved...", True))
 
         # Basement
         self.mansion["speakeasy"] = Room("Speakeasy")
-
         self.mansion["panic_room"] = Room("Panic Room")
-
         self.mansion["unknown_room"] = Room("Unknown Room")
 
         ################################
@@ -306,6 +267,7 @@ class GameState:
     def play(self):
 
         cmd = Input_Parser()
+        self.move_to("foyer")
 
         #########################################
         # Main Loop
