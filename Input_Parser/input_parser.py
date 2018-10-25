@@ -25,13 +25,12 @@ class Input_Parser:
                          ' exit ', ' inventory ', ' showgameitems ']
         self.directions = [' north ', ' south ', ' east ',
                            ' west ', ' upstairs ', ' downstairs ']
-        self.room_names = [' foyer ', ' central staircase ',
-                           ' library ',  ' southern patio ', ' northern patio ',
-                           ' master suite ', ' veranda left ', ' veranda middle ',
-                           ' veranda right ', ' grand room ', ' family room ',
-                           ' garage ', ' dining room ',
-                           ' secret library storage room ', ' pantry ',
-                           ' stairwell ', ' second floor foyer ']
+        self.room_names = [' first floor foyer ', ' library ',
+                           ' dining room ',  ' panic room ', ' master suite ',
+                           ' family room ', ' grand room ', ' veranda ',
+                           ' second floor foyer ', ' sarahs room ', ' study ',
+                           ' basement ', ' wine cellar ',
+                           ' secret room ', ' garage ']
         self.preps = [' in ', ' on ']
         self.verbs = [' look ',
                       ' grab ', ' get ', ' take ', ' pick up ',
