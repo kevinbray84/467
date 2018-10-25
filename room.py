@@ -2,7 +2,8 @@ class Room:
     def __init__(self, room_name, locked_status=False):
         self.name = room_name
         self.description = "This is the " + room_name
-        self.secondary_description = "This is the " + room_name + "'s secondary description"
+        self.secondary_description = "This is the " + \
+            room_name + "'s secondary description"
         self.linked_rooms = {}
         self.items_in_room = {}
         self.is_locked = locked_status

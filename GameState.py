@@ -1,6 +1,8 @@
 from player import Player
 from room_sets import *
 from item_sets import *
+from Input_Parser.input_parser import *
+
 
 class GameState:
     def __init__(self):
@@ -10,7 +12,8 @@ class GameState:
         self.current_room = None
 
     def build_item_sets(self):
-        self.game_items["keys"] = Item("keys", "Rusty golden key, looks like it could open anything.")
+        self.game_items["keys"] = Item(
+            "keys", "Rusty golden key, looks like it could open anything.")
 
     def build_mansion(self):
 
@@ -27,7 +30,8 @@ class GameState:
         self.mansion["family"] = Room("Family Room")
         self.mansion["garage"] = Room("Garage")
         self.mansion["dining"] = Room("Dining Room")
-        self.mansion["secret_stairwell"] = Room("Secret Library Storage Room", True)
+        self.mansion["secret_stairwell"] = Room(
+            "Secret Library Storage Room", True)
         self.mansion["pantry"] = Room("Pantry")
         self.mansion["stairwell"] = Room("Stairwell")
 
@@ -40,7 +44,6 @@ class GameState:
         self.mansion["speakeasy"] = Room("Speakeasy")
         self.mansion["panic_room"] = Room("Panic Room")
         self.mansion["unknown_room"] = Room("Unknown Room")
-
 
         ################################
         #           ROOM SETUP         #
@@ -163,56 +166,94 @@ class GameState:
             print("You can't go that way")
             return self
 
+    def move_to(self, room_name):
+        for key, value in self.current_room.linked_rooms.items():
+            if value.name.lower() == room_name:
+                self.current_room = value
+                return self
+        print("That room isn't connected to this one")
+        return self
+
     def foyer_action_check(self, verb, noun):
         return
 
+    def _show_game_items(self):
+        print "There are %d game items" % len(self.game_items)
+        for key, value in self.game_items.items():
+            print key
+            print value
+
+    def _look_at(self, object_name):
+        for key, value in self.current_room.features.items():
+            if value.name.lower() == object_name:
+                if value.hasAction:
+                    self.action_check(self.current_room.name, object_name)
+                else:
+                    print value.get_description()
+                return self
+        print "The %s isn't in this room" % object_name
+        return self
+
+    def _add_to_inventory(self, object_name):
+        for key, value in self.current_room.features.items():
+            if value.name.lower() == object_name:
+                self.current_room.take_item(self.game_items[object_name])
+                self.main_player.take_item(self.game_items[object_name])
+        return self
+        print "The %s isn't in this room" % object_name
+
+    def _process_cmd(self, cmd):
+
+        #####################################################
+        #   Process menu commands
+        #####################################################
+        if cmd.num_commands == 1:
+            if cmd.command == 'exit':
+                print "Thanks for playing!"
+                exit()
+            elif cmd.command == 'savegame':  # TODO: Implement save game
+                print "Saving game..."
+            elif cmd.command == 'loadgame':  # TODO: Implement load game
+                print "Loading game..."
+            elif cmd.command == 'inventory':
+                self.check_inventory()
+            elif cmd.command == 'showgameitems':
+                self._show_game_items()
+
+        #####################################################
+        #   Process movement commands
+        #####################################################
+        elif cmd.num_directions == 1:
+            self.move(cmd.direction)
+
+        elif cmd.num_room_names == 1:
+            self.move_to(cmd.room_name)
+
+        #####################################################
+        #   Process action commands
+        #####################################################
+        elif cmd.num_verbs == 1:
+            if cmd.verb == 'look':
+                # TODO: Implmenet:
+                self._look_at(cmd.obj)
+            elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
+                # TODO: Implement:
+                print 'GETTING %s' % cmd.obj
+                self._add_to_inventory(cmd.obj)
+            elif cmd.verb == 'put' or cmd.verb == 'use':
+                # TODO: Implement:
+                # get(parser.obj)    # should use the object if it's in the inventory
+                print 'Using %s' % cmd.obj
+
     def play(self):
-        print(self.current_room.get_details())
+
+        cmd = Input_Parser()
 
         while True:
+            print(self.current_room.get_details())
 
-            # command = (input("\nWhat would you like to do?\n> ")).lower()
-            command = (raw_input("\nWhat would you like to do?\n> ")).lower()
-
-            movement = ["go"]
-            observation = ["look"]
-            pickup = ["take"]
-
-            if len(command.split()) > 1:
-                firstWord, rest = command.split(None, 1)
-            else:
-                firstWord = command
-                rest = command
-
-            if rest == "look":
-                print(self.current_room.get_description())
-
-            if firstWord in movement:
-                self.move(rest)
-                self.current_room.get_details()
-
-            elif firstWord in observation:
-                if rest in self.current_room.features:
-                    curr_feature = self.current_room.features[rest]
-                    if curr_feature.hasAction:
-                        self.action_check(self.current_room.name, rest)
-                    else:
-                        print (curr_feature.get_description())
-
-            elif firstWord == "inventory":
-                self.check_inventory()
-
-            elif firstWord in pickup:
-                if rest in self.current_room.items_in_room:
-                    self.current_room.take_item(self.game_items["keys"])
-                    self.main_player.take_item(self.game_items["keys"])
-                    print("Took " + rest)
-
-            else:
-                print("Incorrect response, try again")
-
-            if command == "exit":
-                exit()
+            cmd.get_input()
+            self._process_cmd(cmd)
 
     def action_check(self, room_name, feature_name):
         if room_name.lower() == "foyer":
@@ -222,14 +263,7 @@ class GameState:
 
     def check_inventory(self):
         if bool(self.main_player.inventory) == False:
-            print("Nothing")
+            print("There is nothing in your inventory")
         else:
             for items in self.main_player.inventory:
                 print(items.name)
-
-
-
-
-
-
-

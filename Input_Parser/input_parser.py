@@ -21,7 +21,8 @@ class Input_Parser:
         self.obj = ''
         self.obj_of_prep = ''
 
-        self.commands = [' savegame ', ' loadgame ', ' exit ']
+        self.commands = [' savegame ', ' loadgame ',
+                         ' exit ', ' inventory ', ' showgameitems ']
         self.directions = [' north ', ' south ', ' east ',
                            ' west ', ' upstairs ', ' downstairs ']
         self.room_names = [' foyer ', ' central staircase ',
@@ -43,6 +44,7 @@ class Input_Parser:
                       ' watch ',
                       ' explore ']
         self.objects = [' key ', ' keys ',
+                        ' mailbox ',
                         ' coded key ',
                         ' silver key ',
                         ' car key ', ' car keys ',
