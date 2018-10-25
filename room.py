@@ -63,4 +63,6 @@ class Room:
         self.items_in_room[item.name] = item
 
     def take_item(self, item):
+        print 'REMOVING %s.  THERE ARE %d items' % (
+            item, len(self.items_in_room))
         del self.items_in_room[item]

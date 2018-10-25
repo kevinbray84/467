@@ -197,8 +197,8 @@ class GameState:
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.features.items():
             if value.name.lower() == object_name:
-                self.current_room.take_item(self.game_items[object_name])
                 self.main_player.take_item(self.game_items[object_name])
+                self.current_room.take_item(key)
         return self
         print "The %s isn't in this room" % object_name
 
