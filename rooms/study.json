@@ -10,9 +10,6 @@
         "mail":"You approach the stack of mail and see a stack of unpaid bills. Just how much in debt is this family and why has this not come up within the course of the investigation?"
     },
     "exits": {
-        "north":"",
-        "east":"",
-        "south":"",
         "west":"Second Floor Foyer"
     }
 }

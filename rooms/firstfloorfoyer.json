@@ -10,9 +10,7 @@
         }
     },
     "exits": {
-        "north":"",
         "east":"Dining Room",
-        "south":"",
         "west":"Library"
     }
 }

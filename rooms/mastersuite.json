@@ -15,7 +15,6 @@
     "exits": {
         "north":"Grand Room",
         "east":"Family Room",
-        "south":"Library",
-        "west":""
+        "south":"Library"
     }
 }

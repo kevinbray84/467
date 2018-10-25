@@ -15,8 +15,6 @@
     },
     "exits": {
         "north":"Master Suite",
-        "east":"First Floor Foyer",
-        "south":"",
-        "west":""
+        "east":"First Floor Foyer"
     }
 }

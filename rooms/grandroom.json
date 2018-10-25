@@ -7,9 +7,8 @@
         "family portrait":"Gazing at the family portrait, you look at the figure of a young Sarah. She should be roughly 10 when this was made you guess. You ponder if she has any inclination as to what fate had in store for her?"
     },
     "exits": {
-        "north":"",
         "east":"Veranda",
-        "south":"Master Suite",
-        "west":""
+        "south":"Master Suite"
+
     }
 }

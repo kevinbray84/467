@@ -7,9 +7,6 @@
         "video":"You approach the video monitors and see that there are cameras throughout the house. Better erase all traces you were here, you think to yourself. As you use the controls to rewind the tapes you notice something odd. The Mayor is seen taking a tray of food down into the basement. Your heartbeat quickens, could this be it? Is she still alive in the house? You follow the Mayor's progress as he decends the stairs into the basement, goes into the wine cellar, and finally approaches a wall. The wall turns out to actually be a door! It is tough to make out with the angle, but it looks like he used some type of key. You must go and search the wine cellar!"
     },
     "exits": {
-        "north":"",
-        "east":"Library",
-        "south":"",
-        "west":""
+        "east":"Library"
     }
 }

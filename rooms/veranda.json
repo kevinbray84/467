@@ -7,8 +7,6 @@
         "sky":"Your gaze trends upwards into the clouds as you take a close look at the storm brewing overhead. Suddenly the sky is filled with a flash of lightning and the roar of thunder.The lightning bolt seemed to strike uncomfortably close and you can’t help but feel a sense of foreboding from this storm."
     },
     "exits": {
-        "north":"",
-        "east":"",
         "south":"Family Room",
         "west":"Grand Room"
     }
