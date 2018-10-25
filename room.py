@@ -1,16 +1,33 @@
 class Room:
-    def __init__(self, room_name, locked_status=False):
+    def __init__(self, room_name, long_description=None, short_description=None, look_at=None, exits=None):
         self.name = room_name
+        self.long_description = long_description
+        self.short_description = short_description
+        self.look_at = look_at
+        self.exits = exits
+
         self.description = "This is the " + room_name
-        self.secondary_description = "This is the " + \
-            room_name + "'s secondary description"
+        self.secondary_description = "This is the " + room_name + "'s secondary description"
         self.linked_rooms = {}
         self.items_in_room = {}
-        self.is_locked = locked_status
+        self.is_locked = None
         self.first_visit = True
         self.been_explored = False
 
         self.features = {}
+
+    #def __init__(self, room_name, locked_status=False):
+        #self.name = room_name
+        #self.description = "This is the " + room_name
+        #self.secondary_description = "This is the " + \
+        #    room_name + "'s secondary description"
+        #self.linked_rooms = {}
+        #self.items_in_room = {}
+        #self.is_locked = locked_status
+        #self.first_visit = True
+        #self.been_explored = False
+        #
+        #self.features = {}
 
     def get_name(self):
         return self.name

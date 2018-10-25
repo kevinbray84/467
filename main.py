@@ -14,7 +14,8 @@ from GameState import *
 #main_player.current_room.get_details()
 
 game = GameState()
-game.build_mansion()
+#game.build_mansion()
+game.build_json_mansion()
 
 game.play()
 

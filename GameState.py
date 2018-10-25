@@ -2,6 +2,8 @@ from player import Player
 from room_sets import *
 from item_sets import *
 from Input_Parser.input_parser import *
+from dataparse import *
+import json
 
 
 class GameState:
@@ -10,6 +12,8 @@ class GameState:
         self.mansion = {}
         self.game_items = {}
         self.current_room = None
+
+        self.json_Mansion = {}
 
     def build_item_sets(self):
         self.game_items["keys"] = Item(
@@ -158,6 +162,18 @@ class GameState:
         panic_room.link_room(secret_stairwell, "stairwell")
 
         self.current_room = self.mansion["foyer"]
+
+    def build_json_mansion(self):
+        room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
+                      "library.json", "mastersuite.json", "panicroom.json", "sarahsroom.json",
+                      "secondfloorfoyer.json",
+                      "study.json", "veranda.json", "basement.json", "winecellar.json", "secretroom.json"]
+        for name in room_names:
+            room_dict = inputData(name)
+            new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'],
+                            room_dict['look at'], room_dict['exits'])
+
+            self.json_Mansion[room_dict['location']] = new_room
 
     def move(self, direction):
         if direction in self.current_room.linked_rooms:
