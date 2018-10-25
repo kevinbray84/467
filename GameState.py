@@ -3,8 +3,6 @@ from room_sets import *
 from item_sets import *
 from Input_Parser.input_parser import *
 from dataparse import *
-import json
-
 
 class GameState:
     def __init__(self):
@@ -167,13 +165,19 @@ class GameState:
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
                       "library.json", "mastersuite.json", "panicroom.json", "sarahsroom.json",
                       "secondfloorfoyer.json",
-                      "study.json", "veranda.json", "basement.json", "winecellar.json", "secretroom.json"]
+                      "study.json", "veranda.json", "basement.json", "secretroom.json", "winecellar.json"]
         for name in room_names:
             room_dict = inputData(name)
             new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'],
                             room_dict['look at'], room_dict['exits'])
 
             self.json_Mansion[room_dict['location']] = new_room
+
+        self.current_room = self.json_Mansion["First Floor Foyer"]
+
+    def json_move(self, direction):
+        if direction in self.current_room.exits:
+            self.current_room = self.json_Mansion[self.current_room.exits[direction]]
 
     def move(self, direction):
         if direction in self.current_room.linked_rooms:
@@ -240,7 +244,8 @@ class GameState:
         #   Process movement commands
         #####################################################
         elif cmd.num_directions == 1:
-            self.move(cmd.direction)
+            #self.move(cmd.direction)
+            self.json_move(cmd.direction)
 
         elif cmd.num_room_names == 1:
             self.move_to(cmd.room_name)

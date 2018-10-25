@@ -6,8 +6,8 @@ from room import *
 
 # parse data into room dictionary object
 def inputData(filename):
-    with open('rooms/' + filename) as file:
-        Room_dict = json.loads(file.read())
+    with open('rooms/' + filename) as infile:
+        Room_dict = json.loads(infile.read())
     return Room_dict
 
 
