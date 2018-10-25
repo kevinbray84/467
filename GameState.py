@@ -18,6 +18,7 @@ class GameState:
     def build_mansion(self):
 
         self.mansion["foyer"] = Room("Foyer")
+        self.mansion["foyer"].add_item(Item("keys", "Rusty golden key...."))
         self.mansion["central"] = Room("Central staircase")
         self.mansion["library"] = Room("Library")
         self.mansion["southern_patio"] = Room("Southern Patio")
@@ -195,12 +196,14 @@ class GameState:
         return self
 
     def _add_to_inventory(self, object_name):
-        for key, value in self.current_room.features.items():
+        for key, value in self.current_room.items_in_room.items():
+            print key
+            print value
             if value.name.lower() == object_name:
-                self.main_player.take_item(self.game_items[object_name])
-                self.current_room.take_item(key)
-        return self
-        print "The %s isn't in this room" % object_name
+                self.main_player.take_item(value)
+        #         # self.current_room.take_item(key)
+        # return self
+        # print "The %s isn't in this room" % object_name
 
     def _process_cmd(self, cmd):
 
@@ -237,8 +240,6 @@ class GameState:
                 # TODO: Implmenet:
                 self._look_at(cmd.obj)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
-                # TODO: Implement:
-                print 'GETTING %s' % cmd.obj
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'put' or cmd.verb == 'use':
                 # TODO: Implement:
@@ -265,5 +266,9 @@ class GameState:
         if bool(self.main_player.inventory) == False:
             print("There is nothing in your inventory")
         else:
-            for items in self.main_player.inventory:
-                print(items.name)
+            counter = 1
+            print("The inventory contains %d items:") % len(
+                self.main_player.inventory)
+            for key, value in self.main_player.inventory.items():
+                print "%2d: %s" % (counter, value.name)
+                counter += 1
