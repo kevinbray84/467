@@ -11,11 +11,11 @@ class GameState:
         self.game_items = {}
         self.current_room = None
         self.build_mansion()
-        self.build_item_sets()
+        # self.build_item_sets()
 
-    def build_item_sets(self):
-        self.game_items["keys"] = Item(
-            "keys", "Rusty golden key, looks like it could open anything.")
+    # def build_item_sets(self):
+    #     self.game_items["keys"] = Item(
+    #         "keys", "Rusty golden key, looks like it could open anything.")
 
     def build_mansion(self):
 
@@ -32,8 +32,9 @@ class GameState:
         self.mansion["northern_patio"] = Room("Northern Patio")
 
         self.mansion["master_suite"] = Room("Master Suite")
+        # not gettable until safe is opened
         self.mansion["master_suite"].add_item(
-            Item("passphrase", "A secure passphrase..."))
+            Item("passphrase", "A secure passphrase...", False))
 
         self.mansion["veranda_left"] = Room("Veranda Left")
 
@@ -101,7 +102,7 @@ class GameState:
         self.mansion["foyer"].set_description('You are standing in the Foyer of the mansion. The interior seems to sparkle, and you marvel at the grandeur\n of the entrance with its marble floors and dark mahogany woodwork. In front of you, to the north, is a grand \nstaircase leading to the second floor. Peering into the room to the west, you see books that line the walls \nfrom the floor to the ceiling. You make a mental note that this is the location of the library. To the east \nyou can see what appears to be the dining room with an elongated table adorned with expensive china and fancy \nglassware. In the Foyer, next to the door you see a stack of mail and on the wall hang a set of keys.')
 
         self.mansion["foyer"].add_feature("mailbox", mailbox)
-        self.mansion["foyer"].add_feature("keys", foyer_keys)
+        # self.mansion["foyer"].add_feature("keys", foyer_keys)
 
         # CENTRAL
         self.mansion["central"].link_room(grand, "north")
@@ -240,7 +241,7 @@ class GameState:
             print value
             if value.name.lower() == object_name:
                 self.main_player.take_item(value)
-        #         # self.current_room.take_item(key)
+                self.current_room.take_item(key)
         # return self
         # print "The %s isn't in this room" % object_name
 
@@ -285,16 +286,6 @@ class GameState:
                 # get(parser.obj)    # should use the object if it's in the inventory
                 print 'Using %s' % cmd.obj
 
-    def play(self):
-
-        cmd = Input_Parser()
-
-        while True:
-            print(self.current_room.get_details())
-
-            cmd.get_input()
-            self._process_cmd(cmd)
-
     def action_check(self, room_name, feature_name):
         if room_name.lower() == "foyer":
             if feature_name == "keys":
@@ -311,3 +302,16 @@ class GameState:
             for key, value in self.main_player.inventory.items():
                 print "%2d: %s" % (counter, value.name)
                 counter += 1
+
+    def play(self):
+
+        cmd = Input_Parser()
+
+        #########################################
+        # Main Loop
+        #########################################
+        while True:
+            print(self.current_room.get_details())
+
+            cmd.get_input()
+            self._process_cmd(cmd)
