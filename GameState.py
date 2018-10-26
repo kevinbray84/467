@@ -36,6 +36,7 @@ class GameState:
         if direction in self.current_room.exits:
             self.current_room.first_visit = False
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
+            self.link_json_mansion()
 
     def link_json_mansion(self):
         try:
@@ -67,6 +68,7 @@ class GameState:
         for key, value in self.current_room.linked_rooms.items():
             if value.name.lower() == room_name:
                 self.current_room = value
+                self.link_json_mansion()
                 return self
         print("That room isn't connected to this one")
         return self
