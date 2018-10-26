@@ -1,6 +1,3 @@
-from room_sets import *
-
-
 class Player:
     def __init__(self):
         self.current_room = None

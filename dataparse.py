@@ -1,6 +1,4 @@
 import json
-#import roomclass
-#import gameclass
 from room import *
 
 
@@ -17,6 +15,7 @@ def newgGameStart(gameState):
                   "study.json", "veranda.json", "basement.json", "winecellar.json", "secretroom.json"]
     for name in room_names:
         room_dict = inputData(name)
-        new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'], room_dict['look at'], room_dict['exits'])
+        new_room = Room(room_dict['location'], room_dict['long description'],
+                        room_dict['short description'], room_dict['look at'], room_dict['exits'])
 
         gameState.json_Mansion[room_dict['location']] = new_room

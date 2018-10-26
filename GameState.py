@@ -1,6 +1,4 @@
 from player import Player
-#from room_sets import *
-from item_sets import *
 from Input_Parser.input_parser import *
 from dataparse import *
 
