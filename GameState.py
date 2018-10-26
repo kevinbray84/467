@@ -132,7 +132,6 @@ class GameState:
  #           print(self.current_room.get_details())
             if self.current_room.first_visit == True:
                 print(self.current_room.long_description)
-                self.current_room.first_visit == False
             else:
                 print(self.current_room.short_description)
             cmd.get_input()
