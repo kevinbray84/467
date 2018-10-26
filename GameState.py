@@ -1,6 +1,7 @@
 from player import Player
 from Input_Parser.input_parser import *
 from dataparse import *
+from item import *
 
 
 class GameState:
