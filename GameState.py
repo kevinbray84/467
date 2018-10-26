@@ -13,8 +13,9 @@ class GameState:
         self.current_room = None
         # self.build_mansion()
         # self.build_item_sets()
-
         self.json_Mansion = {}
+        self.build_json_mansion()
+        self.link_json_mansion()
 
     def build_item_sets(self):
         self.game_items["keys"] = Item(
@@ -181,7 +182,3 @@ class GameState:
 
     def _render_room(self):
         print(self.current_room.get_details())
-        # if self.current_room.first_visit == True:
-        #     print(self.current_room.long_description)
-        # else:
-        #     print(self.current_room.short_description)
