@@ -7,7 +7,8 @@ class Room:
         self.exits = exits
 
         self.description = "This is the " + room_name
-        self.secondary_description = "This is the " + room_name + "'s secondary description"
+        self.secondary_description = "This is the " + \
+            room_name + "'s secondary description"
         self.linked_rooms = {}
         self.items_in_room = {}
         self.is_locked = None
@@ -16,10 +17,10 @@ class Room:
 
         self.features = {}
 
-    #def __init__(self, room_name, locked_status=False):
+    # def __init__(self, room_name, locked_status=False):
         #self.name = room_name
         #self.description = "This is the " + room_name
-        #self.secondary_description = "This is the " + \
+        # self.secondary_description = "This is the " + \
         #    room_name + "'s secondary description"
         #self.linked_rooms = {}
         #self.items_in_room = {}
@@ -36,10 +37,10 @@ class Room:
         self.description = room_description
 
     def get_description(self):
-        return self.description
+        return self.long_description
 
     def get_secondary_description(self):
-        return self.secondary_description
+        return self.short_description
 
     def describe(self):
         if self.first_visit:
@@ -52,9 +53,14 @@ class Room:
         self.linked_rooms[direction] = room_to_link
 
     def get_details(self):
+        count = 1
         print("\n====================================================\n" + self.get_name())
         print("====================================================")
         self.describe()
+        print("\nThere are a few items in the room:")
+        for key, value in self.items_in_room.items():
+            print "%2d: %s: %s" % (count, value.name, value.description)
+            count += 1
         print("----------------------------------------------------")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
@@ -78,6 +84,12 @@ class Room:
 
     def add_item(self, item):
         self.items_in_room[item.name] = item
+        print "Adding %s to %s... (%d)" % (
+            item.name, self.name, len(self.items_in_room))
 
     def take_item(self, item):
+        print 'REMOVING %s.  THERE ARE %d items before removing' % (
+            item, len(self.items_in_room))
         del self.items_in_room[item]
+        print 'REMOVED %s.  THERE ARE NOW %d items' % (
+            item, len(self.items_in_room))

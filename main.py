@@ -11,16 +11,10 @@ from GameState import *
 
 #current_room = foyer
 
-#main_player.current_room.get_details()
+# main_player.current_room.get_details()
 
 game = GameState()
 
 game.build_json_mansion()
 game.link_json_mansion()
 game.play()
-
-
-
-
-
-

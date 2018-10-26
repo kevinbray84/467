@@ -4,19 +4,21 @@ from item_sets import *
 from Input_Parser.input_parser import *
 from dataparse import *
 
+
 class GameState:
     def __init__(self):
         self.main_player = Player()
         self.mansion = {}
         self.game_items = {}
         self.current_room = None
+        # self.build_mansion()
+        # self.build_item_sets()
 
         self.json_Mansion = {}
 
     def build_item_sets(self):
         self.game_items["keys"] = Item(
             "keys", "Rusty golden key, looks like it could open anything.")
-
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
@@ -40,22 +42,25 @@ class GameState:
 
     def link_json_mansion(self):
         try:
-            self.current_room.link_room(self.json_Mansion[self.current_room.exits['north']], 'north')
+            self.current_room.link_room(
+                self.json_Mansion[self.current_room.exits['north']], 'north')
         except KeyError:
             pass
         try:
-            self.current_room.link_room(self.json_Mansion[self.current_room.exits['east']], 'east')
+            self.current_room.link_room(
+                self.json_Mansion[self.current_room.exits['east']], 'east')
         except KeyError:
             pass
         try:
-            self.current_room.link_room(self.json_Mansion[self.current_room.exits['south']], 'south')
+            self.current_room.link_room(
+                self.json_Mansion[self.current_room.exits['south']], 'south')
         except KeyError:
             pass
         try:
-            self.current_room.link_room(self.json_Mansion[self.current_room.exits['west']], 'west')  
+            self.current_room.link_room(
+                self.json_Mansion[self.current_room.exits['west']], 'west')
         except KeyError:
             pass
-        
 
     def move(self, direction):
         if direction in self.current_room.linked_rooms:
@@ -94,12 +99,14 @@ class GameState:
         return self
 
     def _add_to_inventory(self, object_name):
-        for key, value in self.current_room.features.items():
+        for key, value in self.current_room.items_in_room.items():
+            print key
+            print value
             if value.name.lower() == object_name:
-                self.current_room.take_item(self.game_items[object_name])
-                self.main_player.take_item(self.game_items[object_name])
-        return self
-        print "The %s isn't in this room" % object_name
+                self.main_player.take_item(value)
+                self.current_room.take_item(key)
+        # return self
+        # print "The %s isn't in this room" % object_name
 
     def _process_cmd(self, cmd):
 
@@ -123,7 +130,7 @@ class GameState:
         #   Process movement commands
         #####################################################
         elif cmd.num_directions == 1:
-            #self.move(cmd.direction)
+            # self.move(cmd.direction)
             self.json_move(cmd.direction)
 
         elif cmd.num_room_names == 1:
@@ -137,8 +144,6 @@ class GameState:
                 # TODO: Implmenet:
                 self._look_at(cmd.obj)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
-                # TODO: Implement:
-                print 'GETTING %s' % cmd.obj
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'put' or cmd.verb == 'use':
                 # TODO: Implement:
@@ -149,12 +154,11 @@ class GameState:
 
         cmd = Input_Parser()
 
+        #########################################
+        # Main Loop
+        #########################################
         while True:
-            #print(self.current_room.get_details())
-            if self.current_room.first_visit == True:
-                print(self.current_room.long_description)
-            else:
-                print(self.current_room.short_description)
+            self._render_room()
             cmd.get_input()
             self._process_cmd(cmd)
 
@@ -168,5 +172,16 @@ class GameState:
         if bool(self.main_player.inventory) == False:
             print("There is nothing in your inventory")
         else:
-            for items in self.main_player.inventory:
-                print(items.name)
+            counter = 1
+            print("The inventory contains %d items:") % len(
+                self.main_player.inventory)
+            for key, value in self.main_player.inventory.items():
+                print "%2d: %s" % (counter, value.name)
+                counter += 1
+
+    def _render_room(self):
+        print(self.current_room.get_details())
+        # if self.current_room.first_visit == True:
+        #     print(self.current_room.long_description)
+        # else:
+        #     print(self.current_room.short_description)

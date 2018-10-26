@@ -168,6 +168,7 @@ class Input_Parser:
     def get_input(self):
         self.__init__()
         self.input = raw_input("Enter command> ")
+        print '\n'
         self.input = ' ' + self.input.lower() + ' '
         self._process_input()
 
