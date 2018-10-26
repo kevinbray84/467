@@ -22,7 +22,7 @@ class Input_Parser:
         self.obj_of_prep = ''
 
         self.commands = [' savegame ', ' loadgame ',
-                         ' exit ', ' inventory ', ' showgameitems ']
+                         ' exit ', ' show inventory ', ' showgameitems ']
         self.directions = [' north ', ' south ', ' east ',
                            ' west ', ' upstairs ', ' downstairs ']
         self.room_names = [' first floor foyer ', ' library ',
@@ -169,6 +169,7 @@ class Input_Parser:
         self.__init__()
         self.input = raw_input("Enter command> ")
         self.input = ' ' + self.input.lower() + ' '
+        print '\n'
         self._process_input()
 
     def _process_input(self):

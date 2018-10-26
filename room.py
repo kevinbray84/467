@@ -45,11 +45,10 @@ class Room:
         for key, value in self.items_in_room.items():
             print "%2d: %s: %s" % (count, value.name, value.description)
             count += 1
-        print("----------------------------------------------------")
+        print("\n----------------------------------------------------")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
-        print 'ROOM DIRECTIONS COMPLETE'
 
     def move(self, direction):
         if direction in self.linked_rooms:
@@ -57,8 +56,6 @@ class Room:
         else:
             print("You can't go that way")
             return self
-
-    # def set_explore(self, primary_desc, secondary_desc, ):
 
     def get_explore(self):
         if not self.been_explored:

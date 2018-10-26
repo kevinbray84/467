@@ -8,18 +8,17 @@ from dataparse import *
 class GameState:
     def __init__(self):
         self.main_player = Player()
-        self.mansion = {}
+        # self.mansion = {}
         self.game_items = {}
         self.current_room = None
-        # self.build_mansion()
-        # self.build_item_sets()
         self.json_Mansion = {}
         self.build_json_mansion()
+        self.add_items_to_mansion()
         self.link_json_mansion()
 
-    def build_item_sets(self):
-        self.game_items["keys"] = Item(
-            "keys", "Rusty golden key, looks like it could open anything.")
+    def add_items_to_mansion(self):
+        self.json_Mansion["First Floor Foyer"].add_item(
+            Item("keys", "Some keys...", False))
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
@@ -122,7 +121,7 @@ class GameState:
                 print "Saving game..."
             elif cmd.command == 'loadgame':  # TODO: Implement load game
                 print "Loading game..."
-            elif cmd.command == 'inventory':
+            elif cmd.command == 'show inventory':
                 self.check_inventory()
             elif cmd.command == 'showgameitems':
                 self._show_game_items()
@@ -154,6 +153,8 @@ class GameState:
     def play(self):
 
         cmd = Input_Parser()
+
+        self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
 
         #########################################
         # Main Loop
