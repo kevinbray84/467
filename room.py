@@ -1,3 +1,8 @@
+import text_splitter
+
+CONSOLE_WIDTH = 120
+
+
 class Room:
     def __init__(self, room_name, long_description=None, short_description=None, look_at=None, exits=None):
         self.name = room_name
@@ -26,7 +31,10 @@ class Room:
 
     def describe(self):
         if self.first_visit:
-            print(self.get_description())
+            input_sets = text_splitter.split_input(self.get_description(), 110)
+            for set_piece in input_sets:
+                print(set_piece)
+            #print(self.get_description())
             self.first_visit = False
         else:
             print(self.get_secondary_description())
@@ -36,16 +44,17 @@ class Room:
 
     def get_details(self):
         count = 1
-        print("\n====================================================\n" + self.get_name())
-        print("====================================================")
+        print("="*CONSOLE_WIDTH)
+        print(self.get_name())
+        print("="*CONSOLE_WIDTH)
         self.describe()
         if len(self.items_in_room) > 0:
-            print("----------------------------------------------------")
-            print("\nThere are a few items in the room:")
+            print("-"*CONSOLE_WIDTH)
+            print("There are a few items in the room:")
         for key, value in self.items_in_room.items():
             print "%2d: %s: %s" % (count, value.name, value.description)
             count += 1
-        print("\n----------------------------------------------------")
+        print("-"*CONSOLE_WIDTH)
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)

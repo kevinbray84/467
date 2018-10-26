@@ -2,6 +2,10 @@ from player import Player
 from Input_Parser.input_parser import *
 from dataparse import *
 from item import *
+import time
+import sys
+import os
+from text_splitter import *
 
 
 class GameState:
@@ -182,7 +186,9 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
+        self.beginning_text()
         while True:
+            clear_terminal()
             self._render_room()
             cmd.get_input()
             self._process_cmd(cmd)
@@ -206,3 +212,29 @@ class GameState:
 
     def _render_room(self):
         print(self.current_room.get_details())
+
+    def beginning_text(self):
+        prompt_width = 90
+        text_width = 80
+        text_main = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        text_secondary = "Good Luck..."
+
+        for i, letter in enumerate(text_main):
+            sys.stdout.write(letter)
+            time.sleep(0.02)
+            if i % 80 == 0 and i != 0:
+                sys.stdout.write("\n")
+
+        time.sleep(1)
+        print("\n")
+        for i, letter in enumerate(text_secondary):
+            sys.stdout.write(letter)
+            time.sleep(.25)
+            if i == 80:
+                sys.stdout.write("\n")
+
+        time.sleep(2)
+        clear_terminal()
+        return
+
+
