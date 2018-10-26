@@ -16,7 +16,7 @@ from GameState import *
 game = GameState()
 
 game.build_json_mansion()
-
+game.link_json_mansion()
 game.play()
 
 

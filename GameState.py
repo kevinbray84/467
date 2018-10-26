@@ -37,6 +37,25 @@ class GameState:
             self.current_room.first_visit = False
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
 
+    def link_json_mansion(self):
+        try:
+            self.current_room.link_room(self.json_Mansion[self.current_room.exits['north']], 'north')
+        except KeyError:
+            pass
+        try:
+            self.current_room.link_room(self.json_Mansion[self.current_room.exits['east']], 'east')
+        except KeyError:
+            pass
+        try:
+            self.current_room.link_room(self.json_Mansion[self.current_room.exits['south']], 'south')
+        except KeyError:
+            pass
+        try:
+            self.current_room.link_room(self.json_Mansion[self.current_room.exits['west']], 'west')  
+        except KeyError:
+            pass
+        
+
     def move(self, direction):
         if direction in self.current_room.linked_rooms:
             self.current_room = self.current_room.linked_rooms[direction]
@@ -129,7 +148,7 @@ class GameState:
         cmd = Input_Parser()
 
         while True:
- #           print(self.current_room.get_details())
+            #print(self.current_room.get_details())
             if self.current_room.first_visit == True:
                 print(self.current_room.long_description)
             else:
