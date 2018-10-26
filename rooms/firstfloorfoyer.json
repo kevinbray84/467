@@ -10,6 +10,7 @@
         }
     },
     "exits": {
+        "north":"Second Floor Foyer",
         "east":"Dining Room",
         "west":"Library"
     }
