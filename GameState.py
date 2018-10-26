@@ -34,6 +34,7 @@ class GameState:
 
     def json_move(self, direction):
         if direction in self.current_room.exits:
+            self.current_room.first_visit = False
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
 
     def move(self, direction):
