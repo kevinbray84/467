@@ -46,6 +46,8 @@ class Input_Parser:
                         ' mailbox ',
                         ' coded key ',
                         ' silver key ',
+                        ' diary key ',
+                        ' engraved key ',
                         ' car key ', ' car keys ',
                         ' desk ',
                         ' slot ',
@@ -76,7 +78,8 @@ class Input_Parser:
                         ' generator ',
                         ' camera ', ' video ', ' video playback ',  # video playback fails
                         ' sarah ',
-                        ' chains ', ' chain '
+                        ' chains ', ' chain ',
+                        ' passphrase '
                         ]
 
     def _find_command(self):

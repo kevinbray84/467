@@ -18,7 +18,31 @@ class GameState:
 
     def add_items_to_mansion(self):
         self.json_Mansion["First Floor Foyer"].add_item(
-            Item("keys", "Some keys...", False))
+            Item("keys", "Some car keys...", True))
+
+        # not gettable until safe opens
+        self.json_Mansion["Master Suite"].add_item(
+            Item("passphrase", "A secure passphrase...", False))
+
+        # not getable until jacket is examined
+        self.json_Mansion["Family Room"].add_item(
+            Item("safe combination", "A cryptic code...", False))
+
+        # not getable until BMW trunk is opened
+        self.json_Mansion["Garage"].add_item(
+            Item("bolt cutters", "Big sharp bolt cutters...", False))
+
+        self.json_Mansion["Dining Room"].add_item(
+            Item("flashlight", "A bright flashlight...", True))
+        self.json_Mansion["Dining Room"].add_item(
+            Item("silver key", "A key that is silver...", True))
+
+        # not getable until you look in the drawers
+        self.json_Mansion["Second Floor Foyer"].add_item(
+            Item("engraved key", "A key that's engraved...", False))
+
+        self.json_Mansion["Sarah's Room"].add_item(
+            Item("diary key", "A key that's engraved...", True))
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
