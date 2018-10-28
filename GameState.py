@@ -209,6 +209,7 @@ class GameState:
             for key, value in self.main_player.inventory.items():
                 print "%2d: %s" % (counter, value.name)
                 counter += 1
+        raw_input("Press enter to continue...")
 
     def _render_room(self):
         print(self.current_room.get_details())
@@ -236,5 +237,3 @@ class GameState:
         time.sleep(2)
         clear_terminal()
         return
-
-

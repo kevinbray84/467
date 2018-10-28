@@ -34,7 +34,7 @@ class Room:
             input_sets = text_splitter.split_input(self.get_description(), 110)
             for set_piece in input_sets:
                 print(set_piece)
-            #print(self.get_description())
+            # print(self.get_description())
             self.first_visit = False
         else:
             print(self.get_secondary_description())
@@ -75,12 +75,12 @@ class Room:
 
     def add_item(self, item):
         self.items_in_room[item.name] = item
-        print "Adding %s to %s... (%d)" % (
-            item.name, self.name, len(self.items_in_room))
+        # print "Adding %s to %s... (%d)" % (
+        #    item.name, self.name, len(self.items_in_room))
 
     def take_item(self, item):
-        print 'REMOVING %s.  THERE ARE %d items before removing' % (
-            item, len(self.items_in_room))
+        # print 'REMOVING %s.  THERE ARE %d items before removing' % (
+        #    item, len(self.items_in_room))
         del self.items_in_room[item]
-        print 'REMOVED %s.  THERE ARE NOW %d items' % (
-            item, len(self.items_in_room))
+        # print 'REMOVED %s.  THERE ARE NOW %d items' % (
+        #    item, len(self.items_in_room))
