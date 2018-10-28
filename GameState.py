@@ -94,6 +94,7 @@ class GameState:
             self.current_room = self.current_room.linked_rooms[direction]
         else:
             print("You can't go that way")
+            raw_input("Press enter to continue...")
             return self
 
     def move_to(self, room_name):
@@ -103,6 +104,7 @@ class GameState:
                 self.link_json_mansion()
                 return self
         print("That room isn't connected to this one")
+        raw_input("Press enter to continue...")
         return self
 
     def foyer_action_check(self, verb, noun):
@@ -123,6 +125,7 @@ class GameState:
                     print value.get_description()
                 return self
         print "The %s isn't in this room" % object_name
+        raw_input("Press any key to continue...")
         return self
 
     def _add_to_inventory(self, object_name):
@@ -132,8 +135,9 @@ class GameState:
             if value.name.lower() == object_name:
                 self.main_player.take_item(value)
                 self.current_room.take_item(key)
-        # return self
-        # print "The %s isn't in this room" % object_name
+                return self
+        print "The %s isn't in this room" % object_name
+        raw_input("Press enter to continue...")
 
     def _process_cmd(self, cmd):
 
