@@ -3,10 +3,7 @@
     "long description": "You step into the Study. It seems to be surprisingly sparse compared to the rest of the house. They must not bring any guests up here you muse. No need to impress in this room. Looking around, you see a computer and a stack of mail on a desk. Might be some clues somewhere in this room. The only exit from the study seems to be the door you came in through. The door is on the western wall and leads back out into the Second Floor Foyer.",
     "short description": "You are in the Study. There is a computer and a stack of mail on a desk. The exit to the Second Floor Foyer is to the west.",
     "look at":{
-        "computer":{
-            "locked":"You approach the computer and power it on. It asks for a password.",
-            "unlocked":"You approach the computer and move the mouse. You search the computer again but don't seem to find anything new. The most interesting files are those you found in an email that seems to be a contracting bill for some extentive remodeling that has been done somewhere in the basement area. It seems like they added an additional room...interesting."
-        },
+        "computer":"You approach the computer and move the mouse. The screen lights up and you search the computer looking for anything suspicious. The most interesting files are those you find in an email that seems to be a contracting bill for some extentive remodeling that has been done somewhere in the basement area. It seems like they added an additional room...interesting.",
         "mail":"You approach the stack of mail and see a stack of unpaid bills. Just how much in debt is this family and why has this not come up within the course of the investigation?"
     },
     "exits": {
