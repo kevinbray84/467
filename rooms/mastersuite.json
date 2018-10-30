@@ -9,7 +9,9 @@
         },
         "safe":{
             "locked": "The safe sits locked in the wall, awaiting the correct combination.",
-            "unlocked":"The safe sits in the wall unlocked."
+            "unlocked":"The safe sits in the wall unlocked. You look inside and find a stack of financial documents, bills, and accounts information. Taking a closer look, it appears that the Mayor was shifting quite a bit of money around. On the bottom of the stack of papers, you find a passphrase scrawled on a piece of paper. This could come in handy later...",
+            "unlocked not taken passphrase":"The safe sits in the wall unlocked. You look inside and find the same stack of financial documents, bills, and accounts information that you discovered earlier. On the bottom of the stack of papers is the passphrase. You should hold on to this for later...",
+            "unlocked and taken": "The safe sits in thr wall unlocked. You look inside and file the same stack of financial documents, bills, and accounts information. Sifting through the rest of the documents you remember that the passphrase has already been taken."
         }
     },
     "exits": {
