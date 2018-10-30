@@ -18,6 +18,7 @@ class GameState:
         self.build_json_mansion()
         self.add_items_to_mansion()
         self.link_json_mansion()
+        self.last_command = ""
 
     def add_items_to_mansion(self):
         self.json_Mansion["First Floor Foyer"].add_item(
@@ -162,9 +163,11 @@ class GameState:
         #####################################################
         elif cmd.num_directions == 1:
             # self.move(cmd.direction)
+            self.last_command = "move"
             self.json_move(cmd.direction)
 
         elif cmd.num_room_names == 1:
+            self.last_command = "move"
             self.move_to(cmd.room_name)
 
         #####################################################
@@ -173,10 +176,13 @@ class GameState:
         elif cmd.num_verbs == 1:
             if cmd.verb == 'look':
                 # TODO: Implmenet:
+                self.last_command = "look"
                 self._look_at(cmd.obj)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
+                self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'put' or cmd.verb == 'use':
+                self.last_command = "use"
                 # TODO: Implement:
                 # get(parser.obj)    # should use the object if it's in the inventory
                 print 'Using %s' % cmd.obj
@@ -192,8 +198,10 @@ class GameState:
         #########################################
         self.beginning_text()
         while True:
-            clear_terminal()
-            self._render_room()
+            #clear_terminal()
+            if self.last_command == "move" or self.last_command == "":
+                self._render_room()
+            print("")
             cmd.get_input()
             self._process_cmd(cmd)
 
@@ -219,25 +227,56 @@ class GameState:
         print(self.current_room.get_details())
 
     def beginning_text(self):
+        clear_terminal()
+        title = [
+            "#########################################################################################################",
+            "#                       _____ _                                   _                                     #",
+            "#                      /__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __                          #",
+            "#                        / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \                         #",
+            "#                       / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |                        #",
+            "#                       \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|                        #",
+            "#                                                                                                       #",
+            "#########################################################################################################"
+        ]
+
+        for lines in title:
+            print(lines)
+
+        time.sleep(1)
+
+        print("")
+
         prompt_width = 90
         text_width = 80
         text_main = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         text_secondary = "Good Luck..."
 
-        for i, letter in enumerate(text_main):
-            sys.stdout.write(letter)
-            time.sleep(0.02)
-            if i % 80 == 0 and i != 0:
-                sys.stdout.write("\n")
-
-        time.sleep(1)
-        print("\n")
-        for i, letter in enumerate(text_secondary):
-            sys.stdout.write(letter)
-            time.sleep(.25)
-            if i == 80:
-                sys.stdout.write("\n")
+        new_text = split_input(text_main, 110)
+        animate_text(new_text, 0.02)
 
         time.sleep(2)
-        clear_terminal()
-        return
+
+        print("\n")
+
+        new_secondary = split_input(text_secondary, 110)
+        animate_text(new_secondary, 0.25)
+
+        time.sleep(2)
+
+        #for i, letter in enumerate(text_main):
+        #    sys.stdout.write(letter)
+        #    time.sleep(0.02)
+        #    if i % 80 == 0 and i != 0:
+        #        sys.stdout.write("\n")
+        #
+        #time.sleep(1)
+        #print("\n")
+        #for i, letter in enumerate(text_secondary):
+        #    sys.stdout.write(letter)
+        #    time.sleep(.25)
+        #    if i == 80:
+        #        sys.stdout.write("\n")
+        #
+        #time.sleep(2)
+        #clear_terminal()
+        #return
