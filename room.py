@@ -70,8 +70,8 @@ class Room:
         if not self.been_explored:
             self.been_explored = True
 
-    def add_feature(self, feature, curr_feature):
-        self.features[feature] = curr_feature
+    def add_feature(self, key, value):
+        self.features[key] = value
 
     def add_item(self, item):
         self.items_in_room[item.name] = item
