@@ -21,31 +21,47 @@ class GameState:
 
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
-        keys = Item(itemdict["keys"]["name"], itemdict["keys"]["description"], itemdict["keys"]["use"], True)
+        keys = Item(itemdict["keys"]["name"], itemdict["keys"]["description"], True)
+        keys.set_use("correct", itemdict["keys"]["use"]["correct"])
+        keys.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
         self.json_Mansion["First Floor Foyer"].add_item(keys)
 
         # not gettable until safe opens
-        passphrase = Item(itemdict["passphrase"]["name"], itemdict["passphrase"]["description"], itemdict["passphrase"]["use"], False)
+        passphrase = Item(itemdict["passphrase"]["name"], itemdict["passphrase"]["description"], False)
+        passphrase.set_use("correct", itemdict["passphrase"]["use"]["correct"])
+        passphrase.set_use("incorrect", itemdict["passphrase"]["use"]["incorrect"])
         self.json_Mansion["Master Suite"].add_item(passphrase)
 
         # not getable until jacket is examined
-        safe_combination = Item(itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], itemdict["safe combination"]["use"], False)
+        safe_combination = Item(itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], False)
+        safe_combination.set_use("correct", itemdict["safe combination"]["use"]["correct"])
+        safe_combination.set_use("incorrect", itemdict["safe combination"]["use"]["incorrect"])
         self.json_Mansion["Family Room"].add_item(safe_combination)
 
         # not getable until BMW trunk is opened
-        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], itemdict["bolt cutters"]["use"], True)
+        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], True)
+        bolt_cutters.set_use("correct", itemdict["bolt cutters"]["use"]["correct"])
+        bolt_cutters.set_use("incorrect", itemdict["bolt cutters"]["use"]["incorrect"])
         self.json_Mansion["Garage"].add_item(bolt_cutters)
 
-        flashlight = Item(itemdict["flashlight"]["name"], itemdict["flashlight"]["description"], itemdict["flashlight"]["use"], True)
-        silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], itemdict["silver key"]["use"], True)
+        flashlight = Item(itemdict["flashlight"]["name"], itemdict["flashlight"]["description"], True)
+        flashlight.set_use("correct", itemdict["flashlight"]["use"]["correct"])
+        flashlight.set_use("incorrect", itemdict["flashlight"]["use"]["incorrect"])
+        silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], True)
+        silver_key.set_use("correct", itemdict["keys"]["use"]["correct"])
+        silver_key.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
         self.json_Mansion["Dining Room"].add_item(flashlight)
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
         # not getable until you look in the drawers
-        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], itemdict["engraved key"]["use"], True)
+        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], True)
+        engraved_key.set_use("correct", itemdict["engraved key"]["use"]["correct"])
+        keys.set_use("incorrect", itemdict["engraved key"]["use"]["incorrect"])
         self.json_Mansion["Second Floor Foyer"].add_item(engraved_key)
 
-        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], itemdict["diary key"]["use"], True)
+        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], True)
+        diary_key.set_use("correct", itemdict["diary key"]["use"]["correct"])
+        diary_key.set_use("incorrect", itemdict["diary key"]["use"]["incorrect"])
         self.json_Mansion["Sarah's Room"].add_item(diary_key)
 
     def build_json_mansion(self):
