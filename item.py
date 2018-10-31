@@ -1,7 +1,8 @@
 class Item:
-    def __init__(self, name=None, description=None, is_getable=True):
+    def __init__(self, name, description, use, is_getable=True):
         self.name = name
         self.description = description
+        self.use = use
         self.is_getable = is_getable
 
     def set_name(self, name):
