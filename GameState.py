@@ -18,6 +18,7 @@ class GameState:
         self.build_json_mansion()
         self.add_items_to_mansion()
         self.link_json_mansion()
+        self.add_json_mansion_features()
 
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
@@ -73,10 +74,20 @@ class GameState:
             room_dict = inputData(name)
             new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'],
                             room_dict['look at'], room_dict['exits'])
-
+            
             self.json_Mansion[room_dict['location']] = new_room
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
+
+    def add_json_mansion_features(self):
+        self.json_Mansion['First Floor Foyer'].add_feature('mail', self.json_Mansion['First Floor Foyer'].look_at['mail'])
+        self.json_Mansion['First Floor Foyer'].add_feature('keys', {})
+        self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
+        self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
+
+        for key in self.json_Mansion['First Floor Foyer'].features.items():
+            print key
+            
 
     def json_move(self, direction):
         if direction in self.current_room.exits:
@@ -207,7 +218,7 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
-        self.beginning_text()
+        #self.beginning_text()
         while True:
             clear_terminal()
             self._render_room()
