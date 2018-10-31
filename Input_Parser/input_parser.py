@@ -43,8 +43,8 @@ class Input_Parser:
                       ' watch ',
                       ' explore ']
         self.objects = [' key ', ' keys ',
+                        ' mail ',
                         ' mailbox ',
-                        ' coded key ',
                         ' silver key ',
                         ' diary key ',
                         ' engraved key ',
