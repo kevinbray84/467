@@ -20,32 +20,33 @@ class GameState:
         self.link_json_mansion()
 
     def add_items_to_mansion(self):
-        self.json_Mansion["First Floor Foyer"].add_item(
-            Item("keys", "Some car keys...", True))
+        itemdict = inputData("items.json")
+        keys = Item(itemdict["keys"]["name"], itemdict["keys"]["description"], itemdict["keys"]["use"], True)
+        self.json_Mansion["First Floor Foyer"].add_item(keys)
 
         # not gettable until safe opens
-        self.json_Mansion["Master Suite"].add_item(
-            Item("passphrase", "A secure passphrase...", False))
+        passphrase = Item(itemdict["passphrase"]["name"], itemdict["passphrase"]["description"], itemdict["passphrase"]["use"], False)
+        self.json_Mansion["Master Suite"].add_item(passphrase)
 
         # not getable until jacket is examined
-        self.json_Mansion["Family Room"].add_item(
-            Item("safe combination", "A cryptic code...", False))
+        safe_combination = Item(itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], itemdict["safe combination"]["use"], False)
+        self.json_Mansion["Family Room"].add_item(safe_combination)
 
         # not getable until BMW trunk is opened
-        self.json_Mansion["Garage"].add_item(
-            Item("bolt cutters", "Big sharp bolt cutters...", False))
+        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], itemdict["bolt cutters"]["use"], True)
+        self.json_Mansion["Garage"].add_item(bolt_cutters)
 
-        self.json_Mansion["Dining Room"].add_item(
-            Item("flashlight", "A bright flashlight...", True))
-        self.json_Mansion["Dining Room"].add_item(
-            Item("silver key", "A key that is silver...", True))
+        flashlight = Item(itemdict["flashlight"]["name"], itemdict["flashlight"]["description"], itemdict["flashlight"]["use"], True)
+        silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], itemdict["silver key"]["use"], True)
+        self.json_Mansion["Dining Room"].add_item(flashlight)
+        self.json_Mansion["Dining Room"].add_item(silver_key)
 
         # not getable until you look in the drawers
-        self.json_Mansion["Second Floor Foyer"].add_item(
-            Item("engraved key", "A key that's engraved...", False))
+        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], itemdict["engraved key"]["use"], True)
+        self.json_Mansion["Second Floor Foyer"].add_item(engraved_key)
 
-        self.json_Mansion["Sarah's Room"].add_item(
-            Item("diary key", "A key that's engraved...", True))
+        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], itemdict["diary key"]["use"], True)
+        self.json_Mansion["Sarah's Room"].add_item(diary_key)
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
