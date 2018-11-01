@@ -178,6 +178,8 @@ class GameState:
             self._firstfloorfoyer_features(object_name)
         elif self.current_room.name == 'Dining Room':
             self._diningroom_features(self, object_name)
+        elif self.current_room.name == 'Library':
+            self._library_features(self, object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
