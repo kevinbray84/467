@@ -85,8 +85,10 @@ class GameState:
         self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
         self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
 
-        for key in self.json_Mansion['First Floor Foyer'].features.items():
+
+        for key, value in self.json_Mansion['First Floor Foyer'].features.items():
             print key
+            print value
             
 
     def json_move(self, direction):
@@ -143,18 +145,27 @@ class GameState:
         for key, value in self.game_items.items():
             print key
             print value
+# old look_at
+#    def _look_at(self, object_name):
+#        for key, value in self.current_room.features.items():
+#            if value.name.lower() == object_name:
+#                if value.hasAction:
+#                    self.action_check(self.current_room.name, object_name)
+#                else:
+#                    print value.get_description()
+#                return self
+#        print "The %s isn't in this room" % object_name
+#        raw_input("Press any key to continue...")
+#        return self
 
     def _look_at(self, object_name):
+        print(object_name)
         for key, value in self.current_room.features.items():
-            if value.name.lower() == object_name:
-                if value.hasAction:
-                    self.action_check(self.current_room.name, object_name)
-                else:
-                    print value.get_description()
-                return self
-        print "The %s isn't in this room" % object_name
-        raw_input("Press any key to continue...")
-        return self
+            if key == object_name:
+                print self.current_room.features[key]
+            else:
+                print ("no good")
+            return self
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
