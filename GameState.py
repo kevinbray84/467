@@ -22,6 +22,8 @@ class GameState:
         self.firstfloorfoyer_keys_taken = False
         self.diningroom_key_taken = False
         self.diningroom_flashlight_taken = False
+        self.library_desk_slot_used = False
+        self.library_panicroom_unlocked = False
 #        self.add_json_mansion_features()
 
     def add_items_to_mansion(self):
@@ -219,6 +221,38 @@ class GameState:
                 else:
                     print self.current_room.look_at[object_name.obj]['flashlight taken']
                     return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+    def _library_features(self, object_name):
+        if object_name.obj in {'desk', 'tome', 'large tome'}:
+            object_name.obj = 'desk'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.library_desk_slot_used is False:
+                    print self.current_room.look_at[object_name.obj]['untouched']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['used']
+                    return self
+        elif object_name.obj in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
+            object_name.obj = 'panic room'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.library_desk_slot_used is False:
+                    #covers if trying to examine panic room without unlocking bookself
+                    print("These actions don't seem possible in this room")
+                    return self
+                elif self.library_panicroom_unlocked is False:
+                    print self.current_room.look_at[object_name.obj]['locked']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['unlocked']
+                    return self
+        elif object_name.obj in {'statue', 'corner', 'sculpture'}:
+            object_name.obj = 'statue'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                print self.current_room.look_at[object_name.obj]
+                return self
         else:
             print("These actions don't seem possible in this room")
             return self
