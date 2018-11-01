@@ -18,7 +18,7 @@ class GameState:
         self.build_json_mansion()
         self.add_items_to_mansion()
         self.link_json_mansion()
-        self.add_json_mansion_features()
+#        self.add_json_mansion_features()
 
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
@@ -79,16 +79,23 @@ class GameState:
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
 
-    def add_json_mansion_features(self):
-        self.json_Mansion['First Floor Foyer'].add_feature('mail', self.json_Mansion['First Floor Foyer'].look_at['mail'])
-        self.json_Mansion['First Floor Foyer'].add_feature('keys', {})
-        self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
-        self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
+# I realized I didn't need to populate a features dict as the look_at parameter of the room class can act as a dict
+#    def add_json_mansion_features(self):
+#        self.json_Mansion['First Floor Foyer'].add_feature('mail', self.json_Mansion['First Floor Foyer'].look_at['mail'])
+#        self.json_Mansion['First Floor Foyer'].add_feature('keys', {})
+#        self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
+#        self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
 
+#        self.json_Mansion['Dining Room'].add_feature('food tray', {})
+#        self.json_Mansion['Dining Room'].add_feature('side table', {})
+#        self.json_Mansion['Dining Room'].features['food tray']['key not taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key not taken']    
+#        self.json_Mansion['Dining Room'].features['food tray']['key taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key taken'] 
+#        self.json_Mansion['Dining Room'].features['side table']['flashlight not taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight not taken']    
+#        self.json_Mansion['Dining Room'].features['side table']['flashlight taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight taken'] 
 
-        for key, value in self.json_Mansion['First Floor Foyer'].features.items():
-            print key
-            print value
+#        for key, value in self.json_Mansion['First Floor Foyer'].features.items():
+#            print key
+#            print value
             
 
     def json_move(self, direction):
@@ -159,7 +166,7 @@ class GameState:
 #        return self
 
     def _look_at(self, object_name):
-        print("sucessfully called look at function")
+        print("successfully called look at function")
         print object_name
         for key, value in self.current_room.features.items():
             if key == object_name:
