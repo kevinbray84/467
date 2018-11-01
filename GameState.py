@@ -200,7 +200,7 @@ class GameState:
             print("These actions don't seem possible in this room")
             return self
 
-def _diningroom_features(self, object_name):
+    def _diningroom_features(self, object_name):
         if object_name.obj in {'foodtray', 'food', 'food tray', 'tray'}:
             object_name.obj = 'food tray'
             if self.current_room.look_at.has_key(object_name.obj) == True:
