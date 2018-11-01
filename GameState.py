@@ -167,13 +167,18 @@ class GameState:
 
     def _look_at(self, object_name):
         print("successfully called look at function")
-        print object_name
-        for key, value in self.current_room.features.items():
-            if key == object_name:
-                print self.current_room.features[key]
-            else:
-                print ("no good")
-            return self
+        print("object: " + object_name.obj)
+        if self.current_room.look_at.has_key(object_name.obj) == True:
+            print self.current_room.look_at[object_name.obj]
+            # do thing/update class parameters here
+        else:
+            print("These action doesn't seem possible in this room")
+#        for key in self.current_room.look_at.iterkeys():
+#            if key.lower() == object_name.obj:
+#                print self.current_room.look_at['mail']
+#            else:
+#                print ("key doesn't match command object")
+        return self
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
