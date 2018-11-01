@@ -20,6 +20,8 @@ class GameState:
         self.link_json_mansion()
 # these variables keep track of if object has been moved or observed before
         self.firstfloorfoyer_keys_taken = False
+        self.diningroom_key_taken = False
+        self.diningroom_flashlight_taken = False
 #        self.add_json_mansion_features()
 
     def add_items_to_mansion(self):
@@ -172,6 +174,8 @@ class GameState:
         print("object: " + object_name.obj)
         if self.current_room.name == 'First Floor Foyer':
             self._firstfloorfoyer_features(object_name)
+        elif self.current_room.name == 'Dining Room':
+            self._diningroom_features(self, object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -191,6 +195,29 @@ class GameState:
                     return self
                 else:
                     print self.current_room.look_at[object_name.obj]['keys taken']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+def _diningroom_features(self, object_name):
+        if object_name.obj in {'foodtray', 'food', 'food tray', 'tray'}:
+            object_name.obj = 'food tray'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.diningroom_key_taken is False:
+                    print self.current_room.look_at[object_name.obj]['key not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    return self
+        elif object_name.obj in {'sidetable', 'side table', 'table'}:
+            object_name.obj = 'side table'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.diningroom_flashlight_taken is False:
+                    print self.current_room.look_at[object_name.obj]['flashlight not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['flashlight taken']
                     return self
         else:
             print("These actions don't seem possible in this room")
