@@ -18,6 +18,8 @@ class GameState:
         self.build_json_mansion()
         self.add_items_to_mansion()
         self.link_json_mansion()
+# these variables keep track of if object has been moved or observed before
+        self.firstfloorfoyer_keys_taken = False
 #        self.add_json_mansion_features()
 
     def add_items_to_mansion(self):
@@ -168,16 +170,30 @@ class GameState:
     def _look_at(self, object_name):
         print("successfully called look at function")
         print("object: " + object_name.obj)
-        if self.current_room.look_at.has_key(object_name.obj) == True:
-            print self.current_room.look_at[object_name.obj]
-            # do thing/update class parameters here
+        if self.current_room.name == 'First Floor Foyer':
+            self._firstfloorfoyer_features(object_name)
         else:
-            print("These action doesn't seem possible in this room")
-#        for key in self.current_room.look_at.iterkeys():
-#            if key.lower() == object_name.obj:
-#                print self.current_room.look_at['mail']
-#            else:
-#                print ("key doesn't match command object")
+            print("These actions don't seem possible in this room")
+        return self
+# I am thinking of having a separate function for each room to cover all the scenarios
+# since the room data can't be standardized
+    def _firstfloorfoyer_features(self, object_name):
+        if object_name.obj in {'mail', 'mailbox'}:
+            object_name.obj = 'mail'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                print self.current_room.look_at[object_name.obj]
+                return self
+        elif object_name.obj in {'keys', 'key peg'}:
+            object_name.obj = 'keys'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.firstfloorfoyer_keys_taken is False:
+                    print self.current_room.look_at[object_name.obj]['keys not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    return self
+
+        print("These action doesn't seem possible in this room")
         return self
 
     def _add_to_inventory(self, object_name):
