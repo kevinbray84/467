@@ -196,9 +196,6 @@ class GameState:
             print("These actions don't seem possible in this room")
             return self
 
-        print("These action doesn't seem possible in this room")
-        return self
-
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
             print key
