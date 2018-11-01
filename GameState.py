@@ -192,6 +192,8 @@ class GameState:
                 else:
                     print self.current_room.look_at[object_name.obj]['keys taken']
                     return self
+        else:
+            return self
 
         print("These action doesn't seem possible in this room")
         return self
