@@ -159,7 +159,8 @@ class GameState:
 #        return self
 
     def _look_at(self, object_name):
-        print(object_name)
+        print("sucessfully called look at function")
+        print object_name
         for key, value in self.current_room.features.items():
             if key == object_name:
                 print self.current_room.features[key]
