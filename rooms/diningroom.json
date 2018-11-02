@@ -4,8 +4,8 @@
     "short description": "You are in the Dining Room. To the north is the Family Room and to the east is the Garage. There is a food tray on the table and a side table.",
     "look at":{
         "food tray":{
-            "key not taken":"The food tray has a single empty bowl and a single empty juice box on it. Looking inside the bowl you see the remnants of what you can only assume to be is soup. Why is there only a single serving of food on the tray? And which family member is drinking juice boxes? Something doesn’t seem right. Under the napkin you spot a glint of silver. It appears to be a silver key! Now what does this unlock…",
-            "key taken": "The food tray has a single empty bowl and a single empty juice box on it. Looking inside the bowl you see the remnants of what you can only assume to be is soup. Why is there only a single serving of food on the tray? And which family member is drinking juice boxes? Something doesn’t seem right."
+            "key not taken":"The food tray has a single empty bowl and a single empty juice box on it. Looking inside the bowl you see the remnants of what you can only assume to be is soup. Why is there only a single serving of food on the tray? And which family member is drinking juice boxes? Something doesnt seem right. Under the napkin you spot a glint of silver. It appears to be a silver key! Now what does this unlock.",
+            "key taken": "The food tray has a single empty bowl and a single empty juice box on it. Looking inside the bowl you see the remnants of what you can only assume to be is soup. Why is there only a single serving of food on the tray? And which family member is drinking juice boxes? Something doesnt seem right."
         },
         "side table":{
             "flashlight not taken": "You approach the side table and take a closer look at the yellow object that caught your eye. It is a flashlight. This could come in handy later.",
