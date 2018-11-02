@@ -19,33 +19,61 @@ class GameState:
         self.add_items_to_mansion()
         self.link_json_mansion()
 
+        # these variables keep track of if object has been moved or observed before
+        self.firstfloorfoyer_keys_taken = False
+        self.diningroom_key_taken = False
+        self.diningroom_flashlight_taken = False
+        self.library_desk_slot_used = False
+        self.library_panicroom_unlocked = False
+
+        # self.add_json_mansion_features()
+        self.last_command = ""
+
+
     def add_items_to_mansion(self):
-        self.json_Mansion["First Floor Foyer"].add_item(
-            Item("keys", "Some car keys...", True))
+        itemdict = inputData("items.json")
+        keys = Item(itemdict["keys"]["name"], itemdict["keys"]["description"], True)
+        keys.set_use("correct", itemdict["keys"]["use"]["correct"])
+        keys.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
+        self.json_Mansion["First Floor Foyer"].add_item(keys)
 
         # not gettable until safe opens
-        self.json_Mansion["Master Suite"].add_item(
-            Item("passphrase", "A secure passphrase...", False))
+        passphrase = Item(itemdict["passphrase"]["name"], itemdict["passphrase"]["description"], False)
+        passphrase.set_use("correct", itemdict["passphrase"]["use"]["correct"])
+        passphrase.set_use("incorrect", itemdict["passphrase"]["use"]["incorrect"])
+        self.json_Mansion["Master Suite"].add_item(passphrase)
 
         # not getable until jacket is examined
-        self.json_Mansion["Family Room"].add_item(
-            Item("safe combination", "A cryptic code...", False))
+        safe_combination = Item(itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], False)
+        safe_combination.set_use("correct", itemdict["safe combination"]["use"]["correct"])
+        safe_combination.set_use("incorrect", itemdict["safe combination"]["use"]["incorrect"])
+        self.json_Mansion["Family Room"].add_item(safe_combination)
 
         # not getable until BMW trunk is opened
-        self.json_Mansion["Garage"].add_item(
-            Item("bolt cutters", "Big sharp bolt cutters...", False))
+        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], True)
+        bolt_cutters.set_use("correct", itemdict["bolt cutters"]["use"]["correct"])
+        bolt_cutters.set_use("incorrect", itemdict["bolt cutters"]["use"]["incorrect"])
+        self.json_Mansion["Garage"].add_item(bolt_cutters)
 
-        self.json_Mansion["Dining Room"].add_item(
-            Item("flashlight", "A bright flashlight...", True))
-        self.json_Mansion["Dining Room"].add_item(
-            Item("silver key", "A key that is silver...", True))
+        flashlight = Item(itemdict["flashlight"]["name"], itemdict["flashlight"]["description"], True)
+        flashlight.set_use("correct", itemdict["flashlight"]["use"]["correct"])
+        flashlight.set_use("incorrect", itemdict["flashlight"]["use"]["incorrect"])
+        silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], True)
+        silver_key.set_use("correct", itemdict["keys"]["use"]["correct"])
+        silver_key.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
+        self.json_Mansion["Dining Room"].add_item(flashlight)
+        self.json_Mansion["Dining Room"].add_item(silver_key)
 
         # not getable until you look in the drawers
-        self.json_Mansion["Second Floor Foyer"].add_item(
-            Item("engraved key", "A key that's engraved...", False))
+        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], True)
+        engraved_key.set_use("correct", itemdict["engraved key"]["use"]["correct"])
+        keys.set_use("incorrect", itemdict["engraved key"]["use"]["incorrect"])
+        self.json_Mansion["Second Floor Foyer"].add_item(engraved_key)
 
-        self.json_Mansion["Sarah's Room"].add_item(
-            Item("diary key", "A key that's engraved...", True))
+        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], True)
+        diary_key.set_use("correct", itemdict["diary key"]["use"]["correct"])
+        diary_key.set_use("incorrect", itemdict["diary key"]["use"]["incorrect"])
+        self.json_Mansion["Sarah's Room"].add_item(diary_key)
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
@@ -56,10 +84,29 @@ class GameState:
             room_dict = inputData(name)
             new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'],
                             room_dict['look at'], room_dict['exits'])
-
+            
             self.json_Mansion[room_dict['location']] = new_room
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
+
+# I realized I didn't need to populate a features dict as the look_at parameter of the room class can act as a dict
+#    def add_json_mansion_features(self):
+#        self.json_Mansion['First Floor Foyer'].add_feature('mail', self.json_Mansion['First Floor Foyer'].look_at['mail'])
+#        self.json_Mansion['First Floor Foyer'].add_feature('keys', {})
+#        self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
+#        self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
+
+#        self.json_Mansion['Dining Room'].add_feature('food tray', {})
+#        self.json_Mansion['Dining Room'].add_feature('side table', {})
+#        self.json_Mansion['Dining Room'].features['food tray']['key not taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key not taken']    
+#        self.json_Mansion['Dining Room'].features['food tray']['key taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key taken'] 
+#        self.json_Mansion['Dining Room'].features['side table']['flashlight not taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight not taken']    
+#        self.json_Mansion['Dining Room'].features['side table']['flashlight taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight taken'] 
+
+#        for key, value in self.json_Mansion['First Floor Foyer'].features.items():
+#            print key
+#            print value
+            
 
     def json_move(self, direction):
         if direction in self.current_room.exits:
@@ -115,18 +162,106 @@ class GameState:
         for key, value in self.game_items.items():
             print key
             print value
+# old look_at
+#    def _look_at(self, object_name):
+#        for key, value in self.current_room.features.items():
+#            if value.name.lower() == object_name:
+#                if value.hasAction:
+#                    self.action_check(self.current_room.name, object_name)
+#                else:
+#                    print value.get_description()
+#                return self
+#        print "The %s isn't in this room" % object_name
+#        raw_input("Press any key to continue...")
+#        return self
 
     def _look_at(self, object_name):
-        for key, value in self.current_room.features.items():
-            if value.name.lower() == object_name:
-                if value.hasAction:
-                    self.action_check(self.current_room.name, object_name)
-                else:
-                    print value.get_description()
-                return self
-        print "The %s isn't in this room" % object_name
-        raw_input("Press any key to continue...")
+        print("successfully called look at function")
+        print("object: " + object_name.obj)
+        if self.current_room.name == 'First Floor Foyer':
+            self._firstfloorfoyer_features(object_name)
+        elif self.current_room.name == 'Dining Room':
+            self._diningroom_features(self, object_name)
+        elif self.current_room.name == 'Library':
+            self._library_features(self, object_name)
+        else:
+            print("These actions don't seem possible in this room")
         return self
+# I am thinking of having a separate function for each room to cover all the scenarios
+# since the room data can't be standardized
+    def _firstfloorfoyer_features(self, object_name):
+        if object_name.obj in {'mail', 'mailbox'}:
+            object_name.obj = 'mail'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                print self.current_room.look_at[object_name.obj]
+                return self
+        elif object_name.obj in {'keys', 'key peg'}:
+            object_name.obj = 'keys'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.firstfloorfoyer_keys_taken is False:
+                    print self.current_room.look_at[object_name.obj]['keys not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+    def _diningroom_features(self, object_name):
+        if object_name.obj in {'foodtray', 'food', 'food tray', 'tray'}:
+            object_name.obj = 'food tray'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.diningroom_key_taken is False:
+                    print self.current_room.look_at[object_name.obj]['key not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    return self
+        elif object_name.obj in {'sidetable', 'side table', 'table'}:
+            object_name.obj = 'side table'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.diningroom_flashlight_taken is False:
+                    print self.current_room.look_at[object_name.obj]['flashlight not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['flashlight taken']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+    def _library_features(self, object_name):
+        if object_name.obj in {'desk', 'tome', 'large tome'}:
+            object_name.obj = 'desk'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.library_desk_slot_used is False:
+                    print self.current_room.look_at[object_name.obj]['untouched']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['used']
+                    return self
+        elif object_name.obj in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
+            object_name.obj = 'panic room'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                if self.library_desk_slot_used is False:
+                    #covers if trying to examine panic room without unlocking bookself
+                    print("These actions don't seem possible in this room")
+                    return self
+                elif self.library_panicroom_unlocked is False:
+                    print self.current_room.look_at[object_name.obj]['locked']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name.obj]['unlocked']
+                    return self
+        elif object_name.obj in {'statue', 'corner', 'sculpture'}:
+            object_name.obj = 'statue'
+            if self.current_room.look_at.has_key(object_name.obj) == True:
+                print self.current_room.look_at[object_name.obj]
+                return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
@@ -162,9 +297,11 @@ class GameState:
         #####################################################
         elif cmd.num_directions == 1:
             # self.move(cmd.direction)
+            self.last_command = "move"
             self.json_move(cmd.direction)
 
         elif cmd.num_room_names == 1:
+            self.last_command = "move"
             self.move_to(cmd.room_name)
 
         #####################################################
@@ -173,10 +310,13 @@ class GameState:
         elif cmd.num_verbs == 1:
             if cmd.verb == 'look':
                 # TODO: Implmenet:
+                self.last_command = "look"
                 self._look_at(cmd.obj)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
+                self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'put' or cmd.verb == 'use':
+                self.last_command = "use"
                 # TODO: Implement:
                 # get(parser.obj)    # should use the object if it's in the inventory
                 print 'Using %s' % cmd.obj
@@ -190,10 +330,12 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
-        self.beginning_text()
+        #self.beginning_text()
         while True:
-            clear_terminal()
-            self._render_room()
+            #clear_terminal()
+            if self.last_command == "move" or self.last_command == "":
+                self._render_room()
+            print("")
             cmd.get_input()
             self._process_cmd(cmd)
 
@@ -219,25 +361,56 @@ class GameState:
         print(self.current_room.get_details())
 
     def beginning_text(self):
+        clear_terminal()
+        title = [
+            "#########################################################################################################",
+            "#                       _____ _                                   _                                     #",
+            "#                      /__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __                          #",
+            "#                        / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \                         #",
+            "#                       / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |                        #",
+            "#                       \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|                        #",
+            "#                                                                                                       #",
+            "#########################################################################################################"
+        ]
+
+        for lines in title:
+            print(lines)
+
+        time.sleep(1)
+
+        print("")
+
         prompt_width = 90
         text_width = 80
         text_main = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         text_secondary = "Good Luck..."
 
-        for i, letter in enumerate(text_main):
-            sys.stdout.write(letter)
-            time.sleep(0.02)
-            if i % 80 == 0 and i != 0:
-                sys.stdout.write("\n")
-
-        time.sleep(1)
-        print("\n")
-        for i, letter in enumerate(text_secondary):
-            sys.stdout.write(letter)
-            time.sleep(.25)
-            if i == 80:
-                sys.stdout.write("\n")
+        new_text = split_input(text_main, 110)
+        animate_text(new_text, 0.02)
 
         time.sleep(2)
-        clear_terminal()
-        return
+
+        print("\n")
+
+        new_secondary = split_input(text_secondary, 110)
+        animate_text(new_secondary, 0.25)
+
+        time.sleep(2)
+
+        #for i, letter in enumerate(text_main):
+        #    sys.stdout.write(letter)
+        #    time.sleep(0.02)
+        #    if i % 80 == 0 and i != 0:
+        #        sys.stdout.write("\n")
+        #
+        #time.sleep(1)
+        #print("\n")
+        #for i, letter in enumerate(text_secondary):
+        #    sys.stdout.write(letter)
+        #    time.sleep(.25)
+        #    if i == 80:
+        #        sys.stdout.write("\n")
+        #
+        #time.sleep(2)
+        #clear_terminal()
+        #return

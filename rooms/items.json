@@ -1,6 +1,6 @@
 {
     "keys":{
-        "name":"keys",
+        "name": "keys",
         "description":"A set of car keys. The logo on the keychain is BMW",
         "use":{
             "correct":"You use the keys on the BMW and it unlocks. You also use the keys to open the trunk as well.",
@@ -8,7 +8,7 @@
         }
     },
     "passphrase":{
-        "name":"passphrase",
+        "name": "passphrase",
         "description":"Scrawled on the piece of paper are the words UNLOCK PASSPHRASE: NOPLACELIKEHOME",
         "use":{
             "correct":"You type in the passphrase into the keypad in the door. *CLICK* You hear the door unlock and open slightly.",
@@ -16,7 +16,7 @@
         }
     },
     "safe combination":{
-        "name":"safe combination",
+        "name": "safe combination",
         "description":"Written on a folded piece of paper are the numbers 12-03-18",
         "use":{
             "correct":"You using the safe combination and spin the dial to the matching numbers. *CLICK* you hear the safe unlock.",
@@ -24,7 +24,7 @@
         }
     },
     "bolt cutters":{
-        "name":"bolt cutters",
+        "name": "bolt cutters",
         "description":"The bolt cutters are heavy in your hands. The blades are sharp to the touch and it seems like they will work just as intended.",
         "use":{
             "correct":"You place the chain in the mouth of the bolt cutters. With as much strength as you can muster, you strain to clamp down the bolt cutters. With a sudden *SNAP* the chain is cut! Sarah has been freed!",
@@ -32,7 +32,7 @@
         }
     },
     "flashlight":{
-        "name":"flashlight",
+        "name": "flashlight",
         "description":"The flashlight is compact, lightweight, and yellow in color. You click it on to test the batteries and find it is in perfect working order.",
         "use":{
             "correct":"You turn on the flashlight and approach the wall. You methodically examine every inch of the wall until you finally spot a keyhole that was previously hidden in the dark. ",
@@ -40,7 +40,7 @@
         }
     },
     "silver key":{
-        "name":"silver key",
+        "name": "silver key",
         "description":"The key is a large, old fashioned key. It is silver in color and has some weight to it.",
         "use":{
             "correct":"You insert the silver key into the keyhole hidden in the wall and give it a turn. *CLICK* You hear the something unlock and the wall gives way, revealing the fact that it is actually a door.",
@@ -48,7 +48,7 @@
         }
     },
     "engraved key":{
-        "name":"engraved key",
+        "name": "engraved key",
         "description":"The key is engraved with what appears to be a family crest in the head of the key. It is unique in shape as it is more like a rod with a bar code running down its length rather than having teeth.",
         "use":{
             "correct":"You insert the engraved key into the slot on the desk and push it all the way in. *CLICK* you hear a noise coming from the bookself directly in front of you. You look up and see it swing open into the room, revealing a door behind it.",
@@ -56,7 +56,7 @@
         }
     },
     "diary key":{
-        "name":"diary key",
+        "name": "diary key",
         "description":"The key is a small golden key that is strung on a thin golden chain. It seems that it is usually worn as a necklace. The key is very lightweight in your hand.",
         "use":{
             "correct":"You insert the diary key into the small keyhole in the diary and turn. The leather strap instantly unlocks. You open the diary up and give it a read. Glancing through the pages, you find a passage where Sarah explains how her father showed her there was a panic room located behind a bookshelf in the library that could be accessed by inserting an engraved key into a slot on top of the desk located in the room.",
