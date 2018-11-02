@@ -177,87 +177,88 @@ class GameState:
 
     def _look_at(self, object_name):
         print("successfully called look at function")
-        print("object: " + object_name.obj)
+        # print("object: " + self.current_room.items_in_room[object_name].name)
         if self.current_room.name == 'First Floor Foyer':
             self._firstfloorfoyer_features(object_name)
         elif self.current_room.name == 'Dining Room':
-            self._diningroom_features(self, object_name)
+            self._diningroom_features(object_name)
         elif self.current_room.name == 'Library':
-            self._library_features(self, object_name)
+            self._library_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
 # I am thinking of having a separate function for each room to cover all the scenarios
 # since the room data can't be standardized
     def _firstfloorfoyer_features(self, object_name):
-        if object_name.obj in {'mail', 'mailbox'}:
-            object_name.obj = 'mail'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
-                print self.current_room.look_at[object_name.obj]
+        if object_name in {'mail', 'mailbox'}:
+            object_name = 'mail'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
                 return self
-        elif object_name.obj in {'keys', 'key peg'}:
-            object_name.obj = 'keys'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
+        elif object_name in {'keys', 'key peg'}:
+            object_name = 'keys'
+            if self.current_room.look_at.has_key(object_name) == True:
                 if self.firstfloorfoyer_keys_taken is False:
-                    print self.current_room.look_at[object_name.obj]['keys not taken']
+                    print self.current_room.look_at[object_name]['keys not taken']
                     return self
                 else:
-                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    print self.current_room.look_at[object_name]['keys taken']
                     return self
         else:
             print("These actions don't seem possible in this room")
             return self
 
     def _diningroom_features(self, object_name):
-        if object_name.obj in {'foodtray', 'food', 'food tray', 'tray'}:
-            object_name.obj = 'food tray'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
+        if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
+            object_name = 'food tray'
+            if self.current_room.look_at.has_key(object_name) == True:
                 if self.diningroom_key_taken is False:
-                    print self.current_room.look_at[object_name.obj]['key not taken']
+                    print self.current_room.look_at[object_name]['key not taken']
                     return self
                 else:
-                    print self.current_room.look_at[object_name.obj]['keys taken']
+                    print self.current_room.look_at[object_name]['keys taken']
                     return self
-        elif object_name.obj in {'sidetable', 'side table', 'table'}:
-            object_name.obj = 'side table'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
+        elif object_name in {'sidetable', 'side table', 'table'}:
+            object_name = 'side table'
+            if self.current_room.look_at.has_key(object_name) == True:
                 if self.diningroom_flashlight_taken is False:
-                    print self.current_room.look_at[object_name.obj]['flashlight not taken']
+                    print self.current_room.look_at[object_name]['flashlight not taken']
                     return self
                 else:
-                    print self.current_room.look_at[object_name.obj]['flashlight taken']
+                    print self.current_room.look_at[object_name]['flashlight taken']
                     return self
         else:
             print("These actions don't seem possible in this room")
             return self
 
     def _library_features(self, object_name):
-        if object_name.obj in {'desk', 'tome', 'large tome'}:
-            object_name.obj = 'desk'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
+        print "looking for %s " % object_name
+        if object_name in {'desk', 'tome', 'large tome'}:
+            object_name = 'desk'
+            if self.current_room.look_at.has_key(object_name) == True:
                 if self.library_desk_slot_used is False:
-                    print self.current_room.look_at[object_name.obj]['untouched']
+                    print self.current_room.look_at[object_name]['untouched']
                     return self
                 else:
-                    print self.current_room.look_at[object_name.obj]['used']
+                    print self.current_room.look_at[object_name]['used']
                     return self
-        elif object_name.obj in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
-            object_name.obj = 'panic room'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
+        elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
+            object_name = 'panic room'
+            if self.current_room.look_at.has_key(object_name) == True:
                 if self.library_desk_slot_used is False:
                     #covers if trying to examine panic room without unlocking bookself
                     print("These actions don't seem possible in this room")
                     return self
                 elif self.library_panicroom_unlocked is False:
-                    print self.current_room.look_at[object_name.obj]['locked']
+                    print self.current_room.look_at[object_name]['locked']
                     return self
                 else:
-                    print self.current_room.look_at[object_name.obj]['unlocked']
+                    print self.current_room.look_at[object_name]['unlocked']
                     return self
-        elif object_name.obj in {'statue', 'corner', 'sculpture'}:
-            object_name.obj = 'statue'
-            if self.current_room.look_at.has_key(object_name.obj) == True:
-                print self.current_room.look_at[object_name.obj]
+        elif object_name in {'statue', 'corner', 'sculpture'}:
+            object_name = 'statue'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
                 return self
         else:
             print("These actions don't seem possible in this room")

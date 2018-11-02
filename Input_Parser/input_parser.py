@@ -42,7 +42,7 @@ class Input_Parser:
                       ' turn on ',
                       ' watch ',
                       ' explore ']
-        self.objects = [' key ', ' keys ',
+        self.objects = [' key ', ' keys ', ' key peg ',
                         ' mail ',
                         ' mailbox ',
                         ' silver key ',
@@ -53,7 +53,10 @@ class Input_Parser:
                         ' slot ',
                         ' keypad ',
                         ' statue ',
-                        ' food tray ', ' tray ',
+                        ' corner ',
+                        ' food tray ', ' tray ', ' food ', ' foodtray ',
+                        ' side table ', ' sidetable ', ' table ',
+                        ' desk ', ' tome ', ' large tome ',
                         ' back table ',
                         ' flashlight ',
                         ' bmw ', ' car ',
@@ -73,13 +76,14 @@ class Input_Parser:
                         ' newspaper ', ' headline ',
                         ' diary ', ' sarah\'s diary ',
                         ' computer ',
-                        ' computer password ',  # computer password fails
+                        ' computer password ',
                         ' letter ',
                         ' generator ',
-                        ' camera ', ' video ', ' video playback ',  # video playback fails
+                        ' camera ', ' video ', ' video playback ',
                         ' sarah ',
                         ' chains ', ' chain ',
-                        ' passphrase '
+                        ' passphrase ',
+                        ' panic room ', ' panic door ', ' keypad ', ' panicroom '
                         ]
 
     def _find_command(self):
