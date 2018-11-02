@@ -25,6 +25,8 @@ class GameState:
         self.diningroom_flashlight_taken = False
         self.library_desk_slot_used = False
         self.library_panicroom_unlocked = False
+        self.garage_car_unlocked = False
+        self.garage_boltcutters_taken = False
 
         # self.add_json_mansion_features()
         self.last_command = ""
@@ -88,25 +90,7 @@ class GameState:
             self.json_Mansion[room_dict['location']] = new_room
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
-
-# I realized I didn't need to populate a features dict as the look_at parameter of the room class can act as a dict
-#    def add_json_mansion_features(self):
-#        self.json_Mansion['First Floor Foyer'].add_feature('mail', self.json_Mansion['First Floor Foyer'].look_at['mail'])
-#        self.json_Mansion['First Floor Foyer'].add_feature('keys', {})
-#        self.json_Mansion['First Floor Foyer'].features['keys']['keys not taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys not taken']
-#        self.json_Mansion['First Floor Foyer'].features['keys']['keys taken'] = self.json_Mansion['First Floor Foyer'].look_at['keys']['keys taken']
-
-#        self.json_Mansion['Dining Room'].add_feature('food tray', {})
-#        self.json_Mansion['Dining Room'].add_feature('side table', {})
-#        self.json_Mansion['Dining Room'].features['food tray']['key not taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key not taken']    
-#        self.json_Mansion['Dining Room'].features['food tray']['key taken'] = self.json_Mansion['Dining Room'].look_at['food tray']['key taken'] 
-#        self.json_Mansion['Dining Room'].features['side table']['flashlight not taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight not taken']    
-#        self.json_Mansion['Dining Room'].features['side table']['flashlight taken'] = self.json_Mansion['Dining Room'].look_at['side table']['flashlight taken'] 
-
-#        for key, value in self.json_Mansion['First Floor Foyer'].features.items():
-#            print key
-#            print value
-            
+           
 
     def json_move(self, direction):
         if direction in self.current_room.exits:
@@ -162,18 +146,6 @@ class GameState:
         for key, value in self.game_items.items():
             print key
             print value
-# old look_at
-#    def _look_at(self, object_name):
-#        for key, value in self.current_room.features.items():
-#            if value.name.lower() == object_name:
-#                if value.hasAction:
-#                    self.action_check(self.current_room.name, object_name)
-#                else:
-#                    print value.get_description()
-#                return self
-#        print "The %s isn't in this room" % object_name
-#        raw_input("Press any key to continue...")
-#        return self
 
     def _look_at(self, object_name):
         print("successfully called look at function")
@@ -184,11 +156,12 @@ class GameState:
             self._diningroom_features(object_name)
         elif self.current_room.name == 'Library':
             self._library_features(object_name)
+        elif self.current_room.name == 'Garage':
+            self._garage_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
-# I am thinking of having a separate function for each room to cover all the scenarios
-# since the room data can't be standardized
+
     def _firstfloorfoyer_features(self, object_name):
         if object_name in {'mail', 'mailbox'}:
             object_name = 'mail'
@@ -263,6 +236,31 @@ class GameState:
         else:
             print("These actions don't seem possible in this room")
             return self
+
+    def _garage_features(self, object_name):
+        print "looking for %s " % object_name
+        if object_name in {'truck','pickup'}:
+            object_name = 'truck'
+        if self.current_room.look_at.has_key(object_name) == True:
+            print self.current_room.look_at[object_name]
+            return self
+        elif object_name in {'bmw','car','bmw car'}:
+            object_name = 'BMW'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.garage_car_unlocked == False:
+                    print self.current_room.look_at[object_name]['locked']
+                    return self
+                elif self.garage_boltcutters_taken == False:
+                    print self.current_room.look_at[object_name]['unlocked']['bolt cutters not taken']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['unlocked']['bolt cutters taken']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
