@@ -7,7 +7,6 @@
         "BMW":{
             "locked": "The BMW car appears spotless and looks like it has never been driven. You try the handle, but it is locked.",
             "unlocked":{
-                "used keys": "You use the car keys on the BMW. The car unlocks. Searching the interior yields nothing. It seems like it has recently been detailed. You try the trunk. In there you see a pair of bolt cutters. Things just keep getting stranger. These could be useful later though.",
                 "bolt cutters not taken": "The BMW is unlocked and the bolt cutters are still in the trunk.",
                 "bolt cutters taken": "The BMW is unlocked and the bolt cutters have already been taken."
             }
