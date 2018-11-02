@@ -265,13 +265,17 @@ class GameState:
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
-            print key
-            print value
             if value.name.lower() == object_name:
                 self.main_player.take_item(value)
                 self.current_room.take_item(key)
                 return self
         print "The %s isn't in this room" % object_name
+        raw_input("Press enter to continue...")
+
+    def _drop_from_inventory(self, item_name):
+        item_to_drop = self.main_player.inventory[item_name]
+        self.main_player.drop_item(item_name)
+        self.current_room.add_item(item_to_drop)
         raw_input("Press enter to continue...")
 
     def _process_cmd(self, cmd):
@@ -315,6 +319,8 @@ class GameState:
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
+            elif cmd.verb == 'drop':
+                self._drop_from_inventory(cmd.obj)
             elif cmd.verb == 'put' or cmd.verb == 'use':
                 self.last_command = "use"
                 # TODO: Implement:

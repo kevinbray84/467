@@ -84,3 +84,5 @@ class Room:
         del self.items_in_room[item]
         # print 'REMOVED %s.  THERE ARE NOW %d items' % (
         #    item, len(self.items_in_room))
+
+
