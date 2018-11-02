@@ -3,7 +3,7 @@
         "name": "keys",
         "description":"A set of car keys. The logo on the keychain is BMW",
         "use":{
-            "correct":"You use the keys on the BMW and it unlocks. You also use the keys to open the trunk as well.",
+            "correct":"You use the car keys on the BMW. The car unlocks. Searching the interior yields nothing. It seems like it has recently been detailed. You try the trunk. In there you see a pair of bolt cutters. Things just keep getting stranger. These could be useful later though.",
             "incorrect":"That doesn't appear to be the correct usage of that item."
         }
     },
