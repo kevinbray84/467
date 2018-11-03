@@ -72,6 +72,8 @@ class Input_Parser:
                         ' jacket ',
                         ' sofa ', ' couch ',
                         ' billiards table ', ' pool table ',
+                        ' patio table ',' padio table ', ' patiotable ', ' patio ',
+                        ' sky ',' storm ',' summer storm ',' clouds ',' storm in the sky ',
                         ' pocket ',
                         ' piece of paper ', ' paper ',
                         ' newspaper ', ' headline ',
