@@ -162,6 +162,8 @@ class GameState:
             self._garage_features(object_name)
         elif self.current_room.name == 'Family Room':
             self._familyroom_features(object_name)
+        elif self.current_room.name == 'Panic Room':
+            self._panicroom_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -284,6 +286,22 @@ class GameState:
                 else:
                     print self.current_room.look_at[object_name]['after taking combination code']
                     return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
+
+    def _panicroom_features(self, object_name):
+        print "looking for %s " % object_name
+        if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
+            object_name = 'food'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'video','camera','video playback', 'monitors', 'monitor', 'video monitors', 'video monitor'}:
+            object_name = 'video'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self        
         else:
             print("These actions don't seem possible in this room")
             return self 
