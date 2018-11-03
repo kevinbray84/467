@@ -174,6 +174,8 @@ class GameState:
             self._secondfloorfoyer_features(object_name)
         elif self.current_room.name == 'Wine Cellar':
             self._winecellar_features(object_name)
+        elif self.current_room.name == 'Grand Room':
+            self._grandroom_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -221,7 +223,7 @@ class GameState:
             return self
 
     def _library_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'desk', 'tome', 'large tome'}:
             object_name = 'desk'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -254,7 +256,7 @@ class GameState:
             return self
 
     def _garage_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'truck','pickup'}:
             object_name = 'truck'
         if self.current_room.look_at.has_key(object_name) == True:
@@ -277,7 +279,7 @@ class GameState:
             return self
 
     def _familyroom_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'billiards table','pool table', 'pooltable','table'}:
             object_name = 'billiards table'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -301,7 +303,7 @@ class GameState:
             return self 
 
     def _panicroom_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
             object_name = 'food'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -317,7 +319,7 @@ class GameState:
             return self 
     
     def _veranda_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
             object_name = 'patio table'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -333,7 +335,7 @@ class GameState:
             return self 
 
     def _study_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
             object_name = 'computer'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -349,7 +351,7 @@ class GameState:
             return self 
 
     def _secondfloorfoyer_features(self, object_name):
-        print "looking for %s " % object_name
+        #print "looking for %s " % object_name
         if object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
             object_name = 'table'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -390,6 +392,22 @@ class GameState:
         else:
             print("These actions don't seem possible in this room")
             return self
+
+    def _grandroom_features(self, object_name):
+        #print "looking for %s " % object_name
+        if object_name in {'fireplace','fire','fire place','ashes'}:
+            object_name = 'fireplace'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'family portrait','portrait','family picture', 'family', 'picture'}:
+            object_name = 'family portrait'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
