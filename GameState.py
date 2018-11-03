@@ -31,7 +31,8 @@ class GameState:
         self.familyroom_code_taken = False
         self.secondfloorfoyer_examineddrawers = False
         self.secondfloorfoyer_key_taken = False
-        # self.add_json_mansion_features()
+        self.winecellar_wall_unlocked = False
+
         self.last_command = ""
 
 
@@ -171,6 +172,8 @@ class GameState:
             self._study_features(object_name)
         elif self.current_room.name == 'Second Floor Foyer':
             self._secondfloorfoyer_features(object_name)
+        elif self.current_room.name == 'Wine Cellar':
+            self._winecellar_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -368,6 +371,25 @@ class GameState:
         else:
             print("These actions don't seem possible in this room")
             return self 
+
+    def _winecellar_features(self, object_name):
+        if object_name in {'wine rack','wine','rack'}:
+            object_name = 'wine rack'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'wall','bare wall','eastern wall','back wall'}:
+            object_name = 'wall'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.winecellar_wall_unlocked is False:
+                    print self.current_room.look_at[object_name]['locked']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['unlocked']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
