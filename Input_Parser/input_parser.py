@@ -70,7 +70,8 @@ class Input_Parser:
                         ' wine bottle ', ' wine ',  ' bottle ',
                         ' wine receipt ', ' receipt ',
                         ' jacket ',
-                        ' sofa ',
+                        ' sofa ', ' couch ',
+                        ' billiards table ', ' pool table '
                         ' pocket ',
                         ' piece of paper ', ' paper ',
                         ' newspaper ', ' headline ',
