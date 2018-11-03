@@ -27,6 +27,8 @@ class GameState:
         self.library_panicroom_unlocked = False
         self.garage_car_unlocked = False
         self.garage_boltcutters_taken = False
+        self.familyroom_examinedcouch = False
+        self.familyroom_code_taken = False
 
         # self.add_json_mansion_features()
         self.last_command = ""
@@ -158,6 +160,8 @@ class GameState:
             self._library_features(object_name)
         elif self.current_room.name == 'Garage':
             self._garage_features(object_name)
+        elif self.current_room.name == 'Family Room':
+            self._familyroom_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -260,7 +264,29 @@ class GameState:
             print("These actions don't seem possible in this room")
             return self
 
-
+    def _familyroom_features(self, object_name):
+        print "looking for %s " % object_name
+        if object_name in {'billiards table','pool table', 'pooltable','table'}:
+            object_name = 'billiards table'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'couch','furniture', 'jacket', 'sofa'}:
+            object_name = 'couch'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.familyroom_examinedcouch == False:
+                    print self.current_room.look_at[object_name]['before taking combination code']
+                    self.familyroom_examinedcouch = True
+                    return self
+                elif self.familyroom_code_taken == False:
+                    print self.current_room.look_at[object_name]['reexamining jacket before taking combination code']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['after taking combination code']
+                    return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
