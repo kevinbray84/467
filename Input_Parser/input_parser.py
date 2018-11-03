@@ -67,7 +67,7 @@ class Input_Parser:
                         ' passcode ',
                         ' end table ',
                         ' fireplace ',
-                        ' wine bottle ', ' wine ',  ' bottle ',
+                        ' wine bottle ', ' wine ',  ' bottle ',' wine rack ', ' rack ',
                         ' wine receipt ', ' receipt ',
                         ' jacket ',
                         ' sofa ', ' couch ',
@@ -88,6 +88,7 @@ class Input_Parser:
                         ' sarah ',
                         ' chains ', ' chain ',
                         ' passphrase ',
+                        ' wall ', ' eastern wall ', ' bare wall ', ' back wall ',
                         ' panic room ', ' panic door ', ' keypad ', ' panicroom '
                         ]
 
