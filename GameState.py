@@ -29,7 +29,8 @@ class GameState:
         self.garage_boltcutters_taken = False
         self.familyroom_examinedcouch = False
         self.familyroom_code_taken = False
-
+        self.secondfloorfoyer_examineddrawers = False
+        self.secondfloorfoyer_key_taken = False
         # self.add_json_mansion_features()
         self.last_command = ""
 
@@ -168,6 +169,8 @@ class GameState:
             self._veranda_features(object_name)
         elif self.current_room.name == 'Study':
             self._study_features(object_name)
+        elif self.current_room.name == 'Second Floor Foyer':
+            self._secondfloorfoyer_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -338,6 +341,30 @@ class GameState:
             if self.current_room.look_at.has_key(object_name) == True:
                 print self.current_room.look_at[object_name]
                 return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
+
+    def _secondfloorfoyer_features(self, object_name):
+        print "looking for %s " % object_name
+        if object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
+            object_name = 'table'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'drawers', 'drawer'}:
+            object_name = 'drawers'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.secondfloorfoyer_examineddrawers == False:
+                    print self.current_room.look_at[object_name]['before taking key']
+                    self.secondfloorfoyer_examineddrawers = True
+                    return self
+                elif self.secondfloorfoyer_key_taken == False:
+                    print self.current_room.look_at[object_name]['reexamining without having taken key']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['after taking key']
+                    return self
         else:
             print("These actions don't seem possible in this room")
             return self 
