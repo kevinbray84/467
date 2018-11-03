@@ -150,7 +150,7 @@ class GameState:
             print value
 
     def _look_at(self, object_name):
-        print("successfully called look at function")
+        #print("successfully called look at function")
         # print("object: " + self.current_room.items_in_room[object_name].name)
         if self.current_room.name == 'First Floor Foyer':
             self._firstfloorfoyer_features(object_name)
@@ -164,6 +164,8 @@ class GameState:
             self._familyroom_features(object_name)
         elif self.current_room.name == 'Panic Room':
             self._panicroom_features(object_name)
+        elif self.current_room.name == 'Veranda':
+            self._veranda_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -299,6 +301,22 @@ class GameState:
                 return self
         elif object_name in {'video','camera','video playback', 'monitors', 'monitor', 'video monitors', 'video monitor'}:
             object_name = 'video'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
+    
+    def _veranda_features(self, object_name):
+        print "looking for %s " % object_name
+        if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
+            object_name = 'patio table'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'sky','storm','summer storm','clouds','storm in the sky'}:
+            object_name = 'sky'
             if self.current_room.look_at.has_key(object_name) == True:
                 print self.current_room.look_at[object_name]
                 return self        
