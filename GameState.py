@@ -256,7 +256,6 @@ class GameState:
             return self
 
     def _garage_features(self, object_name):
-        #print "looking for %s " % object_name
         if object_name in {'truck','pickup'}:
             object_name = 'truck'
         if self.current_room.look_at.has_key(object_name) == True:
@@ -446,7 +445,6 @@ class GameState:
         #   Process movement commands
         #####################################################
         elif cmd.num_directions == 1 and cmd.verb == 'go':
-            # self.move(cmd.direction)
             self.last_command = "move"
             self.json_move(cmd.direction)
 
@@ -472,6 +470,18 @@ class GameState:
                 # TODO: Implement:
                 # get(parser.obj)    # should use the object if it's in the inventory
                 print 'Using %s' % cmd.obj
+            elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
+                if self.main_player.inventory.has_key('keys'):
+                    print 'You succesfully unlocked the BMW'
+                    self.garage_car_unlocked = True
+                    self.current_room.items_in_room['bolt cutters'].is_getable = True
+                elif not self.main_player.inventory.has_key('keys'):
+                    print 'You don\'t have the keys'
+            else:
+                print 'You can\'t do that here'
+
+
+
 
     def play(self):
 

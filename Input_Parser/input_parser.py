@@ -41,7 +41,8 @@ class Input_Parser:
                       ' move ',
                       ' turn on ',
                       ' watch ',
-                      ' explore ']
+                      ' explore ',
+                      ' unlock ']
         self.objects = [' key ', ' keys ', ' key peg ',
                         ' mail ', ' stack ', 'stack of mail ',
                         ' mailbox ',
@@ -59,7 +60,7 @@ class Input_Parser:
                         ' desk ', ' tome ', ' large tome ',
                         ' back table ',
                         ' flashlight ',
-                        ' bmw ', ' car ',
+                        ' bmw ', ' car ', ' bmw car ',
                         ' bolt cutters ',
                         ' truck ',
                         ' portrait ', ' family portrait ', ' family picture ', ' picture ',
