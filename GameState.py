@@ -445,12 +445,12 @@ class GameState:
         #####################################################
         #   Process movement commands
         #####################################################
-        elif cmd.num_directions == 1:
+        elif cmd.num_directions == 1 and cmd.verb == 'go':
             # self.move(cmd.direction)
             self.last_command = "move"
             self.json_move(cmd.direction)
 
-        elif cmd.num_room_names == 1:
+        elif cmd.num_room_names == 1 and cmd.verb == 'go':
             self.last_command = "move"
             self.move_to(cmd.room_name)
 
