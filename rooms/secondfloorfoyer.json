@@ -7,7 +7,7 @@
         "drawers":{
             "before taking key": "Opening up one of the drawers, you notice an engraved key rolling around at the bottom of the drawer. Perhaps this could be helpful later on.",
             "reexamining without having taken key":"Opening up one of the drawers, you notice the engraved key still rolling about inside. Perhaps this could be of use.",
-            "after taking coded key": "Opening the drawers, you find nothing else of value."
+            "after taking key": "Opening the drawers, you find nothing else of value."
         }
     },
     "exits": {
