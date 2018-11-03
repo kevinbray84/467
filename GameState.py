@@ -56,7 +56,7 @@ class GameState:
         self.json_Mansion["Family Room"].add_item(safe_combination)
 
         # not getable until BMW trunk is opened
-        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], True)
+        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], False)
         bolt_cutters.set_use("correct", itemdict["bolt cutters"]["use"]["correct"])
         bolt_cutters.set_use("incorrect", itemdict["bolt cutters"]["use"]["incorrect"])
         self.json_Mansion["Garage"].add_item(bolt_cutters)
@@ -472,7 +472,7 @@ class GameState:
                 print 'Using %s' % cmd.obj
             elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
                 if self.main_player.inventory.has_key('keys'):
-                    print 'You succesfully unlocked the BMW'
+                    print 'You succesfully unlocked the BMW and found some bolt cutters inside'
                     self.garage_car_unlocked = True
                     self.current_room.items_in_room['bolt cutters'].is_getable = True
                 elif not self.main_player.inventory.has_key('keys'):

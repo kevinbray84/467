@@ -48,13 +48,21 @@ class Room:
         print(self.get_name())
         print("="*CONSOLE_WIDTH)
         self.describe()
-        if len(self.items_in_room) > 0:
+        # if len(self.items_in_room) > 0:
+        has_gettable_items = False
+        for key, value in self.items_in_room.items():  # check for getable items in room
+            if value.is_getable == True:
+                has_gettable_items = True
+        if has_gettable_items:
             print("-"*CONSOLE_WIDTH)
             print("There are a few items in the room:")
-        for key, value in self.items_in_room.items():
-            print "%2d: %s: %s" % (count, value.name, value.description)
-            count += 1
+
+        for key, value in self.items_in_room.items():  # display all items that are getable
+            if value.is_getable:
+                print "%2d: %s: %s" % (count, value.name, value.description)
+                count += 1
         print("-"*CONSOLE_WIDTH)
+
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
@@ -84,5 +92,3 @@ class Room:
         del self.items_in_room[item]
         # print 'REMOVED %s.  THERE ARE NOW %d items' % (
         #    item, len(self.items_in_room))
-
-

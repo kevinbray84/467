@@ -4,7 +4,10 @@ class Player:
         self.inventory = {}
 
     def take_item(self, item):
-        self.inventory[item.name] = item
+        if item.is_getable:
+            self.inventory[item.name] = item
+        else:
+            print 'You can\'t get that item'
 
     def drop_item(self, item):
         del self.inventory[item]
