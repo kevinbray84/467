@@ -77,7 +77,7 @@ class GameState:
         diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], True)
         diary_key.set_use("correct", itemdict["diary key"]["use"]["correct"])
         diary_key.set_use("incorrect", itemdict["diary key"]["use"]["incorrect"])
-        self.json_Mansion["Sarah's Room"].add_item(diary_key)
+        self.json_Mansion["Sarahs Room"].add_item(diary_key)
 
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
