@@ -411,8 +411,11 @@ class GameState:
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
             if value.name.lower() == object_name:
-                self.main_player.take_item(value)
-                self.current_room.take_item(key)
+                if value.is_getable:
+                    self.main_player.take_item(value)
+                    self.current_room.take_item(key)
+                else:
+                    print "You can\'t get that item"
                 return self
         print "The %s isn't in this room" % object_name
         raw_input("Press enter to continue...")
