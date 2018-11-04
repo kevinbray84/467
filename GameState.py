@@ -414,6 +414,8 @@ class GameState:
                 if value.is_getable:
                     self.main_player.take_item(value)
                     self.current_room.take_item(key)
+                    if value.name == 'keys':
+                        self.firstfloorfoyer_keys_taken = True
                 else:
                     print "You can\'t get that item"
                 return self
@@ -475,7 +477,7 @@ class GameState:
                 print 'Using %s' % cmd.obj
             elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
                 if self.main_player.inventory.has_key('keys'):
-                    print 'You succesfully unlocked the BMW and found some bolt cutters inside'
+                    print self.main_player.inventory['keys'].use['correct']
                     self.garage_car_unlocked = True
                     self.current_room.items_in_room['bolt cutters'].is_getable = True
                 elif not self.main_player.inventory.has_key('keys'):
