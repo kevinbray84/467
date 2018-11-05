@@ -176,6 +176,8 @@ class GameState:
             self._winecellar_features(object_name)
         elif self.current_room.name == 'Grand Room':
             self._grandroom_features(object_name)
+        elif self.current_room.name == 'Secret Room':
+            self._secretroom_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -401,6 +403,22 @@ class GameState:
                 return self
         elif object_name in {'family portrait','portrait','family picture', 'family', 'picture'}:
             object_name = 'family portrait'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
+
+    def _secretroom_features(self, object_name):
+        #print "looking for %s " % object_name
+        if object_name in {'chain','chains','chain lock','lock','shackle'}:
+            object_name = 'chain'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'sarah','daughter','her'}:
+            object_name = 'sarah'
             if self.current_room.look_at.has_key(object_name) == True:
                 print self.current_room.look_at[object_name]
                 return self        
