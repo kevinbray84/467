@@ -87,8 +87,8 @@ class Input_Parser:
                         ' bottled water ', 'bottled waters ',
                         ' camera ', ' video ', ' video playback ', ' video monitors ',  ' video monitor ',
                         ' monitors ', ' monitor ',
-                        ' sarah ',
-                        ' chains ', ' chain ',
+                        ' sarah ', ' daughter ', ' her ',
+                        ' chains ', ' chain ', ' chain lock ', ' shackle ',
                         ' passphrase ',
                         ' wall ', ' eastern wall ', ' bare wall ', ' back wall ',
                         ' panic room ', ' panic door ', ' keypad ', ' panicroom '
