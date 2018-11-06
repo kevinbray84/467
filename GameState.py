@@ -35,6 +35,10 @@ class GameState:
         self.sarahsroom_diary_unlocked = False
         self.sarahsroom_diarykey_taken = False
         self.sarahsroom_bed_examined = False
+        self.mastersuite_portrait_moved = False
+        self.mastersuite_safe_unlocked = False
+        self.mastersuite_safe_examined = False
+        self.mastersuite_passphrase_taken = False
 
         self.last_command = ""
 
@@ -183,6 +187,8 @@ class GameState:
             self._secretroom_features(object_name)
         elif self.current_room.name == "Sarahs Room":
             self._sarahsroom_features(object_name)
+        elif self.current_room.name == 'Master Suite':
+            self._mastersuite_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -458,6 +464,46 @@ class GameState:
         else:
             print("These actions don't seem possible in this room")
             return self 
+
+    def _mastersuite_features(self, object_name):
+        if object_name in {'portrait','portrait of the couple','portrait of couple'}:
+            object_name = 'portrait'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.mastersuite_portrait_moved == False:
+                    print self.current_room.look_at[object_name]['not moved']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['moved']
+                    return self
+        elif object_name in {'safe', 'combination','hidden safe'}:
+            object_name = 'safe'
+            if self.mastersuite_portrait_moved == False:
+                print("These actions don't seem possible in this room")
+                return self
+            elif self.mastersuite_safe_unlocked == False:
+                print self.current_room.look_at[object_name]['locked']
+                return self
+            elif self.mastersuite_safe_examined == False:
+                print self.current_room.look_at[object_name]['unlocked']
+                self.mastersuite_safe_examined = True
+                return self
+            elif self.mastersute_passphrase_taken == False:
+                print self.current_room.look_at[object_name]['unlocked not taken passphrase']
+                return self
+            else:
+                print self.current_room.look_at[object_name]['unlocked and taken']
+                return self
+        elif object_name in {'end table','small crystal containers','small crystal container','crystal containers','endtable'}:
+            object_name = 'end table'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        else:
+            print("These actions don't seem possible in this room")
+            return self
+
+
+
 
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
