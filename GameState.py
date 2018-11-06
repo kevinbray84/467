@@ -189,6 +189,8 @@ class GameState:
             self._sarahsroom_features(object_name)
         elif self.current_room.name == 'Master Suite':
             self._mastersuite_features(object_name)
+        elif self.current_room.name == 'Basement':
+            self._basement_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -502,7 +504,21 @@ class GameState:
             print("These actions don't seem possible in this room")
             return self
 
-
+    def _basement_features(self, object_name):
+        #print "looking for %s " % object_name
+        if object_name in {'trunk', 'large trunk'}:
+            object_name = 'trunk'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self
+        elif object_name in {'footprints','foot prints','footprint','foot print','ground','dust','floor'}:
+            object_name = 'footprints'
+            if self.current_room.look_at.has_key(object_name) == True:
+                print self.current_room.look_at[object_name]
+                return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
 
 
     def _add_to_inventory(self, object_name):
