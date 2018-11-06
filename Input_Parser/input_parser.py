@@ -94,6 +94,8 @@ class Input_Parser:
                         ' sarah ', ' daughter ', ' her ',
                         ' chains ', ' chain ', ' chain lock ', ' shackle ',
                         ' passphrase ',
+                        ' trunk ', ' large trunk ',
+                        ' footprints ', ' foot prints ', ' footprint ', ' foot print ', ' ground ', ' dust ',
                         ' wall ', ' eastern wall ', ' bare wall ', ' back wall ',
                         ' panic room ', ' panic door ', ' keypad ', ' panicroom '
                         ]
