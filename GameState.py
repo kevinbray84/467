@@ -32,6 +32,9 @@ class GameState:
         self.secondfloorfoyer_examineddrawers = False
         self.secondfloorfoyer_key_taken = False
         self.winecellar_wall_unlocked = False
+        self.sarahsroom_diary_unlocked = False
+        self.sarahsroom_diarykey_taken = False
+        self.sarahsroom_bed_examined = False
 
         self.last_command = ""
 
@@ -178,6 +181,8 @@ class GameState:
             self._grandroom_features(object_name)
         elif self.current_room.name == 'Secret Room':
             self._secretroom_features(object_name)
+        elif self.current_room.name == "Sarahs Room":
+            self._sarahsroom_features(object_name)
         else:
             print("These actions don't seem possible in this room")
         return self
@@ -422,6 +427,34 @@ class GameState:
             if self.current_room.look_at.has_key(object_name) == True:
                 print self.current_room.look_at[object_name]
                 return self        
+        else:
+            print("These actions don't seem possible in this room")
+            return self 
+
+    def _sarahsroom_features(self, object_name):
+        #print "looking for %s " % object_name
+        if object_name in {'side table','table','diary','sarahs diary','sarah\'s diary'}:
+            object_name = 'side table'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.sarahsroom_diary_unlocked == False:
+                    print self.current_room.look_at[object_name]['locked']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['unlocked']
+                    return self
+        elif object_name in {'bed', 'under bed','floor'}:
+            object_name = 'bed'
+            if self.current_room.look_at.has_key(object_name) == True:
+                if self.sarahsroom_bed_examined == False:
+                    print self.current_room.look_at[object_name]['not taken diary key']
+                    self.sarahsroom_bed_examined = True
+                    return self
+                elif self.sarahsroom_diarykey_taken == False:
+                    print self.current_room.look_at[object_name]['reexamining not taken diary key']
+                    return self
+                else:
+                    print self.current_room.look_at[object_name]['taken diary key']
+                    return self
         else:
             print("These actions don't seem possible in this room")
             return self 
