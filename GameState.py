@@ -589,7 +589,10 @@ class GameState:
                 # get(parser.obj)    # should use the object if it's in the inventory
                 print 'Using %s' % cmd.obj
             elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
-                if self.main_player.inventory.has_key('keys'):
+                print "OBJECT is %s" % cmd.obj
+                if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower():
+                    print 'You can\'t unlock the %s' % cmd.obj
+                elif self.main_player.inventory.has_key('keys'):
                     print self.main_player.inventory['keys'].use['correct']
                     self.garage_car_unlocked = True
                     self.current_room.items_in_room['bolt cutters'].is_getable = True
