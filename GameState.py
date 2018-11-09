@@ -158,44 +158,45 @@ class GameState:
             print key
             print value
 
-    def _look_at(self, object_name):
+    def _look_at(self, cmd):
         #print("successfully called look at function")
         # print("object: " + self.current_room.items_in_room[object_name].name)
         if self.current_room.name == 'First Floor Foyer':
-            self._firstfloorfoyer_features(object_name)
+            self._firstfloorfoyer_features(cmd)
         elif self.current_room.name == 'Dining Room':
-            self._diningroom_features(object_name)
+            self._diningroom_features(cmd)
         elif self.current_room.name == 'Library':
-            self._library_features(object_name)
+            self._library_features(cmd)
         elif self.current_room.name == 'Garage':
-            self._garage_features(object_name)
+            self._garage_features(cmd)
         elif self.current_room.name == 'Family Room':
-            self._familyroom_features(object_name)
+            self._familyroom_features(cmd)
         elif self.current_room.name == 'Panic Room':
-            self._panicroom_features(object_name)
+            self._panicroom_features(cmd)
         elif self.current_room.name == 'Veranda':
-            self._veranda_features(object_name)
+            self._veranda_features(cmd)
         elif self.current_room.name == 'Study':
-            self._study_features(object_name)
+            self._study_features(cmd)
         elif self.current_room.name == 'Second Floor Foyer':
-            self._secondfloorfoyer_features(object_name)
+            self._secondfloorfoyer_features(cmd)
         elif self.current_room.name == 'Wine Cellar':
-            self._winecellar_features(object_name)
+            self._winecellar_features(cmd)
         elif self.current_room.name == 'Grand Room':
-            self._grandroom_features(object_name)
+            self._grandroom_features(cmd)
         elif self.current_room.name == 'Secret Room':
-            self._secretroom_features(object_name)
+            self._secretroom_features(cmd)
         elif self.current_room.name == "Sarahs Room":
-            self._sarahsroom_features(object_name)
+            self._sarahsroom_features(cmd)
         elif self.current_room.name == 'Master Suite':
-            self._mastersuite_features(object_name)
+            self._mastersuite_features(cmd)
         elif self.current_room.name == 'Basement':
-            self._basement_features(object_name)
+            self._basement_features(cmd)
         else:
             print("These actions don't seem possible in this room")
         return self
 
-    def _firstfloorfoyer_features(self, object_name):
+    def _firstfloorfoyer_features(self, cmd):
+        object_name = cmd.obj
         if object_name in {'mail', 'mailbox'}:
             object_name = 'mail'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -270,24 +271,35 @@ class GameState:
             print("These actions don't seem possible in this room")
             return self
 
-    def _garage_features(self, object_name):
-        if object_name in {'truck','pickup'}:
-            object_name = 'truck'
-        if self.current_room.look_at.has_key(object_name) == True:
-            print self.current_room.look_at[object_name]
-            return self
-        elif object_name in {'bmw','car','bmw car'}:
-            object_name = 'BMW'
+    def _garage_features(self, cmd):
+        object_name = cmd.obj
+        if cmd.verb == 'look':
+            if object_name in {'truck','pickup'}:
+                object_name = 'truck'
             if self.current_room.look_at.has_key(object_name) == True:
-                if self.garage_car_unlocked == False:
-                    print self.current_room.look_at[object_name]['locked']
-                    return self
-                elif self.garage_boltcutters_taken == False:
-                    print self.current_room.look_at[object_name]['unlocked']['bolt cutters not taken']
-                    return self
-                else:
-                    print self.current_room.look_at[object_name]['unlocked']['bolt cutters taken']
-                    return self
+                print self.current_room.look_at[object_name]
+                return self
+            elif object_name in {'bmw','car','bmw car'}:
+                object_name = 'BMW'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.garage_car_unlocked == False:
+                        print self.current_room.look_at[object_name]['locked']
+                        return self
+                    elif self.garage_boltcutters_taken == False:
+                        print self.current_room.look_at[object_name]['unlocked']['bolt cutters not taken']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['unlocked']['bolt cutters taken']
+                        return self
+        if cmd.verb == 'unlock':
+            if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower():
+                print 'You can\'t unlock the %s' % cmd.obj
+            elif self.main_player.inventory.has_key('keys'):
+                print self.main_player.inventory['keys'].use['correct']
+                self.garage_car_unlocked = True
+                self.current_room.items_in_room['bolt cutters'].is_getable = True
+            elif not self.main_player.inventory.has_key('keys'):
+                print 'You don\'t have the keys'
         else:
             print("These actions don't seem possible in this room")
             return self
@@ -577,27 +589,14 @@ class GameState:
             if cmd.verb == 'look':
                 # TODO: Implmenet:
                 self.last_command = "look"
-                self._look_at(cmd.obj)
+                self._look_at(cmd)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'drop':
                 self._drop_from_inventory(cmd.obj)
-            elif cmd.verb == 'put' or cmd.verb == 'use':
-                self.last_command = "use"
-                # TODO: Implement:
-                # get(parser.obj)    # should use the object if it's in the inventory
-                print 'Using %s' % cmd.obj
             elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
-                print "OBJECT is %s" % cmd.obj
-                if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower():
-                    print 'You can\'t unlock the %s' % cmd.obj
-                elif self.main_player.inventory.has_key('keys'):
-                    print self.main_player.inventory['keys'].use['correct']
-                    self.garage_car_unlocked = True
-                    self.current_room.items_in_room['bolt cutters'].is_getable = True
-                elif not self.main_player.inventory.has_key('keys'):
-                    print 'You don\'t have the keys'
+                self._garage_features(cmd)
             else:
                 print 'You can\'t do that here'
 
