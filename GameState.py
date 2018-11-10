@@ -153,122 +153,133 @@ class GameState:
         return
 
 
-    def _look_at(self, cmd):
-        #print("successfully called look at function")
-        # print("object: " + self.current_room.items_in_room[object_name].name)
-        if self.current_room.name == 'First Floor Foyer':
-            self._firstfloorfoyer_features(cmd)
-        elif self.current_room.name == 'Dining Room':
-            self._diningroom_features(cmd)
-        elif self.current_room.name == 'Library':
-            self._library_features(cmd)
-        elif self.current_room.name == 'Garage':
-            self._garage_features(cmd)
-        elif self.current_room.name == 'Family Room':
-            self._familyroom_features(cmd)
-        elif self.current_room.name == 'Panic Room':
-            self._panicroom_features(cmd)
-        elif self.current_room.name == 'Veranda':
-            self._veranda_features(cmd)
-        elif self.current_room.name == 'Study':
-            self._study_features(cmd)
-        elif self.current_room.name == 'Second Floor Foyer':
-            self._secondfloorfoyer_features(cmd)
-        elif self.current_room.name == 'Wine Cellar':
-            self._winecellar_features(cmd)
-        elif self.current_room.name == 'Grand Room':
-            self._grandroom_features(cmd)
-        elif self.current_room.name == 'Secret Room':
-            self._secretroom_features(cmd)
-        elif self.current_room.name == "Sarahs Room":
-            self._sarahsroom_features(cmd)
-        elif self.current_room.name == 'Master Suite':
-            self._mastersuite_features(cmd)
-        elif self.current_room.name == 'Basement':
-            self._basement_features(cmd)
-        else:
-            print("These actions don't seem possible in this room")
-        return self
+    # def _look_at(self, cmd):
+    #     #print("successfully called look at function")
+    #     # print("object: " + self.current_room.items_in_room[object_name].name)
+    #     if self.current_room.name == 'First Floor Foyer':
+    #         self._firstfloorfoyer_features(cmd)
+    #     elif self.current_room.name == 'Dining Room':
+    #         self._diningroom_features(cmd)
+    #     elif self.current_room.name == 'Library':
+    #         self._library_features(cmd)
+    #     elif self.current_room.name == 'Garage':
+    #         self._garage_features(cmd)
+    #     elif self.current_room.name == 'Family Room':
+    #         self._familyroom_features(cmd)
+    #     elif self.current_room.name == 'Panic Room':
+    #         self._panicroom_features(cmd)
+    #     elif self.current_room.name == 'Veranda':
+    #         self._veranda_features(cmd)
+    #     elif self.current_room.name == 'Study':
+    #         self._study_features(cmd)
+    #     elif self.current_room.name == 'Second Floor Foyer':
+    #         self._secondfloorfoyer_features(cmd)
+    #     elif self.current_room.name == 'Wine Cellar':
+    #         self._winecellar_features(cmd)
+    #     elif self.current_room.name == 'Grand Room':
+    #         self._grandroom_features(cmd)
+    #     elif self.current_room.name == 'Secret Room':
+    #         self._secretroom_features(cmd)
+    #     elif self.current_room.name == "Sarahs Room":
+    #         self._sarahsroom_features(cmd)
+    #     elif self.current_room.name == 'Master Suite':
+    #         self._mastersuite_features(cmd)
+    #     elif self.current_room.name == 'Basement':
+    #         self._basement_features(cmd)
+    #     else:
+    #         print("These actions don't seem possible in this room")
+    #     return self
 
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
-        if object_name in {'mail', 'mailbox'}:
-            object_name = 'mail'
-            if self.current_room.look_at.has_key(object_name) == True:
-                print self.current_room.look_at[object_name]
-                return self
-        elif object_name in {'keys', 'key peg'}:
-            object_name = 'keys'
-            if self.current_room.look_at.has_key(object_name) == True:
-                if self.firstfloorfoyer_keys_taken is False:
-                    print self.current_room.look_at[object_name]['keys not taken']
+        if cmd.verb == 'look at':
+            if object_name in {'mail', 'mailbox'}:
+                object_name = 'mail'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    print self.current_room.look_at[object_name]
                     return self
-                else:
-                    print self.current_room.look_at[object_name]['keys taken']
-                    return self
+            elif object_name in {'keys', 'key peg'}:
+                object_name = 'keys'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.firstfloorfoyer_keys_taken is False:
+                        print self.current_room.look_at[object_name]['keys not taken']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['keys taken']
+                        return self
+            else:
+                print "You can't examine the %s in the %s." % (object_name, self.main_player.current_room.name)
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the %s " % self.main_player.current_room.name)
             return self
 
-    def _diningroom_features(self, object_name):
-        if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
-            object_name = 'food tray'
-            if self.current_room.look_at.has_key(object_name) == True:
-                if self.diningroom_key_taken is False:
-                    print self.current_room.look_at[object_name]['key not taken']
-                    return self
-                else:
-                    print self.current_room.look_at[object_name]['keys taken']
-                    return self
-        elif object_name in {'sidetable', 'side table', 'table'}:
-            object_name = 'side table'
-            if self.current_room.look_at.has_key(object_name) == True:
-                if self.diningroom_flashlight_taken is False:
-                    print self.current_room.look_at[object_name]['flashlight not taken']
-                    return self
-                else:
-                    print self.current_room.look_at[object_name]['flashlight taken']
-                    return self
+    def _diningroom_features(self, cmd):
+        object_name = cmd.obj
+        if cmd.verb == 'look at':
+            if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
+                object_name = 'food tray'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.diningroom_key_taken is False:
+                        print self.current_room.look_at[object_name]['key not taken']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['keys taken']
+                        return self
+            elif object_name in {'sidetable', 'side table', 'table'}:
+                object_name = 'side table'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.diningroom_flashlight_taken is False:
+                        print self.current_room.look_at[object_name]['flashlight not taken']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['flashlight taken']
+                        return self
+            else:
+                print "You can't examine the %s in the %s." % (object_name, self.main_player.current_room.name)
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the %s " % self.main_player.current_room.name)
             return self
 
-    def _library_features(self, object_name):
-        #print "looking for %s " % object_name
-        if object_name in {'desk', 'tome', 'large tome'}:
-            object_name = 'desk'
-            if self.current_room.look_at.has_key(object_name) == True:
-                if self.library_desk_slot_used is False:
-                    print self.current_room.look_at[object_name]['untouched']
+    def _library_features(self, cmd):
+        object_name = cmd.obj
+        if cmd.verb == 'look at':
+            if object_name in {'desk', 'tome', 'large tome'}:
+                object_name = 'desk'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.library_desk_slot_used is False:
+                        print self.current_room.look_at[object_name]['untouched']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['used']
+                        return self
+            elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
+                object_name = 'panic room'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    if self.library_desk_slot_used is False:
+                        #covers if trying to examine panic room without unlocking bookself
+                        print("These actions don't seem possible in this room")
+                        return self
+                    elif self.library_panicroom_unlocked is False:
+                        print self.current_room.look_at[object_name]['locked']
+                        return self
+                    else:
+                        print self.current_room.look_at[object_name]['unlocked']
+                        return self
+            elif object_name in {'statue', 'corner', 'sculpture'}:
+                object_name = 'statue'
+                if self.current_room.look_at.has_key(object_name) == True:
+                    print self.current_room.look_at[object_name]
                     return self
-                else:
-                    print self.current_room.look_at[object_name]['used']
-                    return self
-        elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
-            object_name = 'panic room'
-            if self.current_room.look_at.has_key(object_name) == True:
-                if self.library_desk_slot_used is False:
-                    #covers if trying to examine panic room without unlocking bookself
-                    print("These actions don't seem possible in this room")
-                    return self
-                elif self.library_panicroom_unlocked is False:
-                    print self.current_room.look_at[object_name]['locked']
-                    return self
-                else:
-                    print self.current_room.look_at[object_name]['unlocked']
-                    return self
-        elif object_name in {'statue', 'corner', 'sculpture'}:
-            object_name = 'statue'
-            if self.current_room.look_at.has_key(object_name) == True:
-                print self.current_room.look_at[object_name]
-                return self
+            else:
+                print "You can't examine the %s in the %s." % (object_name, self.main_player.current_room.name)
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Library")
             return self
 
     def _garage_features(self, cmd):
+        print "IN GARGE FEATURES"
         object_name = cmd.obj
-        if cmd.verb == 'look':
+        if cmd.verb == 'look at':
             if object_name in {'truck','pickup'}:
                 object_name = 'truck'
             if self.current_room.look_at.has_key(object_name) == True:
@@ -296,7 +307,7 @@ class GameState:
             elif not self.main_player.inventory.has_key('keys'):
                 print 'You don\'t have the keys'
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the garage")
             return self
 
     def _familyroom_features(self, object_name):
@@ -320,7 +331,7 @@ class GameState:
                     print self.current_room.look_at[object_name]['after taking combination code']
                     return self
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Family Room")
             return self 
 
     def _panicroom_features(self, object_name):
@@ -336,7 +347,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Panic Room")
             return self 
     
     def _veranda_features(self, object_name):
@@ -352,7 +363,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Veranda")
             return self 
 
     def _study_features(self, object_name):
@@ -368,7 +379,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Study")
             return self 
 
     def _secondfloorfoyer_features(self, object_name):
@@ -392,7 +403,7 @@ class GameState:
                     print self.current_room.look_at[object_name]['after taking key']
                     return self
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Second Floor Foyer")
             return self 
 
     def _winecellar_features(self, object_name):
@@ -411,7 +422,7 @@ class GameState:
                     print self.current_room.look_at[object_name]['unlocked']
                     return self
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Wine Cellar")
             return self
 
     def _grandroom_features(self, object_name):
@@ -427,7 +438,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Grand room")
             return self 
 
     def _secretroom_features(self, object_name):
@@ -443,7 +454,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Secret Room")
             return self 
 
     def _sarahsroom_features(self, object_name):
@@ -471,7 +482,7 @@ class GameState:
                     print self.current_room.look_at[object_name]['taken diary key']
                     return self
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in Sarah\'s room")
             return self 
 
     def _mastersuite_features(self, object_name):
@@ -487,7 +498,7 @@ class GameState:
         elif object_name in {'safe', 'combination','hidden safe'}:
             object_name = 'safe'
             if self.mastersuite_portrait_moved == False:
-                print("These actions don't seem possible in this room")
+                print("These actions don't seem possible right now")
                 return self
             elif self.mastersuite_safe_unlocked == False:
                 print self.current_room.look_at[object_name]['locked']
@@ -508,7 +519,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Master Suite")
             return self
 
     def _basement_features(self, object_name):
@@ -524,7 +535,7 @@ class GameState:
                 print self.current_room.look_at[object_name]
                 return self        
         else:
-            print("These actions don't seem possible in this room")
+            print("These actions don't seem possible in the Basement")
             return self 
 
 
@@ -613,18 +624,48 @@ class GameState:
         #   Process action commands
         #####################################################
         elif cmd.num_verbs == 1:
-            if cmd.verb == 'look at':
-                self.last_command = "look at"
-                self._look_at(cmd)
-            elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
+            # if cmd.verb == 'look at':
+            #     self.last_command = "look at"
+            #     self._look_at(cmd)
+            if cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
             elif cmd.verb == 'drop':
                 self._drop_from_inventory(cmd.obj)
-            elif cmd.verb == 'unlock' and self.current_room.name.lower() == 'garage':
-                self._garage_features(cmd)
+
+            elif self.current_room.name.lower() == 'first floor foyer':
+                self._firstfloorfoyer_features(cmd)
+            elif self.current_room.name.lower() == 'dining room':
+                self._diningroom_features(cmd)
+            elif self.current_room.name.lower() == 'garage':
+                 self._garage_features(cmd)
+            elif self.current_room.name.lower() == 'library':
+                self._library_features(cmd)       
+            elif self.current_room.name.lower() == 'family room':
+                self._familyroom_features(cmd)
+            elif self.current_room.name.lower() == 'panic room':
+                self._panicroom_features(cmd)    
+            elif self.current_room.name.lower() == 'veranda':
+                self._veranda_features(cmd)
+            elif self.current_room.name.lower() == 'study':
+                self._study_features(cmd)    
+            elif self.current_room.name.lower() == 'second floor foyer':
+                self._secondfloorfoyer_features(cmd)
+            elif self.current_room.name.lower() == 'wine cellar':
+                self._winecellar_features(cmd)                  
+            elif self.current_room.name.lower() == 'grand room':
+                self._grandroom_features(cmd)
+            elif self.current_room.name.lower() == 'secret room':
+                self._secretroom_features(cmd)           
+            elif self.current_room.name.lower() == 'sarahs room':
+                self._sarahsroom_features(cmd)
+            elif self.current_room.name.lower() == 'master suite':
+                self._mastersuite_features(cmd)    
+            elif self.current_room.name.lower() == 'basement':
+                self._basement_features(cmd)
+                                      
             else:
-                print 'You can\'t do that here'
+                print 'DEFAULT: You can\'t %s in the %s' % (cmd.verb, self.current_room.name)
 
 
     def action_check(self, room_name, feature_name):
