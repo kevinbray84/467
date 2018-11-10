@@ -563,7 +563,17 @@ class GameState:
         print "    get <item name> - adds the specified item to inventory"
         print "    drop <item name> - drops the specified item in the current room"
         print "GAME ACTIONS"
-        print "    show inventory - display's all items in the player's inventory"   
+        print "    look at <item name> - examine an object"   
+        print "    unlock <item name> - unlock the specified item"   
+        print "    try on <item name> - wear the specified item"
+        print "    move <item name> - move the specified item"
+        print "    open <item name> - open the specified item"
+        print "    enter <code> - enter the specified code"
+        print "    watch <item name> - watch the specified item"
+        print "    turn on <item name> - turn on the specified item"
+        print "    use <item name> - use the specified item"
+        print "    cut <item name> - cut the specified item"
+        print "    rescue <character name> - rescue the specified person"
         raw_input("Press enter to continue...")
 
 
@@ -586,7 +596,7 @@ class GameState:
             elif cmd.command == 'help':
                 self._help()
             elif cmd.command == 'look':
-                print ""
+                self.last_command = 'look'
 
         #####################################################
         #   Process movement commands
@@ -705,7 +715,7 @@ class GameState:
         #self.beginning_text()
         while True:
             #clear_terminal()
-            if self.last_command == "move" or self.last_command == "":
+            if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
                 self._render_room()
             print("")
             cmd.get_input()

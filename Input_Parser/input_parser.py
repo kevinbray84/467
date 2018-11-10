@@ -32,17 +32,21 @@ class Input_Parser:
                            ' basement ', ' wine cellar ',
                            ' secret room ', ' garage ']
         self.preps = [' in ', ' on ']
-        self.verbs = [' look at ',
-                      ' grab ', ' get ', ' take ', ' pick up ',
-                      ' put ', ' use ',
-                      ' try ',
-                      ' go ',
+        self.verbs = [' grab ', ' get ', ' take ', ' pick up ',
                       ' drop ',
+                      ' go ',
+                      ' look at ',
+                      ' unlock ',
+                      ' try on ',
                       ' move ',
-                      ' turn on ',
+                      ' open ',
+                      ' enter ',
                       ' watch ',
-                      ' explore ',
-                      ' unlock ']
+                      ' turn on ',
+                      ' use ',
+                      ' cut ',
+                      ' rescue '
+                      ]
         self.objects = [' key ', ' keys ', ' key peg ',
                         ' mail ', ' stack ', 'stack of mail ',
                         ' mailbox ',
@@ -134,7 +138,7 @@ class Input_Parser:
 
     def _find_prep(self):
         for word in self.preps:
-            if word in self.input and self.verb != 'turn on':  # need special case for turn on
+            if word in self.input and self.verb != 'turn on' and self.verb != 'try on':  # need special case for turn on
                 self.num_preps += 1
                 self.prep = word.strip()
 
