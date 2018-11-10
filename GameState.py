@@ -152,11 +152,6 @@ class GameState:
     def foyer_action_check(self, verb, noun):
         return
 
-    def _show_game_items(self):
-        print "There are %d game items" % len(self.game_items)
-        for key, value in self.game_items.items():
-            print key
-            print value
 
     def _look_at(self, cmd):
         #print("successfully called look at function")
@@ -553,6 +548,26 @@ class GameState:
         self.current_room.add_item(item_to_drop)
         raw_input("Press enter to continue...")
 
+    def _help(self):
+        print "SYSTEM COMMANDS: "
+        print "    savegame - saves the game"
+        print "    loadgame - loads the game"
+        print "    exit - exits the game"
+        print "    look - refreshes the display of the current room's info"
+        print "    help - displays this menu"
+        print "NAVIGATION COMMANDS: "
+        print "    go <direction> - move in the specified direction (north, south, east, west)"
+        print "    go <room name> - move to the specified room"
+        print "INVENTORY MANAGEMENT"
+        print "    show inventory - display's all items in the player's inventory"
+        print "    get <item name> - adds the specified item to inventory"
+        print "    drop <item name> - drops the specified item in the current room"
+        print "GAME ACTIONS"
+        print "    show inventory - display's all items in the player's inventory"   
+        raw_input("Press enter to continue...")
+
+
+
     def _process_cmd(self, cmd):
 
         #####################################################
@@ -568,8 +583,10 @@ class GameState:
                 print "Loading game..."
             elif cmd.command == 'show inventory':
                 self.check_inventory()
-            elif cmd.command == 'showgameitems':
-                self._show_game_items()
+            elif cmd.command == 'help':
+                self._help()
+            elif cmd.command == 'look':
+                print ""
 
         #####################################################
         #   Process movement commands
@@ -586,9 +603,8 @@ class GameState:
         #   Process action commands
         #####################################################
         elif cmd.num_verbs == 1:
-            if cmd.verb == 'look':
-                # TODO: Implmenet:
-                self.last_command = "look"
+            if cmd.verb == 'look at':
+                self.last_command = "look at"
                 self._look_at(cmd)
             elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
@@ -600,26 +616,6 @@ class GameState:
             else:
                 print 'You can\'t do that here'
 
-
-
-
-    def play(self):
-
-        cmd = Input_Parser()
-
-        self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
-
-        #########################################
-        # Main Loop
-        #########################################
-        #self.beginning_text()
-        while True:
-            #clear_terminal()
-            if self.last_command == "move" or self.last_command == "":
-                self._render_room()
-            print("")
-            cmd.get_input()
-            self._process_cmd(cmd)
 
     def action_check(self, room_name, feature_name):
         if room_name.lower() == "foyer":
@@ -696,3 +692,21 @@ class GameState:
         #time.sleep(2)
         #clear_terminal()
         #return
+
+    def play(self):
+
+        cmd = Input_Parser()
+
+        self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
+
+        #########################################
+        # Main Loop
+        #########################################
+        #self.beginning_text()
+        while True:
+            #clear_terminal()
+            if self.last_command == "move" or self.last_command == "":
+                self._render_room()
+            print("")
+            cmd.get_input()
+            self._process_cmd(cmd)

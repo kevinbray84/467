@@ -22,7 +22,7 @@ class Input_Parser:
         self.obj_of_prep = ''
 
         self.commands = [' savegame ', ' loadgame ',
-                         ' exit ', ' show inventory ', ' showgameitems ']
+                         ' exit ', ' show inventory ', ' help ', ' look ']
         self.directions = [' north ', ' south ', ' east ',
                            ' west ', ' upstairs ', ' downstairs ']
         self.room_names = [' first floor foyer ', ' library ',
@@ -32,7 +32,7 @@ class Input_Parser:
                            ' basement ', ' wine cellar ',
                            ' secret room ', ' garage ']
         self.preps = [' in ', ' on ']
-        self.verbs = [' look ',
+        self.verbs = [' look at ',
                       ' grab ', ' get ', ' take ', ' pick up ',
                       ' put ', ' use ',
                       ' try ',
@@ -101,9 +101,13 @@ class Input_Parser:
                         ]
 
     def _find_command(self):
+        if 'look at' in self.input:
+            return self
         for word in self.commands:
             if word in self.input:
-                self.num_commands += 1
+                if len(word) > len(self.command):  # only get longest matching word
+                    if len(self.command) == 0:     # dont double count long match
+                        self.num_commands += 1
                 self.command = word.strip()
 
     def _find_direction(self):
