@@ -559,7 +559,7 @@ class GameState:
                     print self.current_room.look_at[object_name]['unlocked']
                     self.mastersuite_safe_examined = True
                     return self
-                elif self.mastersute_passphrase_taken == False:
+                elif self.mastersuite_passphrase_taken == False:
                     print self.current_room.look_at[object_name]['unlocked not taken passphrase']
                     return self
                 else:
@@ -579,9 +579,23 @@ class GameState:
             else:
                 print 'You can\'t move the %s' % object_name
                 return self
-            self.mastersuite_portrait_moved == True
+            self.mastersuite_portrait_moved = True
             print self.current_room.look_at[object_name]['moved']
 
+        elif cmd.verb == 'enter':
+            if self.mastersuite_portrait_moved == False:
+                print "There is nothing to enter a code into"
+                return self
+            code = raw_input("  Enter code to access safe> ")
+            if code == '12-03-18':
+                print '  Access granted!'
+                self.mastersuite_safe_unlocked = True
+                self.current_room.items_in_room['passphrase'].is_getable = True
+                print self.current_room.look_at['safe']['unlocked not taken passphrase']
+                self.mastersuite_safe_examined = True
+            else:
+                print '  Access denied.'
+                self.current_room.look_at['safe']['locked']
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
@@ -618,6 +632,8 @@ class GameState:
                         self.firstfloorfoyer_keys_taken = True                    
                     elif value.name == 'safe combination':
                         self.familyroom_code_taken = True
+                    elif value.name == 'passphrase':
+                        self.mastersuite_passphrase_taken = True
                 else:
                     print "You can\'t get that item"
                 return self

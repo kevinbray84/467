@@ -70,7 +70,7 @@ class Input_Parser:
                         ' truck ', ' pickup ',
                         ' portrait ', ' family portrait ', ' family picture ', ' picture ',
                         ' family ',
-                        ' combination ', ' safe combination ',
+                        ' combination ', ' safe combination ', ' code ',
                         ' safe ', ' hidden safe ', ' combination ',
                         ' end table ', ' endtable ', ' small crystal containers ', ' small crystal container ',
                         ' crystal container ', ' crystal containers ',
