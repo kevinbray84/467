@@ -325,7 +325,7 @@ class GameState:
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.familyroom_examinedcouch == False:
                         print self.current_room.look_at[object_name]['before taking combination code']
-                        self.familyroom_examinedcouch = True
+                        # self.familyroom_examinedcouch = True
                         return self
                     elif self.familyroom_code_taken == False:
                         print self.current_room.look_at[object_name]['reexamining jacket before taking combination code']
@@ -335,6 +335,17 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+
+        if cmd.verb == 'try on':
+            if object_name in {'jacket'}:
+                object_name = 'couch'
+            else:
+                print 'You can\'t try on the %s' % object_name
+                return self
+            print self.current_room.look_at[object_name]['trying jacket on']
+            self.familyroom_examinedcouch = True
+            self.current_room.items_in_room['safe combination'].is_getable = True
+
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
@@ -594,7 +605,9 @@ class GameState:
                     self.main_player.take_item(value)
                     self.current_room.take_item(key)
                     if value.name == 'keys':
-                        self.firstfloorfoyer_keys_taken = True
+                        self.firstfloorfoyer_keys_taken = True                    
+                    elif value.name == 'safe combination':
+                        self.familyroom_code_taken = True
                 else:
                     print "You can\'t get that item"
                 return self
@@ -730,7 +743,7 @@ class GameState:
             print("The inventory contains %d items:") % len(
                 self.main_player.inventory)
             for key, value in self.main_player.inventory.items():
-                print "%2d: %s" % (counter, value.name)
+                print "%2d: %s - %s" % (counter, value.name, value.description)
                 counter += 1
         raw_input("Press enter to continue...")
 
