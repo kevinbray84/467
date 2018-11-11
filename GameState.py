@@ -78,12 +78,12 @@ class GameState:
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
         # not getable until you look in the drawers
-        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], True)
+        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], False)
         engraved_key.set_use("correct", itemdict["engraved key"]["use"]["correct"])
         keys.set_use("incorrect", itemdict["engraved key"]["use"]["incorrect"])
         self.json_Mansion["Second Floor Foyer"].add_item(engraved_key)
 
-        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], True)
+        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], False)
         diary_key.set_use("correct", itemdict["diary key"]["use"]["correct"])
         diary_key.set_use("incorrect", itemdict["diary key"]["use"]["incorrect"])
         self.json_Mansion["Sarahs Room"].add_item(diary_key)
@@ -272,6 +272,58 @@ class GameState:
                     return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+
+        elif cmd.verb in ['use', 'try', 'unlock', 'enter']:
+            if object_name.lower() == "engraved key":
+                if self.main_player.inventory.has_key('engraved key'):
+                    if self.library_desk_slot_used is False:
+                        self.library_desk_slot_used = True
+                        print_split(self.main_player.inventory['engraved key'].use['correct'])
+
+                    else:
+                        print("You have already used the engraved key here")
+                else:
+                    print("You do not have the Coded Key in your inventory")
+
+
+            elif cmd.verb == 'enter':
+                if self.library_desk_slot_used == False:
+                    print "There is nothing to enter a code into"
+                    return self
+                code = raw_input("  Enter code to access safe> ")
+                if code == 'NOPLACELIKEHOME':
+                    print '  Access granted!'
+                    print_split(self.main_player.inventory['passphrase'].use['correct'])
+                    self.library_panicroom_unlocked = True
+                    self.current_room.exits.update({"west": "Panic Room"})
+                    response = raw_input("Would you like to enter now? >")
+                    if response.lower() == ["yes", "y"]:
+                        self.json_move("west")
+                    else:
+                        return self
+                else:
+                    print '  Access denied.'
+                    return self
+
+            #elif object_name.lower == "passphrase":
+            #    if self.main_player.inventory.has_key('passphrase'):
+            #        if self.library_panicroom_unlocked is False:
+            #            output = "You approach the keypad, looking at the sheet of paper you slowly input the passphrase written down on it.  As you press the final key you hear a loud latch disengage and the door slowly creaks open." \
+            #                     "Looks like we can finally enter the Panic Room."
+            #            self.library_panicroom_unlocked = True
+            #            print_split(output)
+            #            self.current_room.exits.update({"west": "Panic Room"})
+            #            response = raw_input("Would you like to enter now? >")
+            #            if response.lower() == ["yes", "y"]:
+            #                self.json_move("west")
+            #            else:
+            #                return self
+            #        else:
+            #            print("It appears you have already unlocked the Panic Room.")
+            #    else:
+            #        print("You do not have this in your inventory.")
+            else:
+                print("You try to use the {} but it seems to have no effect".format(object_name))
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self
@@ -425,6 +477,8 @@ class GameState:
                     if self.secondfloorfoyer_examineddrawers == False:
                         print self.current_room.look_at[object_name]['before taking key']
                         self.secondfloorfoyer_examineddrawers = True
+                        self.current_room.items_in_room['engraved key'].is_getable = True
+
                         return self
                     elif self.secondfloorfoyer_key_taken == False:
                         print self.current_room.look_at[object_name]['reexamining without having taken key']
@@ -434,6 +488,14 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+
+        #elif cmd.verb == "take":
+        #    if self.secondfloorfoyer_examineddrawers == True:
+        #        if object_name.lower() == "engraved key":
+        #            self.main_player.take_item(engraved_key)
+
+
+
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
@@ -521,6 +583,7 @@ class GameState:
                     if self.sarahsroom_bed_examined == False:
                         print self.current_room.look_at[object_name]['not taken diary key']
                         self.sarahsroom_bed_examined = True
+                        self.current_room.items_in_room['diary key'].is_getable = True
                         return self
                     elif self.sarahsroom_diarykey_taken == False:
                         print self.current_room.look_at[object_name]['reexamining not taken diary key']
@@ -530,6 +593,16 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+        elif cmd.verb == 'open':
+            if object_name == 'diary':
+                object_name = 'diary'
+                if self.current_room.look_at.has_key("side table"):
+                    if "diary key" in self.main_player.inventory:
+                        if self.sarahsroom_diary_unlocked == False:
+                            self.sarahsroom_diary_unlocked = True
+                            print_split(self.main_player.inventory['diary key'].use['correct'])
+
+
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
@@ -634,6 +707,13 @@ class GameState:
                         self.familyroom_code_taken = True
                     elif value.name == 'passphrase':
                         self.mastersuite_passphrase_taken = True
+
+                    if object_name[-1] == "s":
+                        verb = "were"
+                    else:
+                        verb = "was"
+
+                    print_split(object_name.capitalize() + " " + verb + " added to your inventory")
                 else:
                     print "You can\'t get that item"
                 return self
@@ -717,6 +797,7 @@ class GameState:
             if cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
+
             elif cmd.verb == 'drop':
                 self._drop_from_inventory(cmd.obj)
 
@@ -843,7 +924,7 @@ class GameState:
         #self.beginning_text()
         while True:
             #clear_terminal()
-            if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
+            if self.last_command == "move" or self.last_command == "":
                 self._render_room()
             print("")
             cmd.get_input()

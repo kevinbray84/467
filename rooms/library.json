@@ -15,7 +15,6 @@
     },
     "exits": {
         "north":"Master Suite",
-        "west": "Panic Room",
         "east":"First Floor Foyer"
     }
 }

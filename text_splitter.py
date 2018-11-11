@@ -2,6 +2,9 @@ import os
 import time
 import sys
 
+TEXT_WIDTH = 110
+LINE_BREAKS = 120
+
 
 def split_input(user_string, chunk_size):
     output = []
@@ -26,6 +29,12 @@ def split_input(user_string, chunk_size):
         total_length += len(line)
 
     return output
+
+
+def print_split(user_string, chunk_size=TEXT_WIDTH):
+    output = split_input(user_string, chunk_size)
+    for chunk in output:
+        print(chunk)
 
 
 def animate_text(split_text, speed):
