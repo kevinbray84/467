@@ -572,6 +572,16 @@ class GameState:
                     return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+        
+        elif cmd.verb == 'move':
+            if object_name in {'portrait','portrait of the couple','portrait of couple'}:
+                object_name = 'portrait'
+            else:
+                print 'You can\'t move the %s' % object_name
+                return self
+            self.mastersuite_portrait_moved == True
+            print self.current_room.look_at[object_name]['moved']
+
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
