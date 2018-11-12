@@ -576,18 +576,23 @@ class GameState:
             elif object_name in {'sarah', 'daughter', 'her'}:
                 object_name = 'sarah'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
-                    return self       
+                    if self.secretroom_chain_broke == False:
+                        print self.current_room.look_at[object_name]
+                        return self
+                    else:
+                        self.secretroom_sarah_free = True
+                        print_split(self.current_room.look_at['sarah'])
+                        return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
         if cmd.verb in ['use', 'cut']:
-            if object_name == 'bolt cutters':
+            if object_name == 'chain' or object_name == 'bolt cutters':
                 if object_name in self.main_player.inventory:
                     print_split(self.main_player.inventory['bolt cutters'].use['correct'])
                     self.secretroom_chain_broke = True
                     return self
-        elif cmd.verb in ['help', 'talk']:
+        elif cmd.verb in ['talk to']:
             if self.secretroom_chain_broke:
                 self.secretroom_sarah_free = True
                 print_split(self.current_room.look_at['sarah'])
@@ -720,10 +725,10 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-        elif cmd.verb == 'use':
+        elif cmd.verb in ['use', 'turn on']:
             object_name = cmd.obj
             if object_name.lower() == 'flashlight':
-                print_split(self.main_player.inventory['flashlight'].use['correct baseement'])
+                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
                 self.current_room.exits.update({"south": "Wine Cellar"})
             else:
                 print "You can't use %s in the %s." % (object_name, self.current_room.name)
