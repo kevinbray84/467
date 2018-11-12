@@ -25,6 +25,7 @@ class GameState:
         self.diningroom_flashlight_taken = False
         self.library_desk_slot_used = False
         self.library_panicroom_unlocked = False
+        self.panicroom_video_watched = False
         self.garage_car_unlocked = False
         self.garage_boltcutters_taken = False
         self.familyroom_examinedcouch = False
@@ -39,6 +40,10 @@ class GameState:
         self.mastersuite_safe_unlocked = False
         self.mastersuite_safe_examined = False
         self.mastersuite_passphrase_taken = False
+        self.basement_winecellar_found = False
+        self.winecellar_keyhole = False
+        self.secretroom_sarah_free = False
+        self.secretroom_chain_broke = False
 
         self.last_command = ""
 
@@ -405,7 +410,7 @@ class GameState:
 
     def _panicroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'look at':        
+        if cmd.verb == 'look at':
             if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
                 if self.current_room.look_at.has_key(object_name) == True:
@@ -471,7 +476,8 @@ class GameState:
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
                     return self
-            elif object_name in {'drawers', 'drawer'}:
+        elif cmd.verb == 'open':
+            if object_name in {'drawers', 'drawer'}:
                 object_name = 'drawers'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.secondfloorfoyer_examineddrawers == False:
@@ -521,6 +527,20 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
+        elif cmd.verb in ['use', 'turn on', 'activate', 'unlock']:
+            if object_name == 'flashlight':
+                if object_name in self.main_player.inventory:
+                    print_split(self.main_player.inventory['flashlight'].use['correct'])
+                    self.winecellar_keyhole = True
+            if object_name == 'silver key':
+                if object_name in self.main_player.inventory:
+                    self.winecellar_wall_unlocked = True
+                    print_split(self.main_player.inventory['silver key'].use['correct'])
+                    return self
+                else:
+                    print_split("It appears you do not have this item")
+            else:
+                print "You can't %s the %s in the %s." % (cmd.verb, object_name, self.current_room.name)
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self
@@ -553,7 +573,7 @@ class GameState:
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
                     return self
-            elif object_name in {'sarah','daughter','her'}:
+            elif object_name in {'sarah', 'daughter', 'her'}:
                 object_name = 'sarah'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -561,6 +581,16 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
+        if cmd.verb in ['use', 'cut']:
+            if object_name == 'bolt cutters':
+                if object_name in self.main_player.inventory:
+                    print_split(self.main_player.inventory['bolt cutters'].use['correct'])
+                    self.secretroom_chain_broke = True
+                    return self
+        elif cmd.verb in ['help', 'talk']:
+            if self.secretroom_chain_broke:
+                self.secretroom_sarah_free = True
+                print_split(self.current_room.look_at['sarah'])
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -668,7 +698,7 @@ class GameState:
                 self.mastersuite_safe_examined = True
             else:
                 print '  Access denied.'
-                self.current_room.look_at['safe']['locked']
+                return self
 
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
@@ -690,6 +720,13 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
+        elif cmd.verb == 'use':
+            object_name = cmd.obj
+            if object_name.lower() == 'flashlight':
+                print_split(self.main_player.inventory['flashlight'].use['correct baseement'])
+                self.current_room.exits.update({"south": "Wine Cellar"})
+            else:
+                print "You can't use %s in the %s." % (object_name, self.current_room.name)
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -894,24 +931,6 @@ class GameState:
 
         time.sleep(2)
 
-        #for i, letter in enumerate(text_main):
-        #    sys.stdout.write(letter)
-        #    time.sleep(0.02)
-        #    if i % 80 == 0 and i != 0:
-        #        sys.stdout.write("\n")
-        #
-        #time.sleep(1)
-        #print("\n")
-        #for i, letter in enumerate(text_secondary):
-        #    sys.stdout.write(letter)
-        #    time.sleep(.25)
-        #    if i == 80:
-        #        sys.stdout.write("\n")
-        #
-        #time.sleep(2)
-        #clear_terminal()
-        #return
-
     def play(self):
 
         cmd = Input_Parser()
@@ -922,7 +941,7 @@ class GameState:
         # Main Loop
         #########################################
         #self.beginning_text()
-        while True:
+        while self.secretroom_sarah_free == False:
             #clear_terminal()
             if self.last_command == "move" or self.last_command == "":
                 self._render_room()

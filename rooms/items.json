@@ -36,7 +36,8 @@
         "description":"The flashlight is compact, lightweight, and yellow in color. You click it on to test the batteries and find it is in perfect working order.",
         "use":{
             "correct":"You turn on the flashlight and approach the wall. You methodically examine every inch of the wall until you finally spot a keyhole that was previously hidden in the dark. ",
-            "incorrect":"You turn on the flashlight and shine it around but it doesn't seem to help."
+            "incorrect":"You turn on the flashlight and shine it around but it doesn't seem to help.",
+            "correct basement":"You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar."
         }
     },
     "silver key":{
