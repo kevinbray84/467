@@ -270,6 +270,24 @@ class GameState:
 
     def _library_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'rosewood sliding door', 'rosewood door','sliding door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif self.library_panicroom_unlocked == True:
+                if object_name in {'massive steel door', 'massive door', 'steel door'}:
+                    cmd.direction = 'west'
+                    self.json_move(cmd.direction)
+                    return self
+                else:
+                    print("You don't seem to be able to move there.")
+                    return self
+
         if cmd.verb == 'look at':
             if object_name in {'desk', 'tome', 'large tome'}:
                 object_name = 'desk'
@@ -404,7 +422,7 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door'}:
+            elif object_name in {'solid oak door','oak door','oaken door', 'door'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
