@@ -511,6 +511,12 @@ class GameState:
 
     def _study_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'oaken panel door', 'oaken door','panel door','oak door', 'oak panel door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+                
         if cmd.verb == 'look at':        
             if object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
                 object_name = 'computer'
@@ -663,7 +669,8 @@ class GameState:
 
     def _sarahsroom_features(self, cmd):
         object_name = cmd.obj
-        if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
+        if cmd.verb == 'go':
+            if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
