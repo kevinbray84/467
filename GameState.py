@@ -189,10 +189,6 @@ class GameState:
     #     else:
     #         print("These actions don't seem possible in this room")
     #     return self
-#elif cmd.num_directions == 1 and cmd.verb == 'go':
-#            self.last_command = "move"
-#            self.json_move(cmd.direction)
-
 
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
@@ -209,6 +205,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
+        
         if cmd.verb == 'look at':
             if object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
                 object_name = 'mail'
@@ -232,6 +229,20 @@ class GameState:
 
     def _diningroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'carpeted step','step','carpet','carpeted steps','steps'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'heavy wooden door','heavy door','wooden door','door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+        
         if cmd.verb == 'look at':
             if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
                 object_name = 'food tray'
