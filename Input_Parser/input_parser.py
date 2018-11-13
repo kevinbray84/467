@@ -115,7 +115,9 @@ class Input_Parser:
                         ' massive steel door ', ' massive door ', ' steel door ',
                         ' sliding glass door ', ' glass door ', ' sliding door ',
                         ' disguised hidden stone door ', ' hidden stone door ', ' stone door ', ' disguised stone door ', ' disguised door ', ' hidden door ',
-                        ' opaque glass door ', ' opaque door '
+                        ' opaque glass door ', ' opaque door ',
+                        ' decorated door ', ' picture door ', ' decorative door ', ' door with pictures ',
+                        ' oaken panel door ', ' oaken door ', ' panel door ', ' oak door ', ' oak panel door '
                         ]
 
     def _find_command(self):
