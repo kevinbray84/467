@@ -399,6 +399,24 @@ class GameState:
 
     def _familyroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'carpeted step','step','carpet','carpeted steps','steps'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':
             if object_name in {'billiards table','pool table', 'pooltable','table'}:
                 object_name = 'billiards table'
