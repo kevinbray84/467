@@ -490,6 +490,7 @@ class GameState:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
+
         if cmd.verb == 'look at':   
             if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
                 object_name = 'patio table'
@@ -601,6 +602,7 @@ class GameState:
                 cmd.direction = 'south'
                 self.json_move(cmd.direction)
                 return self
+
         if cmd.verb == 'look at':            
             if object_name in {'fireplace','fire','fire place','ashes'}:
                 object_name = 'fireplace'
@@ -626,6 +628,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
+
         if cmd.verb == 'look at':          
             if object_name in {'chain','chains','chain lock','lock','shackle'}:
                 object_name = 'chain'
@@ -755,6 +758,16 @@ class GameState:
 
     def _basement_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'opaque glass door','glass door','opaque door','door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':     
             if object_name in {'trunk', 'large trunk'}:
                 object_name = 'trunk'
