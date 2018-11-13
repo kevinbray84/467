@@ -105,7 +105,9 @@ class Input_Parser:
                         ' panic room ', ' panic door ', ' keypad ', ' panicroom ',
                         ' grand marble staircase ', ' grand marble stair case ', ' marble staircase ', ' marble stair case ', ' staircase ', ' stair case ',
                         ' open double doors ', ' double doors ', ' doors ', ' open doors ',
-                        ' open entryway ', ' open entry way ',' entryway ',' entry way '
+                        ' open entryway ', ' open entry way ',' entryway ',' entry way ',
+                        ' heavy wooden door ', ' heavy door ', ' wooden door ', ' door ',
+                        ' carpeted step ',' step ',' carpet ',' carpeted steps ',' steps '
                         ]
 
     def _find_command(self):
