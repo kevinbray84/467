@@ -381,6 +381,7 @@ class GameState:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
+
         if cmd.verb == 'look at':
             if object_name in {'truck','pickup'}:
                 object_name = 'truck'
@@ -479,6 +480,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
+
         if cmd.verb == 'look at':        
             if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
@@ -650,7 +652,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door'}:
+            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door','carved door', 'intricately carved door'}:
                 cmd.direction = 'south'
                 self.json_move(cmd.direction)
                 return self
@@ -750,6 +752,20 @@ class GameState:
 
     def _mastersuite_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door', 'carved door', 'intricately carved door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'solid oak door','oak door','oaken door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'rosewood sliding door', 'rosewood door','sliding door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':             
             if object_name in {'portrait','portrait of the couple','portrait of couple'}:
                 object_name = 'portrait'
