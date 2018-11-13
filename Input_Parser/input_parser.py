@@ -111,7 +111,7 @@ class Input_Parser:
                         ' elegant wooden double french doors ', ' wooden double french doors ', ' double french doors ', ' french doors ',' doors ', 
                         ' elegant double french doors ', ' elegant wooden doors ', ' elegant french doors ', ' wooden french doors ',
                         ' dimly lit staircase ', ' dimly lit stair case ', ' staircase ', ' stair case ', ' stairs ', ' dimly lit stairs ',
-                        ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door ',
+                        ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door ', ' carved door ', ' intricately carved door ',
                         ' massive steel door ', ' massive door ', ' steel door ',
                         ' sliding glass door ', ' glass door ', ' sliding door ',
                         ' disguised hidden stone door ', ' hidden stone door ', ' stone door ', ' disguised stone door ', ' disguised door ', ' hidden door ',
