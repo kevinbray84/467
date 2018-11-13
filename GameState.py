@@ -531,6 +531,20 @@ class GameState:
 
     def _secondfloorfoyer_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'oaken panel door', 'oaken door','panel door','oak door', 'oak panel door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':                
             if object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
                 object_name = 'table'
