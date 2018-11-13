@@ -663,6 +663,11 @@ class GameState:
 
     def _sarahsroom_features(self, cmd):
         object_name = cmd.obj
+        if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':           
             if object_name in {'side table','table','diary','sarahs diary','sarah\'s diary'}:
                 object_name = 'side table'
