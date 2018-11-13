@@ -358,6 +358,11 @@ class GameState:
 
     def _garage_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'heavy wooden door','heavy door','wooden door','door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
         if cmd.verb == 'look at':
             if object_name in {'truck','pickup'}:
                 object_name = 'truck'
