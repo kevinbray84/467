@@ -113,7 +113,8 @@ class Input_Parser:
                         ' dimly lit staircase ', ' dimly lit stair case ', ' staircase ', ' stair case ', ' stairs ', ' dimly lit stairs ',
                         ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door ',
                         ' massive steel door ', ' massive door ', ' steel door ',
-                        ' sliding glass door ', ' glass door ', ' sliding door '
+                        ' sliding glass door ', ' glass door ', ' sliding door ',
+                        ' disguised hidden stone door ', ' hidden stone door ', ' stone door ', ' disguised stone door ', ' disguised door ', ' hidden door '
                         ]
 
     def _find_command(self):
