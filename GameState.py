@@ -481,6 +481,15 @@ class GameState:
     
     def _veranda_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'sliding glass door','glass door','sliding door','door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
         if cmd.verb == 'look at':   
             if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
                 object_name = 'patio table'
