@@ -102,7 +102,10 @@ class Input_Parser:
                         ' trunk ', ' large trunk ',
                         ' footprints ', ' foot prints ', ' footprint ', ' foot print ', ' ground ', ' dust ',
                         ' wall ', ' eastern wall ', ' bare wall ', ' back wall ',
-                        ' panic room ', ' panic door ', ' keypad ', ' panicroom '
+                        ' panic room ', ' panic door ', ' keypad ', ' panicroom ',
+                        ' grand marble staircase ', ' grand marble stair case ', ' marble staircase ', ' marble stair case ', ' staircase ', ' stair case ',
+                        ' open double doors ', ' double doors ', ' doors ', ' open doors ',
+                        ' open entryway ', ' open entry way ',' entryway ',' entry way '
                         ]
 
     def _find_command(self):
