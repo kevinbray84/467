@@ -592,6 +592,15 @@ class GameState:
 
     def _grandroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'sliding glass door','glass door','sliding door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
         if cmd.verb == 'look at':            
             if object_name in {'fireplace','fire','fire place','ashes'}:
                 object_name = 'fireplace'
