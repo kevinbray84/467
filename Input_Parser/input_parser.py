@@ -107,7 +107,11 @@ class Input_Parser:
                         ' open double doors ', ' double doors ', ' doors ', ' open doors ',
                         ' open entryway ', ' open entry way ',' entryway ',' entry way ',
                         ' heavy wooden door ', ' heavy door ', ' wooden door ', ' door ',
-                        ' carpeted step ',' step ',' carpet ',' carpeted steps ',' steps '
+                        ' carpeted step ',' step ',' carpet ',' carpeted steps ',' steps ',
+                        ' elegant wooden double french doors ', ' wooden double french doors ', ' double french doors ', ' french doors ',' doors ', 
+                        ' elegant double french doors ', ' elegant wooden doors ', ' elegant french doors ', ' wooden french doors ',
+                        ' dimly lit staircase ', ' dimly lit stair case ', ' staircase ', ' stair case ', ' stairs ', ' dimly lit stairs ',
+                        ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door '
                         ]
 
     def _find_command(self):
