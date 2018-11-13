@@ -456,6 +456,11 @@ class GameState:
 
     def _panicroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'massive steel door', 'massive door', 'steel door', 'door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
         if cmd.verb == 'look at':        
             if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
