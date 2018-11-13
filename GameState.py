@@ -621,6 +621,11 @@ class GameState:
 
     def _secretroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
         if cmd.verb == 'look at':          
             if object_name in {'chain','chains','chain lock','lock','shackle'}:
                 object_name = 'chain'
