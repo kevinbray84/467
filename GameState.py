@@ -589,6 +589,20 @@ class GameState:
 
     def _winecellar_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'opaque glass door','glass door','opaque door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif self.winecellar_wall_unlocked == True:
+                if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
+                    cmd.direction = 'east'
+                    self.json_move(cmd.direction)
+                    return self
+                else:
+                    print("You don't seem to be able to move there.")
+                    return self
+
         if cmd.verb == 'look at':          
             if object_name in {'wine rack','wine','rack'}:
                 object_name = 'wine rack'
@@ -645,7 +659,7 @@ class GameState:
         object_name = cmd.obj
         if cmd.verb == 'go':
             if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
-                cmd.direction = 'east'
+                cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
 
