@@ -3,7 +3,7 @@
     "long description": "Walking into the Wine Cellar, you are are astonished by the vast collection of wine bottles that fill the multitude of wine racks surrounding the room. You also notice that the temperature decreased when you stepped into this room. It must be climate controlled you think to yourself. Looking around the room, other than the various wine racks the only noticeable feature is a bare wall. Will they continue to expand their collection until the entire room is completely filled? The only exit seems to be the opaque glass door to the north that leads back into the Basement.",
     "short description": {
         "locked":"You are in the Wine Cellar. You are surrounded by wine racks with only one wall left bare. To the north is the opaque glass door leading to the Basement.",
-        "unlocked": "You are in the Wine Cellar. You are surrounded by wine racks with only one wall left bare. To the north is the glass door leading to the Basement and to the east is a disguised hidden stone door to the Secret Room."
+        "unlocked": "You are in the Wine Cellar. You are surrounded by wine racks with only one wall left bare. To the north is the opaque glass door leading to the Basement and to the east is a disguised hidden stone door to the Secret Room."
     },
     "look at":{
         "wall":{
