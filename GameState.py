@@ -193,7 +193,7 @@ class GameState:
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'look at':
-            if object_name in {'mail', 'mailbox'}:
+            if object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
                 object_name = 'mail'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
