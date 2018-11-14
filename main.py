@@ -1,6 +1,8 @@
 from player import *
 from GameState import *
 import pickle
+import glob
+import os
 
 
 ################################
@@ -18,17 +20,49 @@ while not done_game:
 
     if save_game:
         print "SAVING GAME"
-        file_handler = open('test.sav', 'w')
+        fname = raw_input("    Enter filename> ")
+        fname = fname + ".sav"
+        file_handler = open(fname, 'w')
         pickle.dump(game, file_handler)
         print "Game saved, exiting..."
-        
+
         # this should restart the game from the saved point
-        file_handler = open('test.sav', 'r')
+        file_handler = open(fname, 'r')
         game = pickle.load(file_handler)
         save_game, load_game, done_game = game.play()
 
     if load_game:
-        print "LOADING GAME"
-        file_handler = open('test.sav', 'r')
-        game = pickle.load(file_handler)
-        save_game, load_game, done_game = game.play()
+        print "LOADING GAME."
+        # save a copy of current so it can be restarted if player changes thier mind
+        file_handler = open('temp.bak', 'w')
+        pickle.dump(game, file_handler)
+
+        print "The following savegames are available"
+        for file in os.listdir('.'):
+            if file.endswith(".sav"):
+                print "    %s" % file
+
+        fname = raw_input("    Enter file name> ")
+        try:
+            if not fname.endswith(".sav"):
+                fname = fname + ".sav"
+            file_handler = open(fname, 'r')
+        except:
+            print "File not found"
+            file_handler = open('temp.bak', 'r')
+            game = pickle.load(file_handler)
+            os.remove('temp.bak')
+            save_game, load_game, done_game = game.play()
+            continue
+
+        print "All unsaved progress will be lost.  Do you really want to load?  y/n"
+        choice = raw_input("> ")
+        if 'y' in choice:
+            os.remove('temp.bak')
+            game = pickle.load(file_handler)
+            save_game, load_game, done_game = game.play()
+        else:
+            file_handler = open('temp.bak', 'r')
+            game = pickle.load(file_handler)
+            os.remove('temp.bak')
+            save_game, load_game, done_game = game.play()
