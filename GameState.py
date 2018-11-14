@@ -6,6 +6,7 @@ import time
 import sys
 import os
 from text_splitter import *
+import pickle
 
 
 class GameState:
@@ -973,10 +974,6 @@ class GameState:
             if cmd.command == 'exit':
                 print "Thanks for playing!"
                 exit()
-            elif cmd.command == 'savegame':  # TODO: Implement save game
-                print "Saving game..."
-            elif cmd.command == 'loadgame':  # TODO: Implement load game
-                print "Loading game..."
             elif cmd.command == 'show inventory':
                 self.check_inventory()
             elif cmd.command == 'help':
@@ -1114,8 +1111,15 @@ class GameState:
         #self.beginning_text()
         while self.secretroom_sarah_free == False:
             #clear_terminal()
-            if self.last_command == "move" or self.last_command == "":
+            if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
                 self._render_room()
             print("")
             cmd.get_input()
+            if cmd.command == 'savegame':  # TODO: Implement save game
+                print "SAVING game..."
+                return True, False, False
+            if cmd.command == 'loadgame':  
+                return False, True, False
+            if self.secretroom_sarah_free:
+                return False, False, True
             self._process_cmd(cmd)
