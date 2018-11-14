@@ -102,7 +102,23 @@ class Input_Parser:
                         ' trunk ', ' large trunk ',
                         ' footprints ', ' foot prints ', ' footprint ', ' foot print ', ' ground ', ' dust ',
                         ' wall ', ' eastern wall ', ' bare wall ', ' back wall ',
-                        ' panic room ', ' panic door ', ' keypad ', ' panicroom '
+                        ' panic room ', ' panic door ', ' keypad ', ' panicroom ',
+                        ' grand marble staircase ', ' grand marble stair case ', ' marble staircase ', ' marble stair case ', ' staircase ', ' stair case ',
+                        ' open double doors ', ' double doors ', ' doors ', ' open doors ',
+                        ' open entryway ', ' open entry way ',' entryway ',' entry way ',
+                        ' heavy wooden door ', ' heavy door ', ' wooden door ', ' door ',
+                        ' carpeted step ',' step ',' carpet ',' carpeted steps ',' steps ',
+                        ' elegant wooden double french doors ', ' wooden double french doors ', ' double french doors ', ' french doors ',' doors ', 
+                        ' elegant double french doors ', ' elegant wooden doors ', ' elegant french doors ', ' wooden french doors ',
+                        ' dimly lit staircase ', ' dimly lit stair case ', ' staircase ', ' stair case ', ' stairs ', ' dimly lit stairs ',
+                        ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door ', ' carved door ', ' intricately carved door ',
+                        ' massive steel door ', ' massive door ', ' steel door ',
+                        ' sliding glass door ', ' glass door ', ' sliding door ',
+                        ' disguised hidden stone door ', ' hidden stone door ', ' stone door ', ' disguised stone door ', ' disguised door ', ' hidden door ',
+                        ' opaque glass door ', ' opaque door ',
+                        ' decorated door ', ' picture door ', ' decorative door ', ' door with pictures ',
+                        ' oaken panel door ', ' oaken door ', ' panel door ', ' oak door ', ' oak panel door ', ' solid oak door ', ' solid door ',
+                        ' rosewood sliding door ', ' rosewood door '
                         ]
 
     def _find_command(self):

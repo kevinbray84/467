@@ -1,7 +1,7 @@
 {
     "location": "Dining Room",
-    "long description": "The dining room has a very lavish feel to it. The table is arranged with only the very best china and cutlery. On the edge of the table you spot a serving tray. Glancing around the rest of the room, you spot something yellow sitting on the side table. At the eastern wall you see a door leading out to the Garage. To the north, the adjacent room seems to be the Family Room.",
-    "short description": "You are in the Dining Room. To the north is the Family Room and to the east is the Garage. There is a food tray on the table and a side table.",
+    "long description": "The dining room has a very lavish feel to it. The table is arranged with only the very best china and cutlery. On the edge of the table you spot a serving tray. Glancing around the rest of the room, you spot something yellow sitting on the side table. At the eastern wall you see a heavy wooden door leading out to the Garage. To the north, across a carpeted step into the adjacent room seems to be the Family Room. To the west is an open entryway into the First Floor Foyer.",
+    "short description": "You are in the Dining Room. To the north is a carpeted step leading into the Family Room and to the east is a heavy wooden door to the Garage. To the west is an open entryway into the First Floor Foyer. There is a food tray on the table and a side table.",
     "look at":{
         "food tray":{
             "key not taken":"The food tray has a single empty bowl and a single empty juice box on it. Looking inside the bowl you see the remnants of what you can only assume to be is soup. Why is there only a single serving of food on the tray? And which family member is drinking juice boxes? Something doesnt seem right. Under the napkin you spot a glint of silver. It appears to be a silver key! Now what does this unlock.",

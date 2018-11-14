@@ -197,8 +197,22 @@ class GameState:
 
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+        
         if cmd.verb == 'look at':
-            if object_name in {'mail', 'mailbox'}:
+            if object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
                 object_name = 'mail'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -220,6 +234,20 @@ class GameState:
 
     def _diningroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'carpeted step','step','carpet','carpeted steps','steps'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'heavy wooden door','heavy door','wooden door','door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+        
         if cmd.verb == 'look at':
             if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
                 object_name = 'food tray'
@@ -247,6 +275,24 @@ class GameState:
 
     def _library_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'rosewood sliding door', 'rosewood door','sliding door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif self.library_panicroom_unlocked == True:
+                if object_name in {'massive steel door', 'massive door', 'steel door'}:
+                    cmd.direction = 'west'
+                    self.json_move(cmd.direction)
+                    return self
+                else:
+                    print("You don't seem to be able to move there.")
+                    return self
+
         if cmd.verb == 'look at':
             if object_name in {'desk', 'tome', 'large tome'}:
                 object_name = 'desk'
@@ -335,6 +381,12 @@ class GameState:
 
     def _garage_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'heavy wooden door','heavy door','wooden door','door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':
             if object_name in {'truck','pickup'}:
                 object_name = 'truck'
@@ -371,6 +423,24 @@ class GameState:
 
     def _familyroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'solid oak door','oak door','oaken door', 'door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'carpeted step','step','carpet','carpeted steps','steps'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':
             if object_name in {'billiards table','pool table', 'pooltable','table'}:
                 object_name = 'billiards table'
@@ -410,7 +480,13 @@ class GameState:
 
     def _panicroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'look at':
+        if cmd.verb == 'go':
+            if object_name in {'massive steel door', 'massive door', 'steel door', 'door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+
+        if cmd.verb == 'look at':        
             if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
                 if self.current_room.look_at.has_key(object_name) == True:
@@ -430,6 +506,16 @@ class GameState:
     
     def _veranda_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'sliding glass door','glass door','sliding door','door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':   
             if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
                 object_name = 'patio table'
@@ -450,6 +536,12 @@ class GameState:
 
     def _study_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'oaken panel door', 'oaken door','panel door','oak door', 'oak panel door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+                
         if cmd.verb == 'look at':        
             if object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
                 object_name = 'computer'
@@ -470,6 +562,20 @@ class GameState:
 
     def _secondfloorfoyer_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'oaken panel door', 'oaken door','panel door','oak door', 'oak panel door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':                
             if object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
                 object_name = 'table'
@@ -509,6 +615,20 @@ class GameState:
 
     def _winecellar_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'opaque glass door','glass door','opaque door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif self.winecellar_wall_unlocked == True:
+                if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
+                    cmd.direction = 'east'
+                    self.json_move(cmd.direction)
+                    return self
+                else:
+                    print("You don't seem to be able to move there.")
+                    return self
+
         if cmd.verb == 'look at':          
             if object_name in {'wine rack','wine','rack'}:
                 object_name = 'wine rack'
@@ -547,6 +667,16 @@ class GameState:
 
     def _grandroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'sliding glass door','glass door','sliding door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door','door','carved door', 'intricately carved door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':            
             if object_name in {'fireplace','fire','fire place','ashes'}:
                 object_name = 'fireplace'
@@ -567,6 +697,12 @@ class GameState:
 
     def _secretroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':          
             if object_name in {'chain','chains','chain lock','lock','shackle'}:
                 object_name = 'chain'
@@ -602,6 +738,12 @@ class GameState:
 
     def _sarahsroom_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':           
             if object_name in {'side table','table','diary','sarahs diary','sarah\'s diary'}:
                 object_name = 'side table'
@@ -645,6 +787,20 @@ class GameState:
 
     def _mastersuite_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door', 'carved door', 'intricately carved door'}:
+                cmd.direction = 'north'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'solid oak door','oak door','oaken door'}:
+                cmd.direction = 'east'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'rosewood sliding door', 'rosewood door','sliding door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':             
             if object_name in {'portrait','portrait of the couple','portrait of couple'}:
                 object_name = 'portrait'
@@ -711,6 +867,16 @@ class GameState:
 
     def _basement_features(self, cmd):
         object_name = cmd.obj
+        if cmd.verb == 'go':
+            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+                cmd.direction = 'west'
+                self.json_move(cmd.direction)
+                return self
+            elif object_name in {'opaque glass door','glass door','opaque door','door'}:
+                cmd.direction = 'south'
+                self.json_move(cmd.direction)
+                return self
+
         if cmd.verb == 'look at':     
             if object_name in {'trunk', 'large trunk'}:
                 object_name = 'trunk'

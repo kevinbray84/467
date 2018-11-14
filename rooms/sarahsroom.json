@@ -1,7 +1,7 @@
 {
     "location": "Sarahs Room",
-    "long description": "Pushing open the decorated door, you enter a surprisingly stark room. Aside from the lack of decor, you notice that the room is impeccably clean. This was not like any childs room that you had ever seen. The only furniture in the room is the single twin bed and a side table. The door you just used, which was on the eastern wall, appears to be the single entryway in or out.",
-    "short description": "You are in Sarahs room. The only furnishings you see are a bed and a side table. The only exit is the door to the east.",
+    "long description": "Pushing open the decorated door, you enter a surprisingly stark room. Aside from the lack of decor, you notice that the room is impeccably clean. This was not like any childs room that you had ever seen. The only furniture in the room is the single twin bed and a side table. The decorated door you just used, which is on the eastern wall, appears to be the single entryway in or out.",
+    "short description": "You are in Sarahs room. The only furnishings you see are a bed and a side table. The only exit is the decorated door to the east leading into the Second Floor Foyer.",
     "look at": {
         "bed":{
             "not taken diary key":"You approach the bed and do not notice anything unusual. Getting on your hands and knees, you check under the bed and see a glint of gold in the far corner. Stretching towards the object, it appears to be a very small key on a golden chain. Now what is this going here and does this unlock you wonder?",
