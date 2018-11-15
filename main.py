@@ -21,7 +21,8 @@ while not done_game:
     if save_game:
         print "SAVING GAME"
         fname = raw_input("    Enter filename> ")
-        fname = fname + ".sav"
+        if not fname.endswith('.sav'):
+            fname = fname + ".sav"
         file_handler = open(fname, 'w')
         pickle.dump(game, file_handler)
         print "Game saved, exiting..."
@@ -34,8 +35,7 @@ while not done_game:
     if load_game:
         print "LOADING GAME."
         # save a copy of current so it can be restarted if player changes thier mind
-        file_handler = open('temp.bak', 'w')
-        pickle.dump(game, file_handler)
+        old_game = game
 
         print "The following savegames are available"
         for file in os.listdir('.'):
@@ -55,14 +55,11 @@ while not done_game:
             save_game, load_game, done_game = game.play()
             continue
 
-        print "All unsaved progress will be lost.  Do you really want to load?  y/n"
-        choice = raw_input("> ")
+        print "All unsaved progress will be lost.  Do you really want to load?"
+        choice = raw_input("y/n > ")
         if 'y' in choice:
-            os.remove('temp.bak')
             game = pickle.load(file_handler)
             save_game, load_game, done_game = game.play()
         else:
-            file_handler = open('temp.bak', 'r')
-            game = pickle.load(file_handler)
-            os.remove('temp.bak')
+            game = old_game
             save_game, load_game, done_game = game.play()
