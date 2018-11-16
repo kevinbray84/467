@@ -213,13 +213,27 @@ class GameState:
                 return self
         
         if cmd.verb == 'look at':
-            if object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self
+            elif object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
                 object_name = 'mail'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
                     return self
-            elif object_name in {'keys', 'key peg'}:
-                object_name = 'keys'
+            elif object_name in {'keyholder','key holder','key holder on wall','key holders', 'key peg', 'key pegs','pegs',}:
+                object_name = 'keyholder'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.firstfloorfoyer_keys_taken is False:
                         print self.current_room.look_at[object_name]['keys not taken']
@@ -250,7 +264,21 @@ class GameState:
                 return self
         
         if cmd.verb == 'look at':
-            if object_name in {'foodtray', 'food', 'food tray', 'tray'}:
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self
+            elif object_name in {'foodtray', 'food', 'food tray', 'tray'}:
                 object_name = 'food tray'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.diningroom_key_taken is False:
@@ -295,7 +323,21 @@ class GameState:
                     return self
 
         if cmd.verb == 'look at':
-            if object_name in {'desk', 'tome', 'large tome'}:
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self
+            elif object_name in {'desk', 'tome', 'large tome'}:
                 object_name = 'desk'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.library_desk_slot_used is False:
@@ -389,7 +431,21 @@ class GameState:
                 return self
 
         if cmd.verb == 'look at':
-            if object_name in {'truck','pickup'}:
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self
+            elif object_name in {'truck','pickup'}:
                 object_name = 'truck'
             if self.current_room.look_at.has_key(object_name) == True:
                 print self.current_room.look_at[object_name]
@@ -443,7 +499,21 @@ class GameState:
                 return self
 
         if cmd.verb == 'look at':
-            if object_name in {'billiards table','pool table', 'pooltable','table'}:
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self
+            elif object_name in {'billiards table','pool table', 'pooltable','table'}:
                 object_name = 'billiards table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -487,8 +557,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':        
-            if object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
+        if cmd.verb == 'look at': 
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self       
+            elif object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -517,8 +601,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':   
-            if object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
+        if cmd.verb == 'look at': 
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self  
+            elif object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
                 object_name = 'patio table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -543,8 +641,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
                 
-        if cmd.verb == 'look at':        
-            if object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
+        if cmd.verb == 'look at': 
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self       
+            elif object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
                 object_name = 'computer'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -577,8 +689,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':                
-            if object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
+        if cmd.verb == 'look at':   
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self             
+            elif object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
                 object_name = 'table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -630,8 +756,22 @@ class GameState:
                     print("You don't seem to be able to move there.")
                     return self
 
-        if cmd.verb == 'look at':          
-            if object_name in {'wine rack','wine','rack'}:
+        if cmd.verb == 'look at':
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self          
+            elif object_name in {'wine rack','wine','rack'}:
                 object_name = 'wine rack'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -678,8 +818,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':            
-            if object_name in {'fireplace','fire','fire place','ashes'}:
+        if cmd.verb == 'look at':
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self            
+            elif object_name in {'fireplace','fire','fire place','ashes'}:
                 object_name = 'fireplace'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -704,8 +858,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':          
-            if object_name in {'chain','chains','chain lock','lock','shackle'}:
+        if cmd.verb == 'look at':  
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self        
+            elif object_name in {'chain','chains','chain lock','lock','shackle'}:
                 object_name = 'chain'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -745,8 +913,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':           
-            if object_name in {'side table','table','diary','sarahs diary','sarah\'s diary'}:
+        if cmd.verb == 'look at':  
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self         
+            elif object_name in {'side table','table','diary','sarahs diary','sarah\'s diary'}:
                 object_name = 'side table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.sarahsroom_diary_unlocked == False:
@@ -802,8 +984,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':             
-            if object_name in {'portrait','portrait of the couple','portrait of couple'}:
+        if cmd.verb == 'look at': 
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self            
+            elif object_name in {'portrait','portrait of the couple','portrait of couple'}:
                 object_name = 'portrait'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.mastersuite_portrait_moved == False:
@@ -878,8 +1074,22 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':     
-            if object_name in {'trunk', 'large trunk'}:
+        if cmd.verb == 'look at':  
+            if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
+                for key, value in self.current_room.items_in_room.items():
+                    if value.name.lower() == object_name:
+                        if value.is_getable:
+                            print(value.description)
+                            return self
+                if self.main_player.inventory.has_key(object_name) == True:
+                    for key,value in self.main_player.inventory.items():
+                        if value.name.lower() == object_name:
+                            print(value.description)
+                            return self
+                else:
+                    print("Unable to look at object")
+                    return self   
+            elif object_name in {'trunk', 'large trunk'}:
                 object_name = 'trunk'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
