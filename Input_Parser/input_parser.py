@@ -48,6 +48,7 @@ class Input_Parser:
                       ' rescue '
                       ]
         self.objects = [' key ', ' keys ', ' key peg ',
+                        ' keyholder ', ' key holder ', ' key holder on wall ', ' key holders ', ' key pegs ',' pegs',
                         ' mail ', ' stack ', 'stack of mail ',
                         ' mailbox ',
                         ' silver key ',
