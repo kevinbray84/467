@@ -5,7 +5,7 @@
     "look at": {
         "mail":"There is a stack of recently delivered mail by the door. After analyzing the kidnappers note we determined that the letters used to create it came from the magazines PEOPLE, TIME, and THE NEW YORKER. Is it a coincidence that the Mayor seems to be subscribed to all three? ",
         "keyholder": {
-            "keys not taken":"Hanging from the key holers pegs are a set of what appear to be car keys. The logo on the keychain is BMW.",
+            "keys not taken":"Hanging from the key holder pegs are a set of what appear to be car keys. The logo on the keychain is BMW.",
             "keys taken": "The key holder pegs are empty."
         }
     },
