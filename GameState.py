@@ -1033,7 +1033,7 @@ class GameState:
                 print '  Access granted!'
                 self.mastersuite_safe_unlocked = True
                 self.current_room.items_in_room['passphrase'].is_getable = True
-                print self.current_room.look_at['safe']['unlocked not taken passphrase']
+                print self.current_room.look_at['safe']['unlocked']
                 self.mastersuite_safe_examined = True
             else:
                 print '  Access denied.'
