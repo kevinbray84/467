@@ -1,4 +1,4 @@
-import text_splitter
+from text_splitter import *
 
 CONSOLE_WIDTH = 120
 
@@ -31,13 +31,13 @@ class Room:
 
     def describe(self):
         if self.first_visit:
-            input_sets = text_splitter.split_input(self.get_description(), 110)
+            input_sets = split_input(self.get_description(), 110)
             for set_piece in input_sets:
                 print(set_piece)
             # print(self.get_description())
             self.first_visit = False
         else:
-            print(self.get_secondary_description())
+            print_split(self.get_secondary_description())
 
     def link_room(self, room_to_link, direction):
         self.linked_rooms[direction] = room_to_link
@@ -59,7 +59,7 @@ class Room:
 
         for key, value in self.items_in_room.items():  # display all items that are getable
             if value.is_getable:
-                print "%2d: %s: %s" % (count, value.name, value.description)
+                print_split("%2d: %s: %s" % (count, value.name, value.description))
                 count += 1
         print("-"*CONSOLE_WIDTH)
 

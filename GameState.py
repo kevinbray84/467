@@ -15,6 +15,7 @@ class GameState:
         # self.mansion = {}
         self.game_items = {}
         self.current_room = None
+        self.previous_room = None
         self.json_Mansion = {}
         self.build_json_mansion()
         self.add_items_to_mansion()
@@ -217,34 +218,34 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self
             elif object_name in {'mail', 'mailbox', 'stack of mail', 'stack'}:
                 object_name = 'mail'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'keyholder','key holder','key holder on wall','key holders', 'key peg', 'key pegs','pegs',}:
                 object_name = 'keyholder'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.firstfloorfoyer_keys_taken is False:
-                        print self.current_room.look_at[object_name]['keys not taken']
+                        print_split(self.current_room.look_at[object_name]['keys not taken'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['keys taken']
+                        print_split(self.current_room.look_at[object_name]['keys taken'])
                         return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
         else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
+            print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
     def _diningroom_features(self, cmd):
@@ -268,38 +269,38 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self
             elif object_name in {'foodtray', 'food', 'food tray', 'tray'}:
                 object_name = 'food tray'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.diningroom_key_taken is False:
-                        print self.current_room.look_at[object_name]['key not taken']
+                        print_split(self.current_room.look_at[object_name]['key not taken'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['keys taken']
+                        print_split(self.current_room.look_at[object_name]['keys taken'])
                         return self
             elif object_name in {'sidetable', 'side table', 'table'}:
                 object_name = 'side table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.diningroom_flashlight_taken is False:
-                        print self.current_room.look_at[object_name]['flashlight not taken']
+                        print_split(self.current_room.look_at[object_name]['flashlight not taken'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['flashlight taken']
+                        print_split(self.current_room.look_at[object_name]['flashlight taken'])
                         return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
         else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
+            print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
     def _library_features(self, cmd):
@@ -327,45 +328,45 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self
-            elif object_name in {'desk', 'tome', 'large tome'}:
+            elif object_name in {'table', 'desk', 'tome', 'large tome'}:
                 object_name = 'desk'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.library_desk_slot_used is False:
-                        print self.current_room.look_at[object_name]['untouched']
+                        print_split(self.current_room.look_at[object_name]['untouched'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['used']
+                        print_split(self.current_room.look_at[object_name]['used'])
                         return self
             elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
                 object_name = 'panic room'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.library_desk_slot_used is False:
                         #covers if trying to examine panic room without unlocking bookself
-                        print("These actions don't seem possible in this room")
+                        print_split("These actions don't seem possible in this room")
                         return self
                     elif self.library_panicroom_unlocked is False:
-                        print self.current_room.look_at[object_name]['locked']
+                        print_split(self.current_room.look_at[object_name]['locked'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['unlocked']
+                        print_split(self.current_room.look_at[object_name]['unlocked'])
                         return self
             elif object_name in {'statue', 'corner', 'sculpture'}:
                 object_name = 'statue'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         elif cmd.verb in ['use', 'try', 'unlock', 'enter']:
             if object_name.lower() == "engraved key":
@@ -398,24 +399,6 @@ class GameState:
                 else:
                     print '  Access denied.'
                     return self
-
-            #elif object_name.lower == "passphrase":
-            #    if self.main_player.inventory.has_key('passphrase'):
-            #        if self.library_panicroom_unlocked is False:
-            #            output = "You approach the keypad, looking at the sheet of paper you slowly input the passphrase written down on it.  As you press the final key you hear a loud latch disengage and the door slowly creaks open." \
-            #                     "Looks like we can finally enter the Panic Room."
-            #            self.library_panicroom_unlocked = True
-            #            print_split(output)
-            #            self.current_room.exits.update({"west": "Panic Room"})
-            #            response = raw_input("Would you like to enter now? >")
-            #            if response.lower() == ["yes", "y"]:
-            #                self.json_move("west")
-            #            else:
-            #                return self
-            #        else:
-            #            print("It appears you have already unlocked the Panic Room.")
-            #    else:
-            #        print("You do not have this in your inventory.")
             else:
                 print("You try to use the {} but it seems to have no effect".format(object_name))
         else:
@@ -435,47 +418,47 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self
             elif object_name in {'truck','pickup'}:
                 object_name = 'truck'
             if self.current_room.look_at.has_key(object_name) == True:
-                print self.current_room.look_at[object_name]
+                print_split(self.current_room.look_at[object_name])
                 return self
             elif object_name in {'bmw','car','bmw car'}:
                 object_name = 'BMW'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.garage_car_unlocked == False:
-                        print self.current_room.look_at[object_name]['locked']
+                        print_split(self.current_room.look_at[object_name]['locked'])
                         return self
                     elif self.garage_boltcutters_taken == False:
-                        print self.current_room.look_at[object_name]['unlocked']['bolt cutters not taken']
+                        print_split(self.current_room.look_at[object_name]['unlocked']['bolt cutters not taken'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['unlocked']['bolt cutters taken']
+                        print_split(self.current_room.look_at[object_name]['unlocked']['bolt cutters taken'])
                         return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         if cmd.verb == 'unlock':
             if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower():
-                print 'You can\'t unlock the %s' % cmd.obj
+                print_split('You can\'t unlock the %s' % cmd.obj)
             elif self.main_player.inventory.has_key('keys'):
-                print self.main_player.inventory['keys'].use['correct']
+                print_split(self.main_player.inventory['keys'].use['correct'])
                 self.garage_car_unlocked = True
                 self.current_room.items_in_room['bolt cutters'].is_getable = True
             elif not self.main_player.inventory.has_key('keys'):
-                print 'You don\'t have the keys'
+                print_split('You don\'t have the keys')
         else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
+            print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
     def _familyroom_features(self, cmd):
@@ -503,50 +486,48 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self
             elif object_name in {'billiards table','pool table', 'pooltable','table'}:
                 object_name = 'billiards table'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'couch','furniture', 'jacket', 'sofa'}:
                 object_name = 'couch'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.familyroom_examinedcouch == False:
-                        print self.current_room.look_at[object_name]['before taking combination code']
+                        print_split(self.current_room.look_at[object_name]['before taking combination code'])
                         # self.familyroom_examinedcouch = True
                         return self
                     elif self.familyroom_code_taken == False:
-                        print self.current_room.look_at[object_name]['reexamining jacket before taking combination code']
+                        print_split(self.current_room.look_at[object_name]['reexamining jacket before taking combination code'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['after taking combination code']
+                        print_split(self.current_room.look_at[object_name]['after taking combination code'])
                         return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         if cmd.verb == 'try on':
             if object_name in {'jacket'}:
                 object_name = 'couch'
             else:
-                print 'You can\'t try on the %s' % object_name
+                print_split('You can\'t try on the %s' % object_name)
                 return self
-            print self.current_room.look_at[object_name]['trying jacket on']
+            print_split(self.current_room.look_at[object_name]['trying jacket on'])
             self.familyroom_examinedcouch = True
             self.current_room.items_in_room['safe combination'].is_getable = True
-
-
         else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
+            print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
     def _panicroom_features(self, cmd):
@@ -562,31 +543,31 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self       
             elif object_name in {'food','canned food','canned goods', 'water','bottled water','bottled waters'}:
                 object_name = 'food'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'video','camera','video playback', 'monitors', 'monitor', 'video monitors', 'video monitor'}:
                 object_name = 'video'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self   
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
+            print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
     
     def _veranda_features(self, cmd):
@@ -704,7 +685,7 @@ class GameState:
                 else:
                     print("Unable to look at object")
                     return self             
-            elif object_name in {'table', 'table with drawers', 'newspaper', 'table top'}:
+            elif object_name in {'table', 'table with drawers', 'newspaper', 'table top', 'drawer', 'drawers'}:
                 object_name = 'table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     print self.current_room.look_at[object_name]
@@ -1143,6 +1124,7 @@ class GameState:
         item_to_drop = self.main_player.inventory[item_name]
         self.main_player.drop_item(item_name)
         self.current_room.add_item(item_to_drop)
+        print_split("{} has been dropped from your inventory".format(item_name))
         raw_input("Press enter to continue...")
 
     def _help(self):
@@ -1214,6 +1196,7 @@ class GameState:
                 self._add_to_inventory(cmd.obj)
 
             elif cmd.verb == 'drop':
+                self.last_command = "drop"
                 self._drop_from_inventory(cmd.obj)
 
             elif self.current_room.name.lower() == 'first floor foyer':
@@ -1262,27 +1245,27 @@ class GameState:
             print("There is nothing in your inventory")
         else:
             counter = 1
-            print("The inventory contains %d items:") % len(
-                self.main_player.inventory)
+            print("The inventory contains %d items:") % len(self.main_player.inventory)
             for key, value in self.main_player.inventory.items():
-                print "%2d: %s - %s" % (counter, value.name, value.description)
+                print_split("%2d: %s - %s" % (counter, value.name, value.description))
                 counter += 1
+        print("")
         raw_input("Press enter to continue...")
 
     def _render_room(self):
-        print(self.current_room.get_details())
+        self.current_room.get_details()
 
     def beginning_text(self):
         clear_terminal()
         title = [
-            "#########################################################################################################",
-            "#                       _____ _                                   _                                     #",
-            "#                      /__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __                          #",
-            "#                        / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \                         #",
-            "#                       / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |                        #",
-            "#                       \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|                        #",
-            "#                                                                                                       #",
-            "#########################################################################################################"
+            "##############################################################################################################",
+            "#                          _____ _                                   _                                       #",
+            "#                         /__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __                            #",
+            "#                           / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \                           #",
+            "#                          / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |                          #",
+            "#                          \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|                          #",
+            "#                                                                                                            #",
+            "##############################################################################################################"
         ]
 
         for lines in title:
@@ -1312,8 +1295,8 @@ class GameState:
     def play(self):
 
         cmd = Input_Parser()
-
         self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
+        self.previous_room = None
 
         #########################################
         # Main Loop
@@ -1321,8 +1304,13 @@ class GameState:
         #self.beginning_text()
         while self.secretroom_sarah_free == False:
             #clear_terminal()
-            if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
+
+            if self.current_room != self.previous_room:
                 self._render_room()
+                self.previous_room = self.current_room
+
+            #if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
+                #self._render_room()
             print("")
             cmd.get_input()
             if cmd.command == 'savegame':  # TODO: Implement save game
