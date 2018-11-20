@@ -1026,7 +1026,7 @@ class GameState:
             self.mastersuite_portrait_moved = True
             print self.current_room.look_at[object_name]['moved']
 
-        elif cmd.verb == 'enter':
+        elif cmd.verb in {'enter', 'open', 'use', 'unlock'} and cmd.obj in {'safe', 'code'}:
             if self.mastersuite_portrait_moved == False:
                 print "There is nothing to enter a code into"
                 return self
