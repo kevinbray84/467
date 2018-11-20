@@ -896,7 +896,7 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at':  
+        if cmd.verb in {'look at', 'look under'}:  
             if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
