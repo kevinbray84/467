@@ -79,8 +79,8 @@ class GameState:
         flashlight.set_use("correct", itemdict["flashlight"]["use"]["correct"])
         flashlight.set_use("incorrect", itemdict["flashlight"]["use"]["incorrect"])
         silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], True)
-        silver_key.set_use("correct", itemdict["keys"]["use"]["correct"])
-        silver_key.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
+        silver_key.set_use("correct", itemdict["silver key"]["use"]["correct"])
+        silver_key.set_use("incorrect", itemdict["silver key"]["use"]["incorrect"])
         self.json_Mansion["Dining Room"].add_item(flashlight)
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
@@ -774,10 +774,12 @@ class GameState:
                 if object_name in self.main_player.inventory:
                     print_split(self.main_player.inventory['flashlight'].use['correct'])
                     self.winecellar_keyhole = True
+                    return self
             if object_name == 'silver key':
                 if object_name in self.main_player.inventory:
                     self.winecellar_wall_unlocked = True
                     print_split(self.main_player.inventory['silver key'].use['correct'])
+                    self.current_room.is_locked == False # added to get around description print
                     return self
                 else:
                     print_split("It appears you do not have this item")
@@ -1033,7 +1035,7 @@ class GameState:
                 print '  Access granted!'
                 self.mastersuite_safe_unlocked = True
                 self.current_room.items_in_room['passphrase'].is_getable = True
-                print self.current_room.look_at['safe']['unlocked not taken passphrase']
+                print self.current_room.look_at['safe']['unlocked']
                 self.mastersuite_safe_examined = True
             else:
                 print '  Access denied.'
@@ -1083,16 +1085,16 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-        elif cmd.verb in ['use', 'turn on']:
-            object_name = cmd.obj
-            if object_name.lower() == 'flashlight':
-                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
-                self.current_room.exits.update({"south": "Wine Cellar"})
-            else:
-                print "You can't use %s in the %s." % (object_name, self.current_room.name)
-        else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
-            return self 
+#        elif cmd.verb in ['use', 'turn on']:
+#            object_name = cmd.obj
+#            if object_name.lower() == 'flashlight':
+#                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
+#                self.current_room.exits.update({"south": "Wine Cellar"})
+#            else:
+#                print "You can't use %s in the %s." % (object_name, self.current_room.name)
+#        else:
+#            print("These actions don't seem possible in the %s " % self.current_room.name)
+#            return self 
 
 
     def _add_to_inventory(self, object_name):

@@ -12,7 +12,7 @@ class Room:
         self.exits = exits
         self.linked_rooms = {}
         self.items_in_room = {}
-        self.is_locked = None
+        self.is_locked = True #changed from none
         self.first_visit = True
         self.been_explored = False
         self.features = {}
@@ -27,6 +27,11 @@ class Room:
         return self.long_description
 
     def get_secondary_description(self):
+        if self.name == "Wine Cellar":
+            if self.is_locked == True:
+                return self.short_description['locked']
+            else:
+                return self.short_description['unlocked']
         return self.short_description
 
     def describe(self):
