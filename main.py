@@ -49,9 +49,7 @@ while not done_game:
             file_handler = open(fname, 'r')
         except:
             print "File not found"
-            file_handler = open('temp.bak', 'r')
-            game = pickle.load(file_handler)
-            os.remove('temp.bak')
+            game = old_game
             save_game, load_game, done_game = game.play()
             continue
 
