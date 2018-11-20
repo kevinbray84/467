@@ -79,8 +79,8 @@ class GameState:
         flashlight.set_use("correct", itemdict["flashlight"]["use"]["correct"])
         flashlight.set_use("incorrect", itemdict["flashlight"]["use"]["incorrect"])
         silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], True)
-        silver_key.set_use("correct", itemdict["keys"]["use"]["correct"])
-        silver_key.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
+        silver_key.set_use("correct", itemdict["silver key"]["use"]["correct"])
+        silver_key.set_use("incorrect", itemdict["silver key"]["use"]["incorrect"])
         self.json_Mansion["Dining Room"].add_item(flashlight)
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
