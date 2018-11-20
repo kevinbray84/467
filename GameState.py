@@ -774,6 +774,7 @@ class GameState:
                 if object_name in self.main_player.inventory:
                     print_split(self.main_player.inventory['flashlight'].use['correct'])
                     self.winecellar_keyhole = True
+                    return self
             if object_name == 'silver key':
                 if object_name in self.main_player.inventory:
                     self.winecellar_wall_unlocked = True
