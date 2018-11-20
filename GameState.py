@@ -1311,9 +1311,13 @@ class GameState:
 
             #if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
                 #self._render_room()
+
+            if self.last_command == "look":
+                self._render_room()
+                
             print("")
             cmd.get_input()
-            if cmd.command == 'savegame':  # TODO: Implement save game
+            if cmd.command == 'savegame': 
                 print "SAVING game..."
                 return True, False, False
             if cmd.command == 'loadgame':  
