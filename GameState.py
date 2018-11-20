@@ -448,8 +448,8 @@ class GameState:
             else:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
-        if cmd.verb == 'unlock':
-            if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower():
+        if cmd.verb in {'unlock', 'use'}:
+            if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower() and 'keys' not in cmd.obj.lower():
                 print_split('You can\'t unlock the %s' % cmd.obj)
             elif self.main_player.inventory.has_key('keys'):
                 print_split(self.main_player.inventory['keys'].use['correct'])
