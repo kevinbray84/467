@@ -1083,16 +1083,16 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-        elif cmd.verb in ['use', 'turn on']:
-            object_name = cmd.obj
-            if object_name.lower() == 'flashlight':
-                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
-                self.current_room.exits.update({"south": "Wine Cellar"})
-            else:
-                print "You can't use %s in the %s." % (object_name, self.current_room.name)
-        else:
-            print("These actions don't seem possible in the %s " % self.current_room.name)
-            return self 
+#        elif cmd.verb in ['use', 'turn on']:
+#            object_name = cmd.obj
+#            if object_name.lower() == 'flashlight':
+#                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
+#                self.current_room.exits.update({"south": "Wine Cellar"})
+#            else:
+#                print "You can't use %s in the %s." % (object_name, self.current_room.name)
+#        else:
+#            print("These actions don't seem possible in the %s " % self.current_room.name)
+#            return self 
 
 
     def _add_to_inventory(self, object_name):
