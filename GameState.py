@@ -936,7 +936,7 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
-        elif cmd.verb == 'open':
+        elif cmd.verb in {'open', 'read'}:
             if object_name == 'diary':
                 object_name = 'diary'
                 if self.current_room.look_at.has_key("side table"):
