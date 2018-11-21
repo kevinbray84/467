@@ -391,6 +391,7 @@ class GameState:
                     print_split(self.main_player.inventory['passphrase'].use['correct'])
                     self.library_panicroom_unlocked = True
                     self.current_room.exits.update({"west": "Panic Room"})
+                    self.current_room.linked_rooms['west'] = self.json_Mansion["Panic Room"]
                     response = raw_input("Would you like to enter now? > ")
                     if response.lower() in {"yes", "y"}:
                         self.json_move("west")
