@@ -8,13 +8,13 @@
             "untouched": "On the desk is a family photo album. Taking a glance through the album, you notice there are very few photos of Sarah, the kidnapped daughter. How very odd. Setting the book aside, you notice there is a slot on the corner of the desk, almost like a vending machine coin slot. Maybe something can be inserted into it.",
             "used": "On the desk sits the family photo album as well as the inserted coded key."
         },
-        "panic room":{
-            "locked":"The formidable Panic Room door stands before you, keypad at the ready.",
+        "panic room": {
+            "locked": "The formidable Panic Room door stands before you, keypad at the ready.",
             "unlocked": "The formidable Panic Room door stands ajar, awaiting your entry."
         }
     },
     "exits": {
-        "north":"Master Suite",
-        "east":"First Floor Foyer"
+        "north": "Master Suite",
+        "east": "First Floor Foyer"
     }
 }

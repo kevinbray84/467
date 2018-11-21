@@ -347,7 +347,7 @@ class GameState:
                     else:
                         print_split(self.current_room.look_at[object_name]['used'])
                         return self
-            elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad'}:
+            elif object_name in {'panic room', 'panic door', 'panicroom', 'panic door', 'keypad', 'door'}:
                 object_name = 'panic room'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.library_desk_slot_used is False:
