@@ -132,16 +132,24 @@ class GameState:
             self.link_json_mansion()
 
     def link_json_mansion(self):
+        # link north
         try:
             self.current_room.link_room(
                 self.json_Mansion[self.current_room.exits['north']], 'north')
         except KeyError:
             pass
-        try:
-            self.current_room.link_room(
-                self.json_Mansion[self.current_room.exits['east']], 'east')
-        except KeyError:
-            pass
+        
+        # link east
+        # skip adding secret room exit to wine cellar until it's discovered    
+        if self.current_room.name in {'Wine Cellar'}:
+            print "LINKING WINE CELLAR %s" % self.current_room.name
+        else:
+            print "Linking %s EAST" % self.current_room.name
+            try:
+                self.current_room.link_room(
+                    self.json_Mansion[self.current_room.exits['east']], 'east')
+            except KeyError:
+                pass
 
         # skip adding basement exit to wine cellar until it's discovered    
         if self.current_room.name in {'Basement'}:
@@ -152,6 +160,7 @@ class GameState:
                     self.json_Mansion[self.current_room.exits['south']], 'south')
             except KeyError:
                 pass
+                
         try:
             self.current_room.link_room(
                 self.json_Mansion[self.current_room.exits['west']], 'west')
@@ -1111,7 +1120,7 @@ class GameState:
         elif cmd.verb in ['use', 'turn on']:
             object_name = cmd.obj
             if object_name.lower() == 'flashlight':
-                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
+                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.  You also notice a trunk and some footprints.")
                 self.current_room.exits.update({"south": "Wine Cellar"})
                 self.current_room.linked_rooms['south'] = self.json_Mansion["Wine Cellar"]
             else:
