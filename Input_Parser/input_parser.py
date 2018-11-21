@@ -36,10 +36,12 @@ class Input_Parser:
                       ' drop ',
                       ' go ',
                       ' look at ',
+                      ' look under ',
                       ' unlock ',
                       ' try on ',
                       ' move ',
                       ' open ',
+                      ' read ',
                       ' enter ',
                       ' watch ',
                       ' turn on ',
@@ -48,7 +50,7 @@ class Input_Parser:
                       ' rescue '
                       ]
         self.objects = [' key ', ' keys ', ' key peg ',
-                        ' keyholder ', ' key holder ', ' key holder on wall ', ' key holders ', ' key pegs ',' pegs',
+                        ' keyholder ', ' key holder ', ' key holder on wall ', ' key holders ', ' key pegs ', ' pegs',
                         ' mail ', ' stack ', 'stack of mail ',
                         ' mailbox ',
                         ' silver key ',
@@ -90,7 +92,7 @@ class Input_Parser:
                         ' newspaper ', ' headline ', ' table with drawers ', ' table top ',
                         ' drawers ', ' drawer ',
                         ' diary ', ' sarah\'s diary ', ' sarahs diary ',
-                        ' bed ', ' under bed ', ' floor ',
+                        ' bed ', ' floor ',
                         ' computer ', ' desktop ', ' computer monitor ', ' laptop ',
                         ' letter ',
                         ' food ', ' canned food ', ' canned goods ', ' water ',
@@ -106,13 +108,13 @@ class Input_Parser:
                         ' panic room ', ' panic door ', ' keypad ', ' panicroom ',
                         ' grand marble staircase ', ' grand marble stair case ', ' marble staircase ', ' marble stair case ', ' staircase ', ' stair case ',
                         ' open double doors ', ' double doors ', ' doors ', ' open doors ',
-                        ' open entryway ', ' open entry way ',' entryway ',' entry way ',
+                        ' open entryway ', ' open entry way ', ' entryway ', ' entry way ',
                         ' heavy wooden door ', ' heavy door ', ' wooden door ', ' door ',
-                        ' carpeted step ',' step ',' carpet ',' carpeted steps ',' steps ',
-                        ' elegant wooden double french doors ', ' wooden double french doors ', ' double french doors ', ' french doors ',' doors ', 
+                        ' carpeted step ', ' step ', ' carpet ', ' carpeted steps ', ' steps ',
+                        ' elegant wooden double french doors ', ' wooden double french doors ', ' double french doors ', ' french doors ', ' doors ',
                         ' elegant double french doors ', ' elegant wooden doors ', ' elegant french doors ', ' wooden french doors ',
                         ' dimly lit staircase ', ' dimly lit stair case ', ' staircase ', ' stair case ', ' stairs ', ' dimly lit stairs ',
-                        ' intricately carved mahogany door ', ' carved mahogany door ',' mahogany door ',' door ', ' carved door ', ' intricately carved door ',
+                        ' intricately carved mahogany door ', ' carved mahogany door ', ' mahogany door ', ' door ', ' carved door ', ' intricately carved door ',
                         ' massive steel door ', ' massive door ', ' steel door ',
                         ' sliding glass door ', ' glass door ', ' sliding door ',
                         ' disguised hidden stone door ', ' hidden stone door ', ' stone door ', ' disguised stone door ', ' disguised door ', ' hidden door ',
@@ -123,7 +125,7 @@ class Input_Parser:
                         ]
 
     def _find_command(self):
-        if 'look at' in self.input:
+        if 'look at' in self.input or 'look under' in self.input:
             return self
         for word in self.commands:
             if word in self.input:

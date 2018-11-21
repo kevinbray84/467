@@ -944,6 +944,8 @@ class GameState:
                         if self.sarahsroom_diary_unlocked == False:
                             self.sarahsroom_diary_unlocked = True
                             print_split(self.main_player.inventory['diary key'].use['correct'])
+                    else:
+                        print_split("The diary is locked.  Maybe there is a key somewhere?")
 
 
 
