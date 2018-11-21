@@ -369,7 +369,7 @@ class GameState:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         elif cmd.verb in ['use', 'try', 'unlock', 'enter']:
-            if object_name.lower() == "engraved key":
+            if object_name.lower() in {"engraved key"}:
                 if self.main_player.inventory.has_key('engraved key'):
                     if self.library_desk_slot_used is False:
                         self.library_desk_slot_used = True
@@ -381,7 +381,7 @@ class GameState:
                     print("You do not have the Coded Key in your inventory")
 
 
-            elif cmd.verb == 'enter':
+            elif cmd.verb in {'enter', 'use', 'try'} and object_name.lower() in {'keypad'}:
                 if self.library_desk_slot_used == False:
                     print "There is nothing to enter a code into"
                     return self
@@ -392,7 +392,7 @@ class GameState:
                     self.library_panicroom_unlocked = True
                     self.current_room.exits.update({"west": "Panic Room"})
                     response = raw_input("Would you like to enter now? >")
-                    if response.lower() == ["yes", "y"]:
+                    if response.lower() in {"yes", "y"}:
                         self.json_move("west")
                     else:
                         return self
