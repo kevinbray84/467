@@ -49,50 +49,66 @@ class GameState:
 
         self.last_command = ""
 
-
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
-        keys = Item(itemdict["keys"]["name"], itemdict["keys"]["description"], True)
+        keys = Item(itemdict["keys"]["name"],
+                    itemdict["keys"]["description"], True)
         keys.set_use("correct", itemdict["keys"]["use"]["correct"])
         keys.set_use("incorrect", itemdict["keys"]["use"]["incorrect"])
         self.json_Mansion["First Floor Foyer"].add_item(keys)
 
         # not gettable until safe opens
-        passphrase = Item(itemdict["passphrase"]["name"], itemdict["passphrase"]["description"], False)
+        passphrase = Item(itemdict["passphrase"]["name"],
+                          itemdict["passphrase"]["description"], False)
         passphrase.set_use("correct", itemdict["passphrase"]["use"]["correct"])
-        passphrase.set_use("incorrect", itemdict["passphrase"]["use"]["incorrect"])
+        passphrase.set_use(
+            "incorrect", itemdict["passphrase"]["use"]["incorrect"])
         self.json_Mansion["Master Suite"].add_item(passphrase)
 
         # not getable until jacket is examined
-        safe_combination = Item(itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], False)
-        safe_combination.set_use("correct", itemdict["safe combination"]["use"]["correct"])
-        safe_combination.set_use("incorrect", itemdict["safe combination"]["use"]["incorrect"])
+        safe_combination = Item(
+            itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], False)
+        safe_combination.set_use(
+            "correct", itemdict["safe combination"]["use"]["correct"])
+        safe_combination.set_use(
+            "incorrect", itemdict["safe combination"]["use"]["incorrect"])
         self.json_Mansion["Family Room"].add_item(safe_combination)
 
         # not getable until BMW trunk is opened
-        bolt_cutters = Item(itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], False)
-        bolt_cutters.set_use("correct", itemdict["bolt cutters"]["use"]["correct"])
-        bolt_cutters.set_use("incorrect", itemdict["bolt cutters"]["use"]["incorrect"])
+        bolt_cutters = Item(
+            itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], False)
+        bolt_cutters.set_use(
+            "correct", itemdict["bolt cutters"]["use"]["correct"])
+        bolt_cutters.set_use(
+            "incorrect", itemdict["bolt cutters"]["use"]["incorrect"])
         self.json_Mansion["Garage"].add_item(bolt_cutters)
 
-        flashlight = Item(itemdict["flashlight"]["name"], itemdict["flashlight"]["description"], True)
+        flashlight = Item(itemdict["flashlight"]["name"],
+                          itemdict["flashlight"]["description"], True)
         flashlight.set_use("correct", itemdict["flashlight"]["use"]["correct"])
-        flashlight.set_use("incorrect", itemdict["flashlight"]["use"]["incorrect"])
-        silver_key = Item(itemdict["silver key"]["name"], itemdict["silver key"]["description"], True)
+        flashlight.set_use(
+            "incorrect", itemdict["flashlight"]["use"]["incorrect"])
+        silver_key = Item(itemdict["silver key"]["name"],
+                          itemdict["silver key"]["description"], True)
         silver_key.set_use("correct", itemdict["silver key"]["use"]["correct"])
-        silver_key.set_use("incorrect", itemdict["silver key"]["use"]["incorrect"])
+        silver_key.set_use(
+            "incorrect", itemdict["silver key"]["use"]["incorrect"])
         self.json_Mansion["Dining Room"].add_item(flashlight)
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
         # not getable until you look in the drawers
-        engraved_key = Item(itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], False)
-        engraved_key.set_use("correct", itemdict["engraved key"]["use"]["correct"])
+        engraved_key = Item(
+            itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], False)
+        engraved_key.set_use(
+            "correct", itemdict["engraved key"]["use"]["correct"])
         keys.set_use("incorrect", itemdict["engraved key"]["use"]["incorrect"])
         self.json_Mansion["Second Floor Foyer"].add_item(engraved_key)
 
-        diary_key = Item(itemdict["diary key"]["name"], itemdict["diary key"]["description"], False)
+        diary_key = Item(itemdict["diary key"]["name"],
+                         itemdict["diary key"]["description"], False)
         diary_key.set_use("correct", itemdict["diary key"]["use"]["correct"])
-        diary_key.set_use("incorrect", itemdict["diary key"]["use"]["incorrect"])
+        diary_key.set_use(
+            "incorrect", itemdict["diary key"]["use"]["incorrect"])
         self.json_Mansion["Sarahs Room"].add_item(diary_key)
 
     def build_json_mansion(self):
@@ -104,11 +120,10 @@ class GameState:
             room_dict = inputData(name)
             new_room = Room(room_dict['location'], room_dict['long description'], room_dict['short description'],
                             room_dict['look at'], room_dict['exits'])
-            
+
             self.json_Mansion[room_dict['location']] = new_room
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
-           
 
     def json_move(self, direction):
         if direction in self.current_room.exits:
@@ -127,11 +142,16 @@ class GameState:
                 self.json_Mansion[self.current_room.exits['east']], 'east')
         except KeyError:
             pass
-        try:
-            self.current_room.link_room(
-                self.json_Mansion[self.current_room.exits['south']], 'south')
-        except KeyError:
+
+        # skip adding basement exit to wine cellar until it's discovered    
+        if self.current_room.name in {'Basement'}:
             pass
+        else:
+            try:
+                self.current_room.link_room(
+                    self.json_Mansion[self.current_room.exits['south']], 'south')
+            except KeyError:
+                pass
         try:
             self.current_room.link_room(
                 self.json_Mansion[self.current_room.exits['west']], 'west')
@@ -351,7 +371,7 @@ class GameState:
                 object_name = 'panic room'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.library_desk_slot_used is False:
-                        #covers if trying to examine panic room without unlocking bookself
+                        # covers if trying to examine panic room without unlocking bookself
                         print_split("These actions don't seem possible in this room")
                         return self
                     elif self.library_panicroom_unlocked is False:
@@ -539,7 +559,7 @@ class GameState:
                 self.json_move(cmd.direction)
                 return self
 
-        if cmd.verb == 'look at': 
+        if cmd.verb in {'look at', 'watch'}: 
             if object_name in {'keys','passphrase','safe combination','bolt cutters','flashlight','silver key','engraved key','diary key'}:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
@@ -710,7 +730,7 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-        #elif cmd.verb == "take":
+        # elif cmd.verb == "take":
         #    if self.secondfloorfoyer_examineddrawers == True:
         #        if object_name.lower() == "engraved key":
         #            self.main_player.take_item(engraved_key)
@@ -1088,16 +1108,17 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-#        elif cmd.verb in ['use', 'turn on']:
-#            object_name = cmd.obj
-#            if object_name.lower() == 'flashlight':
-#                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
-#                self.current_room.exits.update({"south": "Wine Cellar"})
-#            else:
-#                print "You can't use %s in the %s." % (object_name, self.current_room.name)
-#        else:
-#            print("These actions don't seem possible in the %s " % self.current_room.name)
-#            return self 
+        elif cmd.verb in ['use', 'turn on']:
+            object_name = cmd.obj
+            if object_name.lower() == 'flashlight':
+                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.")
+                self.current_room.exits.update({"south": "Wine Cellar"})
+                self.current_room.linked_rooms['south'] = self.json_Mansion["Wine Cellar"]
+            else:
+                print "You can't use %s in the %s." % (object_name, self.current_room.name)
+        else:
+            print("These actions don't seem possible in the %s " % self.current_room.name)
+            return self 
 
 
     def _add_to_inventory(self, object_name):
@@ -1306,16 +1327,16 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
-        #self.beginning_text()
+        # self.beginning_text()
         while self.secretroom_sarah_free == False:
-            #clear_terminal()
+            # clear_terminal()
 
             if self.current_room != self.previous_room:
                 self._render_room()
                 self.previous_room = self.current_room
 
-            #if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
-                #self._render_room()
+            # if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
+                # self._render_room()
 
             if self.last_command == "look":
                 self._render_room()
