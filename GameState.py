@@ -1199,6 +1199,7 @@ class GameState:
         print "    use <item name> - use the specified item"
         print "    cut <item name> - cut the specified item"
         print "    rescue <character name> - rescue the specified person"
+        print "    talk to <character> - talk to a character"
         raw_input("Press enter to continue...")
 
 
