@@ -811,7 +811,7 @@ class GameState:
                 if object_name in self.main_player.inventory:
                     self.winecellar_wall_unlocked = True
                     print_split(self.main_player.inventory['silver key'].use['correct'])
-                    self.current_room.is_locked == False # added to get around description print
+                    self.current_room.is_locked = False # added to get around description print
                     self.current_room.linked_rooms['east'] = self.json_Mansion["Secret Room"]
                     return self
                 else:
