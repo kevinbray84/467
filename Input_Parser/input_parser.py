@@ -82,7 +82,7 @@ class Input_Parser:
                         ' fireplace ', ' fire ', ' fire place ', ' ashes ',
                         ' wine bottle ', ' wine ',  ' bottle ', ' wine rack ', ' rack ',
                         ' wine receipt ', ' receipt ',
-                        ' jacket ',
+                        ' jacket ', ' suit ', ' suit jacket ',
                         ' sofa ', ' couch ',
                         ' billiards table ', ' pool table ', ' pooltable ',
                         ' patio table ', ' padio table ', ' patiotable ', ' patio ',
