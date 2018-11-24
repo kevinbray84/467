@@ -404,6 +404,7 @@ class GameState:
                 if self.main_player.inventory.has_key('engraved key'):
                     if self.library_desk_slot_used is False:
                         self.library_desk_slot_used = True
+                        self.current_room.is_locked = False
                         print_split(self.main_player.inventory['engraved key'].use['correct'])
 
                     else:
@@ -550,7 +551,7 @@ class GameState:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         if cmd.verb == 'try on':
-            if object_name in {'jacket'}:
+            if object_name in {'jacket', 'suit', 'suit jacket'}:
                 object_name = 'couch'
             else:
                 print_split('You can\'t try on the %s' % object_name)
@@ -1065,6 +1066,7 @@ class GameState:
                 print 'You can\'t move the %s' % object_name
                 return self
             self.mastersuite_portrait_moved = True
+            self.current_room.is_locked = False
             print self.current_room.look_at[object_name]['moved']
 
         elif cmd.verb in {'enter', 'open', 'use', 'unlock'} and cmd.obj in {'safe', 'code'}:
