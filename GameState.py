@@ -1245,6 +1245,15 @@ class GameState:
                 self.last_command = "drop"
                 self._drop_from_inventory(cmd.obj)
 
+            elif cmd.verb == 'talk to':
+                if self.current_room.name.lower() == 'secret room':
+                    if cmd.obj in {'sarah', 'daughter', 'her'}:
+                        print_split(self.current_room.look_at['sarah'])
+                    else:
+                        print("This person does not appear to be within this room.") 
+                else:
+                    print("There does not appear to be anyone to talk with in this room.") 
+
             elif self.current_room.name.lower() == 'first floor foyer':
                 self._firstfloorfoyer_features(cmd)
             elif self.current_room.name.lower() == 'dining room':
