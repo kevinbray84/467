@@ -130,6 +130,8 @@ class GameState:
             self.current_room.first_visit = False
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
             self.link_json_mansion()
+        else:
+            print("There should be a better way out of this room. Try leaving by a different direction.")
 
     def link_json_mansion(self):
         # link north
