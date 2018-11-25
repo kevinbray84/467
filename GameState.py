@@ -413,7 +413,7 @@ class GameState:
                     print("You do not have the Coded Key in your inventory")
 
 
-            elif cmd.verb in {'enter', 'use', 'try'} and object_name.lower() in {'keypad'}:
+            elif cmd.verb in {'enter', 'use', 'try', 'activate'} and object_name.lower() in {'keypad'}:
                 if self.library_desk_slot_used == False:
                     print "There is nothing to enter a code into"
                     return self
@@ -1128,7 +1128,7 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
-        elif cmd.verb in ['use', 'turn on']:
+        elif cmd.verb in ['use', 'turn on', 'activate']:
             object_name = cmd.obj
             if object_name.lower() == 'flashlight':
                 print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.  You also notice a trunk and some footprints.")

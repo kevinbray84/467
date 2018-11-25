@@ -46,9 +46,10 @@ class Input_Parser:
                       ' watch ',
                       ' turn on ',
                       ' use ',
+                      ' activate ',
                       ' cut ',
                       ' rescue ',
-                      ' talk to'
+                      ' talk to '
                       ]
         self.objects = [' key ', ' keys ', ' key peg ',
                         ' keyholder ', ' key holder ', ' key holder on wall ', ' key holders ', ' key pegs ', ' pegs',
