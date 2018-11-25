@@ -130,6 +130,8 @@ class GameState:
             self.current_room.first_visit = False
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
             self.link_json_mansion()
+        else:
+            print("There should be a better way out of this room. Try leaving by a different direction.")
 
     def link_json_mansion(self):
         # link north
@@ -402,6 +404,7 @@ class GameState:
                 if self.main_player.inventory.has_key('engraved key'):
                     if self.library_desk_slot_used is False:
                         self.library_desk_slot_used = True
+                        self.current_room.is_locked = False
                         print_split(self.main_player.inventory['engraved key'].use['correct'])
 
                     else:
@@ -548,7 +551,7 @@ class GameState:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         if cmd.verb == 'try on':
-            if object_name in {'jacket'}:
+            if object_name in {'jacket', 'suit', 'suit jacket'}:
                 object_name = 'couch'
             else:
                 print_split('You can\'t try on the %s' % object_name)
@@ -809,9 +812,15 @@ class GameState:
                 if object_name in self.main_player.inventory:
                     self.winecellar_wall_unlocked = True
                     print_split(self.main_player.inventory['silver key'].use['correct'])
-                    self.current_room.is_locked == False # added to get around description print
+                    self.current_room.is_locked = False # added to get around description print
+                    self.current_room.exits.update({"east": "Secret Room"})
                     self.current_room.linked_rooms['east'] = self.json_Mansion["Secret Room"]
-                    return self
+                    response = raw_input("Would you like to enter now? > ")
+                    if response.lower() in {"yes", "y"}:
+                        self.json_move("east")
+                        return self
+                    else:
+                        return self
                 else:
                     print_split("It appears you do not have this item")
             else:
@@ -1057,6 +1066,7 @@ class GameState:
                 print 'You can\'t move the %s' % object_name
                 return self
             self.mastersuite_portrait_moved = True
+            self.current_room.is_locked = False
             print self.current_room.look_at[object_name]['moved']
 
         elif cmd.verb in {'enter', 'open', 'use', 'unlock'} and cmd.obj in {'safe', 'code'}:
@@ -1189,6 +1199,7 @@ class GameState:
         print "    use <item name> - use the specified item"
         print "    cut <item name> - cut the specified item"
         print "    rescue <character name> - rescue the specified person"
+        print "    talk to <character> - talk to a character"
         raw_input("Press enter to continue...")
 
 
@@ -1234,6 +1245,15 @@ class GameState:
             elif cmd.verb == 'drop':
                 self.last_command = "drop"
                 self._drop_from_inventory(cmd.obj)
+
+            elif cmd.verb == 'talk to':
+                if self.current_room.name.lower() == 'secret room':
+                    if cmd.obj in {'sarah', 'daughter', 'her'}:
+                        print_split(self.current_room.look_at['sarah'])
+                    else:
+                        print("This person does not appear to be within this room.") 
+                else:
+                    print("There does not appear to be anyone to talk with in this room.") 
 
             elif self.current_room.name.lower() == 'first floor foyer':
                 self._firstfloorfoyer_features(cmd)

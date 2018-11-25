@@ -32,6 +32,16 @@ class Room:
                 return self.short_description['locked']
             else:
                 return self.short_description['unlocked']
+        elif self.name == "Library":
+            if self.is_locked == True:
+                return self.short_description['locked']
+            else:
+                return self.short_description['unlocked']
+        elif self.name == "Master Suite":
+            if self.is_locked == True:
+                return self.short_description['not moved']
+            else:
+                return self.short_description['moved']
         return self.short_description
 
     def describe(self):
