@@ -915,7 +915,8 @@ class GameState:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
         if cmd.verb in ['use', 'cut']:
-            if object_name == 'chain' or object_name == 'bolt cutters':
+            if object_name in ['chain', 'chains', 'bolt cutters']:
+                object_name = 'bolt cutters'
                 if object_name in self.main_player.inventory:
                     print_split(self.main_player.inventory['bolt cutters'].use['correct'])
                     self.secretroom_chain_broke = True
