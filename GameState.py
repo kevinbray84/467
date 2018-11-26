@@ -191,43 +191,6 @@ class GameState:
         return
 
 
-    # def _look_at(self, cmd):
-    #     #print("successfully called look at function")
-    #     # print("object: " + self.current_room.items_in_room[object_name].name)
-    #     if self.current_room.name == 'First Floor Foyer':
-    #         self._firstfloorfoyer_features(cmd)
-    #     elif self.current_room.name == 'Dining Room':
-    #         self._diningroom_features(cmd)
-    #     elif self.current_room.name == 'Library':
-    #         self._library_features(cmd)
-    #     elif self.current_room.name == 'Garage':
-    #         self._garage_features(cmd)
-    #     elif self.current_room.name == 'Family Room':
-    #         self._familyroom_features(cmd)
-    #     elif self.current_room.name == 'Panic Room':
-    #         self._panicroom_features(cmd)
-    #     elif self.current_room.name == 'Veranda':
-    #         self._veranda_features(cmd)
-    #     elif self.current_room.name == 'Study':
-    #         self._study_features(cmd)
-    #     elif self.current_room.name == 'Second Floor Foyer':
-    #         self._secondfloorfoyer_features(cmd)
-    #     elif self.current_room.name == 'Wine Cellar':
-    #         self._winecellar_features(cmd)
-    #     elif self.current_room.name == 'Grand Room':
-    #         self._grandroom_features(cmd)
-    #     elif self.current_room.name == 'Secret Room':
-    #         self._secretroom_features(cmd)
-    #     elif self.current_room.name == "Sarahs Room":
-    #         self._sarahsroom_features(cmd)
-    #     elif self.current_room.name == 'Master Suite':
-    #         self._mastersuite_features(cmd)
-    #     elif self.current_room.name == 'Basement':
-    #         self._basement_features(cmd)
-    #     else:
-    #         print("These actions don't seem possible in this room")
-    #     return self
-
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -741,15 +704,6 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
-
-        # elif cmd.verb == "take":
-        #    if self.secondfloorfoyer_examineddrawers == True:
-        #        if object_name.lower() == "engraved key":
-        #            self.main_player.take_item(engraved_key)
-
-
-
-
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -921,10 +875,11 @@ class GameState:
                     print_split(self.main_player.inventory['bolt cutters'].use['correct'])
                     self.secretroom_chain_broke = True
                     return self
-        elif cmd.verb in ['talk to']:
+        elif cmd.verb in ['talk to', 'rescue']:
             if self.secretroom_chain_broke:
                 self.secretroom_sarah_free = True
                 print_split(self.current_room.look_at['sarah'])
+                return self
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -1199,8 +1154,8 @@ class GameState:
         print "    turn on <item name> - turn on the specified item"
         print "    use <item name> - use the specified item"
         print "    cut <item name> - cut the specified item"
-        print "    rescue <character name> - rescue the specified person"
         print "    talk to <character> - talk to a character"
+        print "    rescue <character name> - rescue the specified person"
         raw_input("Press enter to continue...")
 
 
@@ -1236,9 +1191,6 @@ class GameState:
         #   Process action commands
         #####################################################
         elif cmd.num_verbs == 1:
-            # if cmd.verb == 'look at':
-            #     self.last_command = "look at"
-            #     self._look_at(cmd)
             if cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
                 self.last_command = "take"
                 self._add_to_inventory(cmd.obj)
@@ -1279,7 +1231,7 @@ class GameState:
             elif self.current_room.name.lower() == 'grand room':
                 self._grandroom_features(cmd)
             elif self.current_room.name.lower() == 'secret room':
-                self._secretroom_features(cmd)           
+                self._secretroom_features(cmd)         
             elif self.current_room.name.lower() == 'sarahs room':
                 self._sarahsroom_features(cmd)
             elif self.current_room.name.lower() == 'master suite':
@@ -1289,6 +1241,7 @@ class GameState:
                                       
             else:
                 print 'DEFAULT: You can\'t %s in the %s' % (cmd.verb, self.current_room.name)
+            
 
 
     def action_check(self, room_name, feature_name):
@@ -1366,19 +1319,16 @@ class GameState:
                 self._render_room()
                 self.previous_room = self.current_room
 
-            # if self.last_command == "move" or self.last_command == "look" or self.last_command == "":
-                # self._render_room()
-
             if self.last_command == "look":
                 self._render_room()
                 
             print("")
             cmd.get_input()
             if cmd.command == 'savegame': 
-                print "SAVING game..."
                 return True, False, False
             if cmd.command == 'loadgame':  
                 return False, True, False
-            if self.secretroom_sarah_free:
-                return False, False, True
+
             self._process_cmd(cmd)
+        
+        return False, False, True # return victory flag after exiting loop

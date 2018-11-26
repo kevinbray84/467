@@ -27,7 +27,7 @@
         "name": "bolt cutters",
         "description": "The bolt cutters are heavy in your hands. The blades are sharp to the touch and it seems like they will work just as intended.",
         "use": {
-            "correct": "You place the chain in the mouth of the bolt cutters. With as much strength as you can muster, you strain to clamp down the bolt cutters. With a sudden *SNAP* the chain is cut! Sarah has been freed!",
+            "correct": "You place the chain in the mouth of the bolt cutters. With as much strength as you can muster, you strain to clamp down the bolt cutters. With a sudden *SNAP* the chain is cut! Sarah has been freed!  All thats left is to rescue her.",
             "incorrect": "That doesn't appear to be the correct usage of that item."
         }
     },

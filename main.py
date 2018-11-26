@@ -59,3 +59,7 @@ while not done_game:
         else:
             game = old_game
             save_game, load_game, done_game = game.play()
+
+        if done_game:
+            print "YOU WIN!"
+            exit()
