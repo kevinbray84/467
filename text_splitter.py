@@ -2,19 +2,22 @@ import os
 import time
 import sys
 
-TEXT_WIDTH = 110
-LINE_BREAKS = 120
 
 
 def set_width():
+    global TEXT_WIDTH
     if os.name == "posix":
         rows, columns = os.popen('stty size', 'r').read().split()
-        TEXT_WIDTH = columns
+        #TEXT_WIDTH = columns
         print("Text width is now: {}".format(TEXT_WIDTH))
+        return columns
     else:
         os.system("mode con cols=130")
-        TEXT_WIDTH = 130
-        print("Testing this {}".format(TEXT_WIDTH))
+        #TEXT_WIDTH = 120
+        print("Testing this {}".format(120))
+        return 120
+
+TEXT_WIDTH = set_width()
 
 
 def split_input(user_string, chunk_size):
