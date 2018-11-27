@@ -10,12 +10,12 @@ def set_width():
         rows, columns = os.popen('stty size', 'r').read().split()
         #TEXT_WIDTH = columns
         print("Text width is now: {}".format(columns))
-        return columns
+        return int(columns)
     else:
         os.system("mode con cols=130")
         #TEXT_WIDTH = 120
         print("Testing this {}".format(120))
-        return 120
+        return int(120)
 
 TEXT_WIDTH = set_width()
 
