@@ -9,7 +9,7 @@ def set_width():
     if os.name == "posix":
         rows, columns = os.popen('stty size', 'r').read().split()
         #TEXT_WIDTH = columns
-        print("Text width is now: {}".format(TEXT_WIDTH))
+        print("Text width is now: {}".format(columns))
         return columns
     else:
         os.system("mode con cols=130")
