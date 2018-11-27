@@ -174,7 +174,6 @@ class GameState:
             self.current_room = self.current_room.linked_rooms[direction]
         else:
             print("You can't go that way")
-            raw_input("Press enter to continue...")
             return self
 
     def move_to(self, room_name):
@@ -184,7 +183,6 @@ class GameState:
                 self.link_json_mansion()
                 return self
         print("That room isn't connected to this one")
-        raw_input("Press enter to continue...")
         return self
 
     def foyer_action_check(self, verb, noun):
@@ -1120,14 +1118,12 @@ class GameState:
                     print "You can\'t get that item"
                 return self
         print "The %s isn't in this room" % object_name
-        raw_input("Press enter to continue...")
 
     def _drop_from_inventory(self, item_name):
         item_to_drop = self.main_player.inventory[item_name]
         self.main_player.drop_item(item_name)
         self.current_room.add_item(item_to_drop)
         print_split("{} has been dropped from your inventory".format(item_name))
-        raw_input("Press enter to continue...")
 
     def _help(self):
         print "SYSTEM COMMANDS: "
@@ -1156,7 +1152,6 @@ class GameState:
         print "    cut <item name> - cut the specified item"
         print "    talk to <character> - talk to a character"
         print "    rescue <character name> - rescue the specified person"
-        raw_input("Press enter to continue...")
 
 
 
@@ -1260,7 +1255,6 @@ class GameState:
                 print_split("%2d: %s - %s" % (counter, value.name, value.description))
                 counter += 1
         print("")
-        raw_input("Press enter to continue...")
 
     def _render_room(self):
         self.current_room.get_details()
