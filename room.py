@@ -60,6 +60,7 @@ class Room:
 
     def get_details(self):
         count = 1
+        print(TEXT_WIDTH)
         print("="*TEXT_WIDTH)
         print(self.get_name())
         print("="*TEXT_WIDTH)
