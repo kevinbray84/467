@@ -1304,6 +1304,8 @@ class GameState:
 
     def play(self):
 
+        set_width()
+
         cmd = Input_Parser()
         self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
         self.previous_room = None
