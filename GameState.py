@@ -7,6 +7,7 @@ import sys
 import os
 from text_splitter import *
 import pickle
+import math
 
 
 class GameState:
@@ -131,7 +132,7 @@ class GameState:
             self.current_room = self.json_Mansion[self.current_room.exits[direction]]
             self.link_json_mansion()
         else:
-            print("There should be a better way out of this room. Try leaving by a different direction.")
+            print_split("There should be a better way out of this room. Try leaving by a different direction.")
 
     def link_json_mansion(self):
         # link north
@@ -583,12 +584,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -596,12 +597,12 @@ class GameState:
             elif object_name in {'patio table','padio table', 'patiotable','table', 'patio'}:
                 object_name = 'patio table'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'sky','storm','summer storm','clouds','storm in the sky'}:
                 object_name = 'sky'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self        
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -623,12 +624,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -636,12 +637,12 @@ class GameState:
             elif object_name in {'computer', 'desktop', 'laptop','computer monitor'}:
                 object_name = 'computer'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'mail', 'stack', 'stack of mail', 'desk'}:
                 object_name = 'mail'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self        
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -671,12 +672,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print (value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -684,23 +685,23 @@ class GameState:
             elif object_name in {'table', 'table with drawers', 'newspaper', 'table top', 'drawer', 'drawers'}:
                 object_name = 'table'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
         elif cmd.verb == 'open':
             if object_name in {'drawers', 'drawer'}:
                 object_name = 'drawers'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.secondfloorfoyer_examineddrawers == False:
-                        print self.current_room.look_at[object_name]['before taking key']
+                        print_split(self.current_room.look_at[object_name]['before taking key'])
                         self.secondfloorfoyer_examineddrawers = True
                         self.current_room.items_in_room['engraved key'].is_getable = True
 
                         return self
                     elif self.secondfloorfoyer_key_taken == False:
-                        print self.current_room.look_at[object_name]['reexamining without having taken key']
+                        print_split(self.current_room.look_at[object_name]['reexamining without having taken key'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['after taking key']
+                        print_split(self.current_room.look_at[object_name]['after taking key'])
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -729,12 +730,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -748,13 +749,13 @@ class GameState:
                 object_name = 'wall'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.winecellar_wall_unlocked is False:
-                        print self.current_room.look_at[object_name]['locked']
+                        print_split(self.current_room.look_at[object_name]['locked'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['unlocked']
+                        print_split(self.current_room.look_at[object_name]['unlocked'])
                         return self
             else:
-                print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
+                print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         elif cmd.verb in ['use', 'turn on', 'activate', 'unlock']:
             if object_name == 'flashlight':
@@ -800,25 +801,25 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
-                    print("Unable to look at object")
+                    print_split("Unable to look at object")
                     return self            
             elif object_name in {'fireplace','fire','fire place','ashes'}:
                 object_name = 'fireplace'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'family portrait','portrait','family picture', 'family', 'picture'}:
                 object_name = 'family portrait'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self    
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -840,12 +841,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -853,13 +854,13 @@ class GameState:
             elif object_name in {'chain','chains','chain lock','lock','shackle'}:
                 object_name = 'chain'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'sarah', 'daughter', 'her'}:
                 object_name = 'sarah'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.secretroom_chain_broke == False:
-                        print self.current_room.look_at[object_name]
+                        print_split(self.current_room.look_at[object_name])
                         return self
                     else:
                         self.secretroom_sarah_free = True
@@ -897,12 +898,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -911,24 +912,24 @@ class GameState:
                 object_name = 'side table'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.sarahsroom_diary_unlocked == False:
-                        print self.current_room.look_at[object_name]['locked']
+                        print_split(self.current_room.look_at[object_name]['locked'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['unlocked']
+                        print_split(self.current_room.look_at[object_name]['unlocked'])
                         return self
             elif object_name in {'bed', 'under bed','floor'}:
                 object_name = 'bed'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.sarahsroom_bed_examined == False:
-                        print self.current_room.look_at[object_name]['not taken diary key']
+                        print_split(self.current_room.look_at[object_name]['not taken diary key'])
                         self.sarahsroom_bed_examined = True
                         self.current_room.items_in_room['diary key'].is_getable = True
                         return self
                     elif self.sarahsroom_diarykey_taken == False:
-                        print self.current_room.look_at[object_name]['reexamining not taken diary key']
+                        print_split(self.current_room.look_at[object_name]['reexamining not taken diary key'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['taken diary key']
+                        print_split(self.current_room.look_at[object_name]['taken diary key'])
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -970,12 +971,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -984,10 +985,10 @@ class GameState:
                 object_name = 'portrait'
                 if self.current_room.look_at.has_key(object_name) == True:
                     if self.mastersuite_portrait_moved == False:
-                        print self.current_room.look_at[object_name]['not moved']
+                        print_split(self.current_room.look_at[object_name]['not moved'])
                         return self
                     else:
-                        print self.current_room.look_at[object_name]['moved']
+                        print_split(self.current_room.look_at[object_name]['moved'])
                         return self
             elif object_name in {'safe', 'combination','hidden safe'}:
                 object_name = 'safe'
@@ -995,22 +996,22 @@ class GameState:
                     print("These actions don't seem possible right now")
                     return self
                 elif self.mastersuite_safe_unlocked == False:
-                    print self.current_room.look_at[object_name]['locked']
+                    print_split(self.current_room.look_at[object_name]['locked'])
                     return self
                 elif self.mastersuite_safe_examined == False:
-                    print self.current_room.look_at[object_name]['unlocked']
+                    print_split(self.current_room.look_at[object_name]['unlocked'])
                     self.mastersuite_safe_examined = True
                     return self
                 elif self.mastersuite_passphrase_taken == False:
-                    print self.current_room.look_at[object_name]['unlocked not taken passphrase']
+                    print_split(self.current_room.look_at[object_name]['unlocked not taken passphrase'])
                     return self
                 else:
-                    print self.current_room.look_at[object_name]['unlocked and taken']
+                    print_split(self.current_room.look_at[object_name]['unlocked and taken'])
                     return self
             elif object_name in {'end table','small crystal containers','small crystal container','crystal containers','endtable'}:
                 object_name = 'end table'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -1023,7 +1024,7 @@ class GameState:
                 return self
             self.mastersuite_portrait_moved = True
             self.current_room.is_locked = False
-            print self.current_room.look_at[object_name]['moved']
+            print_split(self.current_room.look_at[object_name]['moved'])
 
         elif cmd.verb in {'enter', 'open', 'use', 'unlock'} and cmd.obj in {'safe', 'code'}:
             if self.mastersuite_portrait_moved == False:
@@ -1034,7 +1035,7 @@ class GameState:
                 print '  Access granted!'
                 self.mastersuite_safe_unlocked = True
                 self.current_room.items_in_room['passphrase'].is_getable = True
-                print self.current_room.look_at['safe']['unlocked']
+                print_split(self.current_room.look_at['safe']['unlocked'])
                 self.mastersuite_safe_examined = True
             else:
                 print '  Access denied.'
@@ -1061,12 +1062,12 @@ class GameState:
                 for key, value in self.current_room.items_in_room.items():
                     if value.name.lower() == object_name:
                         if value.is_getable:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 if self.main_player.inventory.has_key(object_name) == True:
                     for key,value in self.main_player.inventory.items():
                         if value.name.lower() == object_name:
-                            print(value.description)
+                            print_split(value.description)
                             return self
                 else:
                     print("Unable to look at object")
@@ -1074,12 +1075,12 @@ class GameState:
             elif object_name in {'trunk', 'large trunk'}:
                 object_name = 'trunk'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'footprints','foot prints','footprint','foot print','ground','dust','floor'}:
                 object_name = 'footprints'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self    
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
@@ -1267,19 +1268,28 @@ class GameState:
 
     def beginning_text(self):
         clear_terminal()
+        title_width = len(" _____ _                                   _             ")
+        side_bit = int(math.floor(((TEXT_WIDTH / 2) - math.ceil(title_width/2))))
+
         title = [
-            "##############################################################################################################",
-            "#                          _____ _                                   _                                       #",
-            "#                         /__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __                            #",
-            "#                           / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \                           #",
-            "#                          / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |                          #",
-            "#                          \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|                          #",
-            "#                                                                                                            #",
-            "##############################################################################################################"
+            "#" * TEXT_WIDTH,
+            " _____ _                                   _             ",
+            "/__   \ |__   ___    /\/\   __ _ _ __  ___(_) ___  _ __  ",
+            "  / /\/ '_ \ / _ \  /    \ / _` | '_ \/ __| |/ _ \| '_ \ ",
+            " / /  | | | |  __/ / /\/\ \ (_| | | | \__ \ | (_) | | | |",
+            " \/   |_| |_|\___| \/    \/\__,_|_| |_|___/_|\___/|_| |_|",
+            "                                                         ",
+            "#" * TEXT_WIDTH,
+
         ]
 
-        for lines in title:
-            print(lines)
+
+
+        for i, lines in enumerate(title, 0):
+            if i == 0 or i == len(title)-1:
+                print(lines)
+            else:
+                print("{}{}{}".format(' ' * side_bit, lines, ' ' * side_bit))
 
         time.sleep(1)
 
@@ -1287,24 +1297,24 @@ class GameState:
 
         #prompt_width = 90
         #text_width = 80
-        text_main = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        text_main = "It's a late November night when suddenly you hear your phone ring.  You pick up the phone and upon doing so you can tell the individual on the line sounds panic stricken.  A missing child?" \
+                    " THE MAYOR'S CHILD?!  This is a case you cannot deny, you slam the phone down and storm out immediately investigate the Mayor's House to see if you can" \
+                    " get some hints and get to the bottom of this."
         text_secondary = "Good Luck..."
 
-        new_text = split_input(text_main, 110)
-        animate_text(new_text, 0.02)
+        new_text = split_input(text_main, TEXT_WIDTH)
+        animate_text(new_text, 0.03)
 
-        time.sleep(2)
+        time.sleep(5)
 
         print("\n")
 
-        new_secondary = split_input(text_secondary, 110)
+        new_secondary = split_input(text_secondary, TEXT_WIDTH)
         animate_text(new_secondary, 0.25)
 
         time.sleep(2)
 
     def play(self):
-
-        set_width()
 
         cmd = Input_Parser()
         self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
@@ -1313,7 +1323,7 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
-        # self.beginning_text()
+        self.beginning_text()
         while self.secretroom_sarah_free == False:
             # clear_terminal()
 
