@@ -5,7 +5,7 @@ import sys
 
 
 def set_width():
-    global TEXT_WIDTH
+    #global TEXT_WIDTH
     if os.name == "posix":
         rows, columns = os.popen('stty size', 'r').read().split()
         #TEXT_WIDTH = columns
