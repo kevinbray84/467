@@ -2,8 +2,17 @@ import os
 import time
 import sys
 
-TEXT_WIDTH = 110
-LINE_BREAKS = 120
+
+
+def set_width():
+    if os.name == "posix":
+        rows, columns = os.popen('stty size', 'r').read().split()
+        return int(columns)
+    else:
+        os.system("mode con cols=130")
+        return int(120)
+
+TEXT_WIDTH = set_width()
 
 
 def split_input(user_string, chunk_size):
@@ -47,3 +56,5 @@ def animate_text(split_text, speed):
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
