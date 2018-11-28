@@ -12,7 +12,7 @@ class Room:
         self.exits = exits
         self.linked_rooms = {}
         self.items_in_room = {}
-        self.is_locked = True #changed from none
+        self.is_locked = True  # changed from none
         self.first_visit = True
         self.been_explored = False
         self.features = {}
@@ -70,11 +70,12 @@ class Room:
                 has_gettable_items = True
         if has_gettable_items:
             print("-"*CONSOLE_WIDTH)
-            print("There are a few items in the room:")
+            print("The following items are in the room:")
 
         for key, value in self.items_in_room.items():  # display all items that are getable
             if value.is_getable:
-                print_split("%2d: %s: %s" % (count, value.name, value.description))
+                print_split("%2d: %s: %s" %
+                            (count, value.name, value.description))
                 count += 1
         print("-"*CONSOLE_WIDTH)
 
