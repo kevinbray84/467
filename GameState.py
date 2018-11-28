@@ -144,9 +144,8 @@ class GameState:
         # link east
         # skip adding secret room exit to wine cellar until it's discovered    
         if self.current_room.name in {'Wine Cellar'}:
-            print "LINKING WINE CELLAR %s" % self.current_room.name
+            print ""
         else:
-            print "Linking %s EAST" % self.current_room.name
             try:
                 self.current_room.link_room(
                     self.json_Mansion[self.current_room.exits['east']], 'east')
