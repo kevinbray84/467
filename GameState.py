@@ -196,11 +196,11 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+            elif object_name in {'oak double doors', 'double doors', 'doors','oak doors'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+            elif object_name in {'pillared entryway', 'pillared entry way', 'entryway', 'entry way', 'pillar entryway', 'pillar entry way', 'pillared', 'pillar'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
@@ -247,7 +247,7 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+            elif object_name in {'pillared entryway', 'pillared entry way', 'entryway', 'entry way', 'pillar entryway', 'pillar entry way', 'pillared', 'pillar'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
@@ -302,7 +302,7 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+            elif object_name in {'oak double doors', 'double doors', 'doors','oak doors'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self

@@ -1,9 +1,9 @@
 {
     "location": "Library",
-    "long description": "Stepping into the library, you are amazed at the vast collection of volumes of books that seem to take up the entirety of the room. Within the sea of books is a desk with a large tome lying upon it. Scanning the rest of the room, you notice a statue in the corner. In the north end of the room there is a rosewood sliding door that stands ajar. Peering in, it looks to be the entrance into the master suite of the mansion. On the eastern wall the open double doors lead into the First Floor Foyer.",
+    "long description": "Stepping into the library, you are amazed at the vast collection of volumes of books that seem to take up the entirety of the room. Within the sea of books is a desk with a large tome lying upon it. Scanning the rest of the room, you notice a statue in the corner. In the north end of the room there is a rosewood sliding door that stands ajar. Peering in, it looks to be the entrance into the master suite of the mansion. On the eastern wall the oak double doors lead into the First Floor Foyer.",
     "short description": {
-        "locked":"You are in the Library. To the north is a rosewood sliding door leading into the Master Suite and to the east are open double doors to the First Floor Foyer. There is a Statue and a desk within the room.",
-        "unlocked":"You are in the Library. To the north is a rosewood sliding door leading into the Master Suite, to the east are open double doors to the First Floor Foyer, and to the west is a massive steel door to the Panic Room. There is a Statue and a desk within the room."
+        "locked":"You are in the Library. To the north is a rosewood sliding door leading into the Master Suite and to the east are oak double doors to the First Floor Foyer. There is a Statue and a desk within the room.",
+        "unlocked":"You are in the Library. To the north is a rosewood sliding door leading into the Master Suite, to the east are oak double doors to the First Floor Foyer, and to the west is a massive steel door to the Panic Room. There is a Statue and a desk within the room."
     }, 
     "look at": {
         "statue": "The statue is a towering piece that depicts a proud king.  The plaque at the base reads King Midas. You notice next to the plaque are several scuff marks on the floor. These marks look to have been made by the moving of a nearby bookcase.",
