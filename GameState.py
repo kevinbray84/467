@@ -1085,7 +1085,7 @@ class GameState:
         elif cmd.verb in ['use', 'turn on', 'activate']:
             object_name = cmd.obj
             if object_name.lower() == 'flashlight':
-                print_split("You shine the light around the room and see a hole in the wall, exposing what appears to be a winecellar.  You also notice a trunk and some footprints.")
+                print_split("You shine the light around the room and notice an opaque glass door previously shrouded in darkness on the south wall. It appears to lead to the Wine Cellar.  You also notice a trunk and some footprints.")
                 self.current_room.exits.update({"south": "Wine Cellar"})
                 self.current_room.linked_rooms['south'] = self.json_Mansion["Wine Cellar"]
             else:
@@ -1281,7 +1281,7 @@ class GameState:
 
         prompt_width = 90
         text_width = 80
-        text_main = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        text_main = "Its a dark and stormy night. Looking up through the oak tree branches, you see a storm brewing overhead. The cloudy sky seems to mirror the inner turmoil you are currently feeling. Almost subconsciously, your hand reaches into your pocket to touch your detective badge. From its presence, you seem to find renewed determination and resolve within yourself. As you wait in the shadow of the tree, watching the mansion across the field, you reflect on what a whirlwind the last few days have been. Several days ago, the mayors daughter, Sarah, was kidnapped. Over the course of your investigation, you began to feel that something was off with this case. There were simply too many aspects that didnt add up. A crazy thought began to form in the back of your mind. Maybe this wasnt just some high-profile kidnapping, maybe, this was an inside job. Perhaps this poor little girl was right under everyones noses, in the mayors mansion. You know no one would believe you, but you cant just sit on the sidelines any more. There must be some clues hidden within the mansion, and you intend to find them. Sudden movement of the garage door snaps you out of your thoughts. You see the Mayor and his wife pull out of the driveway in one of their many cars and head off into town. Now or never you tell yourself. You quickly cross the field and make your way to the door. You lockpick the front door and step inside the mansion."
         text_secondary = "Good Luck..."
 
         new_text = split_input(text_main, 110)
@@ -1305,7 +1305,7 @@ class GameState:
         #########################################
         # Main Loop
         #########################################
-        # self.beginning_text()
+        #self.beginning_text()
         while self.secretroom_sarah_free == False:
             # clear_terminal()
 
