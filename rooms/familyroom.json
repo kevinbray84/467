@@ -6,8 +6,10 @@
         "couch": {
             "before taking combination code": "You approach the coach and notice a suit jacket drapped across the back. It must belong to the Mayor. It looks like it is your size.  You contemplate trying it on.",
             "reexamining jacket before taking combination code": "The jacket is back where you left it, with the combination code you found earlier still in the breast pocket. Something like that could come it handy later.",
-            "after taking combination code": "The jacket it still back where you left, minus the number combination code you found earlier and removed.",
-            "trying jacket on": "The jacket fits like a glove.  Upon trying it on, you notice a piece of paper in the inner pocket with a combination written on it."
+            "after taking combination code": "The jacket it still back where you left it, minus the number combination code you found earlier and removed.",
+            "trying jacket on": "The jacket fits like a glove.  Upon trying it on, you notice a piece of paper in the inner pocket with a combination written on it.",
+            "trying on jacket second time":"The jacket still fits like a glove.  Upon trying it on, you notice a piece of paper is still in the inner pocket with a combination written on it. This could come in handy.",
+            "trying jacket on after taking combination": "The jacket still fits like a glove. You check the pockets once more but dont find anything else of value."
         },
         "billiards table": "You admire the billiards table which acts as the centerpiece of the room. This is a farcry from the dingy tables used down at the local watering hole. This table is closer to a work of art than a playing surface. You are half tempted to rack'em up, but quickly realize how poor of an idea that is. Someones life is on the line, this is no time for games."
     },
