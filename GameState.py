@@ -944,13 +944,15 @@ class GameState:
         elif cmd.verb in {'open', 'read'}:
             if object_name == 'diary':
                 object_name = 'diary'
-                if self.current_room.look_at.has_key("side table"):
-                    if "diary key" in self.main_player.inventory:
-                        if self.sarahsroom_diary_unlocked == False:
+                if self.sarahsroom_diary_unlocked == False:
+                    if self.current_room.look_at.has_key("side table"):
+                        if "diary key" in self.main_player.inventory:
                             self.sarahsroom_diary_unlocked = True
                             print_split(self.main_player.inventory['diary key'].use['correct'])
-                    else:
-                        print_split("The diary is locked.  Maybe there is a key somewhere?")
+                        else:
+                            print_split("The diary is locked.  Maybe there is a key somewhere?")
+                elif self.sarahsroom_diary_unlocked == True:
+                    print_split(self.current_room.look_at['side table']['unlocked'])
 
 
 
