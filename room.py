@@ -1,6 +1,4 @@
 from text_splitter import *
-#from text_splitter import TEXT_WIDTH
-#CONSOLE_WIDTH = 120
 
 
 class Room:
@@ -12,7 +10,7 @@ class Room:
         self.exits = exits
         self.linked_rooms = {}
         self.items_in_room = {}
-        self.is_locked = True  # changed from none
+        self.is_locked = True
         self.first_visit = True
         self.been_explored = False
         self.features = {}
@@ -47,10 +45,6 @@ class Room:
     def describe(self):
         if self.first_visit:
             print_split(self.get_description())
-            #input_sets = split_input(self.get_description(), 110)
-            #for set_piece in input_sets:
-            #    print(set_piece)
-            # print(self.get_description())
             self.first_visit = False
         else:
             print_split(self.get_secondary_description())
@@ -64,7 +58,6 @@ class Room:
         print(self.get_name())
         print("="*TEXT_WIDTH)
         self.describe()
-        # if len(self.items_in_room) > 0:
         has_gettable_items = False
         for key, value in self.items_in_room.items():  # check for getable items in room
             if value.is_getable == True:
@@ -100,12 +93,6 @@ class Room:
 
     def add_item(self, item):
         self.items_in_room[item.name] = item
-        # print "Adding %s to %s... (%d)" % (
-        #    item.name, self.name, len(self.items_in_room))
 
     def take_item(self, item):
-        # print 'REMOVING %s.  THERE ARE %d items before removing' % (
-        #    item, len(self.items_in_room))
         del self.items_in_room[item]
-        # print 'REMOVED %s.  THERE ARE NOW %d items' % (
-        #    item, len(self.items_in_room))

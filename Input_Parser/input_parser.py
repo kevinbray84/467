@@ -2,6 +2,7 @@ class Input_Parser:
     def __init__(self):
         self.input = ''
 
+        # initialize words found
         self.num_commands = 0
         self.command = ''
 
@@ -21,10 +22,11 @@ class Input_Parser:
         self.obj = ''
         self.obj_of_prep = ''
 
+        # create lists of each type of word
         self.commands = [' savegame ', ' loadgame ',
                          ' exit ', ' show inventory ', ' help ', ' look ']
         self.directions = [' north ', ' south ', ' east ',
-                           ' west ', ' upstairs ', ' downstairs ']
+                           ' west ']
         self.room_names = [' first floor foyer ', ' library ',
                            ' dining room ',  ' panic room ', ' master suite ',
                            ' family room ', ' grand room ', ' veranda ',
@@ -126,6 +128,11 @@ class Input_Parser:
                         ' rosewood sliding door ', ' rosewood door '
                         ]
 
+    """
+    The following functions find the specified word type in the input and store
+    them in this object's member variables
+    """
+
     def _find_command(self):
         if 'look at' in self.input or 'look under' in self.input:
             return self
@@ -188,6 +195,10 @@ class Input_Parser:
                         self.num_objs += 1
                     self.obj_of_prep = word.strip()
 
+    """
+    This function checks for any errors in the input
+    """
+
     def _check_errors(self):
         if self.num_directions + self.num_commands + self.num_room_names > 1:
             print 'You entered too many commands at once'
@@ -216,12 +227,20 @@ class Input_Parser:
                 print "You're using a lot of prepositions..."
                 self.get_input()
 
+    """
+    This function collects input text from the user
+    """
+
     def get_input(self):
         self.__init__()
         self.input = raw_input("Enter command> ")
         self.input = ' ' + self.input.lower() + ' '
         print '\n'
         self._process_input()
+
+    """
+    This function calls the required functions to parse the input
+    """
 
     def _process_input(self):
         self._find_command()

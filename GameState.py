@@ -13,7 +13,6 @@ import math
 class GameState:
     def __init__(self):
         self.main_player = Player()
-        # self.mansion = {}
         self.game_items = {}
         self.current_room = None
         self.previous_room = None
@@ -50,6 +49,9 @@ class GameState:
 
         self.last_command = ""
 
+    """
+    This funciton is called by the constructor and places all the items in each room.
+    """
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
         keys = Item(itemdict["keys"]["name"],
@@ -66,7 +68,7 @@ class GameState:
             "incorrect", itemdict["passphrase"]["use"]["incorrect"])
         self.json_Mansion["Master Suite"].add_item(passphrase)
 
-        # not getable until jacket is examined
+        # safe combination not getable until jacket is examined
         safe_combination = Item(
             itemdict["safe combination"]["name"], itemdict["safe combination"]["description"], False)
         safe_combination.set_use(
@@ -75,7 +77,7 @@ class GameState:
             "incorrect", itemdict["safe combination"]["use"]["incorrect"])
         self.json_Mansion["Family Room"].add_item(safe_combination)
 
-        # not getable until BMW trunk is opened
+        # bolt cutters are not getable until BMW trunk is opened
         bolt_cutters = Item(
             itemdict["bolt cutters"]["name"], itemdict["bolt cutters"]["description"], False)
         bolt_cutters.set_use(
@@ -97,7 +99,7 @@ class GameState:
         self.json_Mansion["Dining Room"].add_item(flashlight)
         self.json_Mansion["Dining Room"].add_item(silver_key)
 
-        # not getable until you look in the drawers
+        # engraved key is not getable until you look in the drawers
         engraved_key = Item(
             itemdict["engraved key"]["name"], itemdict["engraved key"]["description"], False)
         engraved_key.set_use(
@@ -112,6 +114,10 @@ class GameState:
             "incorrect", itemdict["diary key"]["use"]["incorrect"])
         self.json_Mansion["Sarahs Room"].add_item(diary_key)
 
+    """
+    This function creates the rooms in the mansion by instantiatting room objects with
+    data from the JSON files and placing the rooms in a dict.
+    """
     def build_json_mansion(self):
         room_names = ["diningroom.json", "familyroom.json", "firstfloorfoyer.json", "garage.json", "grandroom.json",
                       "library.json", "mastersuite.json", "panicroom.json", "sarahsroom.json",
@@ -126,6 +132,9 @@ class GameState:
 
         self.current_room = self.json_Mansion["First Floor Foyer"]
 
+    """
+    This function moves the player from one room to another using a cardinal direction.
+    """
     def json_move(self, direction):
         if direction in self.current_room.exits:
             self.current_room.first_visit = False
@@ -134,6 +143,11 @@ class GameState:
         else:
             print_split("There should be a better way out of this room. Try leaving by a different direction.")
 
+    """
+    This function links the rooms in the mansion together.  It attempts to link each
+    direction.  If there is an error linking, it means that there is nothing to
+    link in that direction, so the exception handler simply passes.
+    """
     def link_json_mansion(self):
         # link north
         try:
@@ -153,6 +167,7 @@ class GameState:
             except KeyError:
                 pass
 
+        # link south
         # skip adding basement exit to wine cellar until it's discovered    
         if self.current_room.name in {'Basement'}:
             pass
@@ -162,20 +177,28 @@ class GameState:
                     self.json_Mansion[self.current_room.exits['south']], 'south')
             except KeyError:
                 pass
-                
+
+        # link west   
         try:
             self.current_room.link_room(
                 self.json_Mansion[self.current_room.exits['west']], 'west')
         except KeyError:
             pass
 
+
+    # I'm not sure this ever gets called
+    """
     def move(self, direction):
         if direction in self.current_room.linked_rooms:
             self.current_room = self.current_room.linked_rooms[direction]
         else:
             print("You can't go that way")
             return self
+    """
 
+    """
+    This function moves to a room by using the room name rather than a direction
+    """
     def move_to(self, room_name):
         for key, value in self.current_room.linked_rooms.items():
             if value.name.lower() == room_name:
@@ -185,10 +208,9 @@ class GameState:
         print("That room isn't connected to this one")
         return self
 
-    def foyer_action_check(self, verb, noun):
-        return
-
-
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -240,6 +262,9 @@ class GameState:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _diningroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -295,6 +320,9 @@ class GameState:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _library_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -399,6 +427,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _garage_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -455,6 +486,9 @@ class GameState:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _familyroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -524,6 +558,9 @@ class GameState:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _panicroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -564,6 +601,9 @@ class GameState:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
     
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _veranda_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -608,6 +648,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _study_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -648,6 +691,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _secondfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -706,6 +752,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _winecellar_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -781,6 +830,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _grandroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -825,6 +877,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _secretroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -882,6 +937,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _sarahsroom_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -947,6 +1005,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _mastersuite_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -1042,6 +1103,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self
 
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _basement_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
@@ -1094,7 +1158,9 @@ class GameState:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
 
-
+    """
+    This function processes user commands that take place in the specified room
+    """
     def _add_to_inventory(self, object_name):
         for key, value in self.current_room.items_in_room.items():
             if value.name.lower() == object_name:
@@ -1119,12 +1185,18 @@ class GameState:
                 return self
         print "The %s isn't in this room" % object_name
 
+    """
+    This function drops the specified item from the inventory into the current room.
+    """
     def _drop_from_inventory(self, item_name):
         item_to_drop = self.main_player.inventory[item_name]
         self.main_player.drop_item(item_name)
         self.current_room.add_item(item_to_drop)
         print_split("{} has been dropped from your inventory".format(item_name))
 
+    """
+    This function displays the help menu
+    """
     def _help(self):
         print "SYSTEM COMMANDS: "
         print "    savegame - saves the game"
@@ -1154,7 +1226,9 @@ class GameState:
         print "    rescue <character name> - rescue the specified person"
 
 
-
+    """
+    This function processes the user input and calls the appropriate game function
+    """
     def _process_cmd(self, cmd):
 
         #####################################################
@@ -1239,12 +1313,16 @@ class GameState:
             
 
 
-    def action_check(self, room_name, feature_name):
-        if room_name.lower() == "foyer":
-            if feature_name == "keys":
-                print("Keys are now available in room")
-                self.current_room.add_item(keys)
+    # def action_check(self, room_name, feature_name):
+    #     if room_name.lower() == "foyer":
+    #         if feature_name == "keys":
+    #             print("Keys are now available in room")
+    #             self.current_room.add_item(keys)
 
+
+    """
+    This function displayes the player's current inventory
+    """  
     def check_inventory(self):
         if bool(self.main_player.inventory) == False:
             print("There is nothing in your inventory")
@@ -1256,9 +1334,15 @@ class GameState:
                 counter += 1
         print("")
 
+    """
+    This function displays the current room information
+    """
     def _render_room(self):
         self.current_room.get_details()
 
+    """
+    This function displays opening text crawl
+    """
     def beginning_text(self):
         clear_terminal()
         title_width = len(" _____ _                                   _             ")
@@ -1275,8 +1359,6 @@ class GameState:
             "#" * TEXT_WIDTH,
 
         ]
-
-
 
         for i, lines in enumerate(title, 0):
             if i == 0 or i == len(title)-1:
@@ -1306,6 +1388,9 @@ class GameState:
 
         time.sleep(2)
 
+    """
+    This function starts the main loop of the game
+    """
     def play(self):
 
         cmd = Input_Parser()
@@ -1316,9 +1401,8 @@ class GameState:
         # Main Loop
         #########################################
 
-        self.beginning_text()
+        # self.beginning_text()
         while self.secretroom_sarah_free == False:
-            # clear_terminal()
 
             if self.current_room != self.previous_room:
                 self._render_room()
