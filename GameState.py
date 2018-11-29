@@ -748,10 +748,10 @@ class GameState:
                 else:
                     print("Unable to look at object")
                     return self          
-            elif object_name in {'wine rack','wine','rack'}:
+            elif object_name in {'wine rack','wine','rack','wine racks','racks'}:
                 object_name = 'wine rack'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'wall','bare wall','eastern wall','back wall'}:
                 object_name = 'wall'
@@ -941,7 +941,7 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
-        elif cmd.verb in {'open', 'read'}:
+        elif cmd.verb in {'open', 'read','unlock'}:
             if object_name == 'diary':
                 object_name = 'diary'
                 if self.sarahsroom_diary_unlocked == False:
