@@ -1,6 +1,6 @@
 {
     "location": "Sarahs Room",
-    "long description": "Pushing open the decorated door, you enter a surprisingly stark room. Aside from the lack of decor, you notice that the room is impeccably clean. This was not like any childs room that you had ever seen. The only furniture in the room is the single twin bed and a side table. The decorated door you just used, which is on the eastern wall, appears to be the single entryway in or out.",
+    "long description": "Pushing open the decorated door, you enter a surprisingly stark room. Aside from the lack of decor, you notice that the room is impeccably clean. This was not like any childs room that you had ever seen. The only furniture in the room is the bed and a side table. The decorated door you just used, which is on the eastern wall, appears to be the single entryway in or out.",
     "short description": "You are in Sarahs room. The only furnishings you see are a bed and a side table. The only exit is the decorated door to the east leading into the Second Floor Foyer.",
     "look at": {
         "bed":{
