@@ -33,6 +33,7 @@ class GameState:
         self.garage_boltcutters_taken = False
         self.familyroom_examinedcouch = False
         self.familyroom_code_taken = False
+        self.familyroom_jacket_examined = False
         self.secondfloorfoyer_examineddrawers = False
         self.secondfloorfoyer_key_taken = False
         self.winecellar_wall_unlocked = False
@@ -517,9 +518,16 @@ class GameState:
             else:
                 print_split('You can\'t try on the %s' % object_name)
                 return self
-            print_split(self.current_room.look_at[object_name]['trying jacket on'])
-            self.familyroom_examinedcouch = True
-            self.current_room.items_in_room['safe combination'].is_getable = True
+            if self.familyroom_code_taken == False:
+                if self.familyroom_jacket_examined == False:
+                    print_split(self.current_room.look_at[object_name]['trying jacket on'])
+                    self.familyroom_examinedcouch = True
+                    self.familyroom_jacket_examined = True
+                    self.current_room.items_in_room['safe combination'].is_getable = True
+                else:
+                    print_split(self.current_room.look_at[object_name]['trying on jacket second time'])
+            elif self.familyroom_code_taken == True:
+                print_split(self.current_room.look_at[object_name]['trying jacket on after taking combination'])
         else:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
