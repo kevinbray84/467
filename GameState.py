@@ -1107,6 +1107,16 @@ class GameState:
                         self.familyroom_code_taken = True
                     elif value.name == 'passphrase':
                         self.mastersuite_passphrase_taken = True
+                    elif value.name == 'silver key':
+                        self.diningroom_key_taken = True
+                    elif value.name == 'flashlight':
+                        self.diningroom_flashlight_taken = True
+                    elif value.name == 'bolt cutters':
+                        self.garage_boltcutters_taken = True
+                    elif value.name == 'diary key':
+                        self.sarahroom_diarykey_taken = True
+                    elif value.name == 'engraved key':
+                        self.secondfloorfoyer_key_taken = True
 
                     if object_name[-1] == "s":
                         verb = "were"
