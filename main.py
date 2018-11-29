@@ -26,7 +26,7 @@ while not done_game:
         pickle.dump(game, file_handler)
         print "Game saved!"
 
-        # this should restart the game from the saved point
+        # this restart the game from the saved point automatically
         file_handler = open(fname, 'r')
         game = pickle.load(file_handler)
         save_game, load_game, done_game = game.play()
@@ -61,5 +61,4 @@ while not done_game:
             save_game, load_game, done_game = game.play()
 
         if done_game:
-            print "YOU WIN!"
             exit()
