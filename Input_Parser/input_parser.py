@@ -125,7 +125,8 @@ class Input_Parser:
                         ' opaque glass door ', ' opaque door ',
                         ' decorated door ', ' picture door ', ' decorative door ', ' door with pictures ',
                         ' oaken panel door ', ' oaken door ', ' panel door ', ' oak door ', ' oak panel door ', ' solid oak door ', ' solid door ',
-                        ' rosewood sliding door ', ' rosewood door '
+                        ' rosewood sliding door ', ' rosewood door ',
+                        ' upstairs ', ' downstairs '
                         ]
 
     """
