@@ -504,7 +504,7 @@ class GameState:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs','downstairs'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
@@ -1122,7 +1122,7 @@ class GameState:
     def _basement_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
-            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs','upstairs'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
