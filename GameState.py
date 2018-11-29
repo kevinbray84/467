@@ -447,9 +447,12 @@ class GameState:
             if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower() and 'keys' not in cmd.obj.lower():
                 print_split('You can\'t unlock the %s' % cmd.obj)
             elif self.main_player.inventory.has_key('keys'):
-                print_split(self.main_player.inventory['keys'].use['correct'])
-                self.garage_car_unlocked = True
-                self.current_room.items_in_room['bolt cutters'].is_getable = True
+                if self.garage_car_unlocked == False:
+                    print_split(self.main_player.inventory['keys'].use['correct'])
+                    self.garage_car_unlocked = True
+                    self.current_room.items_in_room['bolt cutters'].is_getable = True
+                else:
+                    print("The BMW car is already unlocked.")
             elif not self.main_player.inventory.has_key('keys'):
                 print_split('You don\'t have the keys')
         else:
