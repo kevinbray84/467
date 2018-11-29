@@ -32,6 +32,7 @@ class GameState:
         self.garage_boltcutters_taken = False
         self.familyroom_examinedcouch = False
         self.familyroom_code_taken = False
+        self.familyroom_jacket_examined = False
         self.secondfloorfoyer_examineddrawers = False
         self.secondfloorfoyer_key_taken = False
         self.winecellar_wall_unlocked = False
@@ -214,15 +215,15 @@ class GameState:
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
-            if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+            if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case','stairs'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+            elif object_name in {'oak double doors', 'double doors', 'doors','oak doors'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+            elif object_name in {'pillared entryway', 'pillared entry way', 'entryway', 'entry way', 'pillar entryway', 'pillar entry way', 'pillared', 'pillar'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
@@ -272,7 +273,7 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open entryway','open entry way','entryway','entry way'}:
+            elif object_name in {'pillared entryway', 'pillared entry way', 'entryway', 'entry way', 'pillar entryway', 'pillar entry way', 'pillared', 'pillar'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
@@ -303,7 +304,7 @@ class GameState:
                         print_split(self.current_room.look_at[object_name]['key not taken'])
                         return self
                     else:
-                        print_split(self.current_room.look_at[object_name]['keys taken'])
+                        print_split(self.current_room.look_at[object_name]['key taken'])
                         return self
             elif object_name in {'sidetable', 'side table', 'table'}:
                 object_name = 'side table'
@@ -330,7 +331,7 @@ class GameState:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'open double doors', 'double doors', 'doors','open doors'}:
+            elif object_name in {'oak double doors', 'double doors', 'doors','oak doors'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
@@ -477,9 +478,12 @@ class GameState:
             if 'bmw' not in cmd.obj.lower() and 'car' not in cmd.obj.lower() and 'keys' not in cmd.obj.lower():
                 print_split('You can\'t unlock the %s' % cmd.obj)
             elif self.main_player.inventory.has_key('keys'):
-                print_split(self.main_player.inventory['keys'].use['correct'])
-                self.garage_car_unlocked = True
-                self.current_room.items_in_room['bolt cutters'].is_getable = True
+                if self.garage_car_unlocked == False:
+                    print_split(self.main_player.inventory['keys'].use['correct'])
+                    self.garage_car_unlocked = True
+                    self.current_room.items_in_room['bolt cutters'].is_getable = True
+                else:
+                    print("The BMW car is already unlocked.")
             elif not self.main_player.inventory.has_key('keys'):
                 print_split('You don\'t have the keys')
         else:
@@ -551,9 +555,16 @@ class GameState:
             else:
                 print_split('You can\'t try on the %s' % object_name)
                 return self
-            print_split(self.current_room.look_at[object_name]['trying jacket on'])
-            self.familyroom_examinedcouch = True
-            self.current_room.items_in_room['safe combination'].is_getable = True
+            if self.familyroom_code_taken == False:
+                if self.familyroom_jacket_examined == False:
+                    print_split(self.current_room.look_at[object_name]['trying jacket on'])
+                    self.familyroom_examinedcouch = True
+                    self.familyroom_jacket_examined = True
+                    self.current_room.items_in_room['safe combination'].is_getable = True
+                else:
+                    print_split(self.current_room.look_at[object_name]['trying on jacket second time'])
+            elif self.familyroom_code_taken == True:
+                print_split(self.current_room.look_at[object_name]['trying jacket on after taking combination'])
         else:
             print_split("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -705,7 +716,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case','stairs'}:
                 cmd.direction = 'south'
                 self.json_move(cmd.direction)
                 return self
@@ -786,10 +797,10 @@ class GameState:
                 else:
                     print("Unable to look at object")
                     return self          
-            elif object_name in {'wine rack','wine','rack'}:
+            elif object_name in {'wine rack','wine','rack','wine racks','racks'}:
                 object_name = 'wine rack'
                 if self.current_room.look_at.has_key(object_name) == True:
-                    print self.current_room.look_at[object_name]
+                    print_split(self.current_room.look_at[object_name])
                     return self
             elif object_name in {'wall','bare wall','eastern wall','back wall'}:
                 object_name = 'wall'
@@ -988,16 +999,18 @@ class GameState:
                         return self
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
-        elif cmd.verb in {'open', 'read'}:
+        elif cmd.verb in {'open', 'read','unlock'}:
             if object_name == 'diary':
                 object_name = 'diary'
-                if self.current_room.look_at.has_key("side table"):
-                    if "diary key" in self.main_player.inventory:
-                        if self.sarahsroom_diary_unlocked == False:
+                if self.sarahsroom_diary_unlocked == False:
+                    if self.current_room.look_at.has_key("side table"):
+                        if "diary key" in self.main_player.inventory:
                             self.sarahsroom_diary_unlocked = True
                             print_split(self.main_player.inventory['diary key'].use['correct'])
-                    else:
-                        print_split("The diary is locked.  Maybe there is a key somewhere?")
+                        else:
+                            print_split("The diary is locked.  Maybe there is a key somewhere?")
+                elif self.sarahsroom_diary_unlocked == True:
+                    print_split(self.current_room.look_at['side table']['unlocked'])
 
 
 
@@ -1173,6 +1186,16 @@ class GameState:
                         self.familyroom_code_taken = True
                     elif value.name == 'passphrase':
                         self.mastersuite_passphrase_taken = True
+                    elif value.name == 'silver key':
+                        self.diningroom_key_taken = True
+                    elif value.name == 'flashlight':
+                        self.diningroom_flashlight_taken = True
+                    elif value.name == 'bolt cutters':
+                        self.garage_boltcutters_taken = True
+                    elif value.name == 'diary key':
+                        self.sarahroom_diarykey_taken = True
+                    elif value.name == 'engraved key':
+                        self.secondfloorfoyer_key_taken = True
 
                     if object_name[-1] == "s":
                         verb = "were"
