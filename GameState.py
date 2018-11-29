@@ -192,7 +192,7 @@ class GameState:
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
-            if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+            if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case','stairs'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
                 return self
@@ -659,7 +659,7 @@ class GameState:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case'}:
+            elif object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case','stairs'}:
                 cmd.direction = 'south'
                 self.json_move(cmd.direction)
                 return self
