@@ -1,7 +1,7 @@
 {
     "location": "Garage",
-    "long description": "You walk into the garage and notice how clean and organized it is. Sitting in the garage are a BMW and a truck. Both look pristine and brand new. You are getting the sense that this family is very concerned with their image. The only exit is the door from which you came in, on the west wall which leads to the Dining Room.",
-    "short description": "You are in the Garage. To the west is the Dining Room. There is a truck and a BMW parked inside.",
+    "long description": "You walk into the garage and notice how clean and organized it is. Sitting in the garage are a BMW and a truck. Both look pristine and brand new. You are getting the sense that this family is very concerned with their image. The only exit is the heavy wooden door from which you came in, on the west wall which leads to the Dining Room.",
+    "short description": "You are in the Garage. To the west is a heavy wooden door leading to the Dining Room. There is a truck and a BMW parked inside.",
     "look at":{
         "truck": "The truck appears spotless and looks like it has never been driven. You try the handle, but it is locked.",
         "BMW":{
