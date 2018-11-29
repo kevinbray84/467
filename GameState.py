@@ -505,7 +505,7 @@ class GameState:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
-            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+            elif object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs','downstairs'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
                 return self
@@ -940,11 +940,18 @@ class GameState:
                     print_split(self.main_player.inventory['bolt cutters'].use['correct'])
                     self.secretroom_chain_broke = True
                     return self
-        elif cmd.verb in ['talk to', 'rescue']:
-            if self.secretroom_chain_broke:
-                self.secretroom_sarah_free = True
-                print_split(self.current_room.look_at['sarah'])
-                return self
+
+        elif cmd.verb in ['rescue']:
+            if object_name in ['sarah','daughter','her']:
+                if self.secretroom_chain_broke == True:
+                    end_text= "You have freed Sarah. You radio in your findings to a stunned watch commander before turning to Sarah. She seems a bit weak from her days of captivity so you wrap your coat around her and gently carry her out of the mansion. As you step outside into the rain, seeing the police lights flashing in the distance, you feel proud of your decision to trust your gut and vow to make sure the mayor and his wife pay for their actions. As the sirens get closer, you slowly begin to relax as you finally realize your journey has finally come to an end. CONGRATULATTIONS YOU WIN "
+                    print_split(end_text)
+                    self.secretroom_sarah_free = True
+                else:
+                    print("Sarah is still chained. Need to cut it before you can rescue her.")
+            else:
+                print_split("The person or object you are trying to interact with does not seem to be in this room. Please try rescuing a different person.")
+
         else:
             print("These actions don't seem possible in the %s " % self.current_room.name)
             return self 
@@ -1123,7 +1130,7 @@ class GameState:
     def _basement_features(self, cmd):
         object_name = cmd.obj
         if cmd.verb == 'go':
-            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs'}:
+            if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs','upstairs'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
                 return self
