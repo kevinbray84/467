@@ -20,6 +20,7 @@ class GameState:
         self.build_json_mansion()
         self.add_items_to_mansion()
         self.link_json_mansion()
+        self.is_new_game = True
 
         # these variables keep track of if object has been moved or observed before
         self.firstfloorfoyer_keys_taken = False
@@ -1418,7 +1419,6 @@ class GameState:
     3) donegame - has the user finished the game?
     """
     def play(self):
-
         cmd = Input_Parser()
         self.main_player.current_room = self.json_Mansion["First Floor Foyer"]
         self.previous_room = None
@@ -1427,7 +1427,10 @@ class GameState:
         # Main Loop
         #########################################
 
-        # self.beginning_text()
+        if self.is_new_game:
+            self.beginning_text()
+            self.is_new_game = False
+            
         while self.secretroom_sarah_free == False:
 
             if self.current_room != self.previous_room:
