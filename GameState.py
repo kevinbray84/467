@@ -278,7 +278,7 @@ class GameState:
                         print_split(self.current_room.look_at[object_name]['key not taken'])
                         return self
                     else:
-                        print_split(self.current_room.look_at[object_name]['keys taken'])
+                        print_split(self.current_room.look_at[object_name]['key taken'])
                         return self
             elif object_name in {'sidetable', 'side table', 'table'}:
                 object_name = 'side table'
