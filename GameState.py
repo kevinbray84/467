@@ -1286,7 +1286,10 @@ class GameState:
         elif cmd.num_room_names == 1 and cmd.verb == 'go':
             self.last_command = "move"
             self.move_to(cmd.room_name)
-
+#testing
+        elif cmd.num_directions == 1 and cmd.verb == '':
+            self.last_command = "move"
+            self.json_move(cmd.direction)
         #####################################################
         #   Process action commands
         #####################################################
@@ -1435,7 +1438,7 @@ class GameState:
         #########################################
 
         if self.is_new_game:
-            self.beginning_text()
+            #self.beginning_text()
             self.is_new_game = False
             
         while self.secretroom_sarah_free == False:
