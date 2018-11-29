@@ -7,7 +7,6 @@
         "footprints": "On the ground, you notice a lot of boot prints that have been made in the dust, both coming and going. Placing your shoe next to one of the imprints, you judge the shoe size to be roughly equal to a men's 11 or 12. This was most likely a result of the Mayor coming down into the basement."
     },
     "exits": {
-        "west": "Family Room",
-        "south": "Wine Cellar"
+        "west": "Family Room"
     }
 }
