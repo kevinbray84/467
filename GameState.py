@@ -943,7 +943,7 @@ class GameState:
         elif cmd.verb in ['rescue']:
             if object_name in ['sarah','daughter','her']:
                 if self.secretroom_chain_broke == True:
-                    end_text= "You have freed Sarah. You radio in your findings to a stunned watch commanded before turning to Sarah. She seems a bit weak from her days of captivity so you wrap your coat around her and gently carry her out of the mansion. As you step outside into the rain, seeing the police lights flashing in the distance, you feel proud of your decision to trust your gut and vow to make sure the mayor and his wife pay for their actions. As the sirens get closer, you slowly begin to relax as you finally realize your journey has finally come to an end. CONGRATULATTIONS YOU WIN "
+                    end_text= "You have freed Sarah. You radio in your findings to a stunned watch commander before turning to Sarah. She seems a bit weak from her days of captivity so you wrap your coat around her and gently carry her out of the mansion. As you step outside into the rain, seeing the police lights flashing in the distance, you feel proud of your decision to trust your gut and vow to make sure the mayor and his wife pay for their actions. As the sirens get closer, you slowly begin to relax as you finally realize your journey has finally come to an end. CONGRATULATTIONS YOU WIN "
                     print_split(end_text)
                     self.secretroom_sarah_free = True
                 else:
