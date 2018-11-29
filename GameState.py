@@ -1239,7 +1239,7 @@ class GameState:
         print "    go <direction> - move in the specified direction (north, south, east, west)"
         print "    go <room name> - move to the specified room"
         print "INVENTORY MANAGEMENT"
-        print "    show inventory - display's all items in the player's inventory"
+        print "    inventory - display's all items in the player's inventory"
         print "    get <item name> - adds the specified item to inventory"
         print "    drop <item name> - drops the specified item in the current room"
         print "GAME ACTIONS"
@@ -1269,7 +1269,7 @@ class GameState:
             if cmd.command == 'exit':
                 print "Thanks for playing!"
                 exit()
-            elif cmd.command == 'show inventory':
+            elif cmd.command == 'inventory':
                 self.check_inventory()
             elif cmd.command == 'help':
                 self._help()

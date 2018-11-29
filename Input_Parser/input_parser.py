@@ -24,7 +24,7 @@ class Input_Parser:
 
         # create lists of each type of word
         self.commands = [' savegame ', ' loadgame ',
-                         ' exit ', ' show inventory ', ' help ', ' look ']
+                         ' exit ', ' inventory ', ' help ', ' look ']
         self.directions = [' north ', ' south ', ' east ',
                            ' west ']
         self.room_names = [' first floor foyer ', ' library ',
