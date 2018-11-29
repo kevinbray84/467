@@ -1412,7 +1412,10 @@ class GameState:
         time.sleep(2)
 
     """
-    This function starts the main loop of the game
+    This function starts the main loop of the game.  It returns 3 status flags:
+    1) savegame - has the user selected the savaegame option?
+    2) loadgaem - has the user selected the loadgame option?
+    3) donegame - has the user finished the game?
     """
     def play(self):
 
