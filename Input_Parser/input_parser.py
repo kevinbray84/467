@@ -82,7 +82,7 @@ class Input_Parser:
                         ' passcode ',
                         ' end table ',
                         ' fireplace ', ' fire ', ' fire place ', ' ashes ',
-                        ' wine bottle ', ' wine ',  ' bottle ', ' wine rack ', ' rack ',
+                        ' wine bottle ', ' wine ',  ' bottle ', ' wine rack ', ' rack ', ' wine racks ', ' racks ',
                         ' wine receipt ', ' receipt ',
                         ' jacket ', ' suit ', ' suit jacket ',
                         ' sofa ', ' couch ',
