@@ -52,7 +52,7 @@ class GameState:
         self.last_command = ""
 
     """
-    This funciton is called by the constructor and places all the items in each room.
+    This function is called by the constructor and places all the items in each room.
     """
     def add_items_to_mansion(self):
         itemdict = inputData("items.json")
