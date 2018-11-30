@@ -40,6 +40,16 @@ class Room:
                 return self.short_description['not moved']
             else:
                 return self.short_description['moved']
+        elif self.name == 'Basement':
+            if self.is_locked == True:
+                return self.short_description['not used flashlight']
+            else:
+                return self.short_description['used flashlight']
+        elif self.name == 'Secret Room':
+            if self.is_locked == True:
+                return self.short_description['not cut chain']
+            else:
+                return self.short_description['cut chain']
         return self.short_description
 
     def describe(self):
