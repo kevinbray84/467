@@ -206,10 +206,10 @@ class Input_Parser:
             self.get_input()
 
         if self.num_directions == 0 and self.num_commands == 0 and self.num_room_names == 0:
-            if self.num_verbs == 0:
-                print "I can't tell what you're trying to do.  Maybe use a verb?"
-                self.get_input()
-            elif self.num_verbs > 1:
+        #    if self.num_verbs == 0:
+            #    print "I can't tell what you're trying to do.  Maybe use a verb?"
+            #    self.get_input()
+            if self.num_verbs > 1:
                 print "You're trying to do too many things at once.  Maybe you have more than one verb?"
                 self.get_input()
             elif self.num_objs == 0:
