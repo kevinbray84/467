@@ -215,7 +215,7 @@ class GameState:
     """
     def _firstfloorfoyer_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'grand marble staircase', 'grand marble stair case','marble staircase', 'marble stair case', 'staircase','stair case','stairs', 'upstairs'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -269,7 +269,7 @@ class GameState:
     """
     def _diningroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'carpeted step','step','carpet','carpeted steps','steps'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -327,7 +327,7 @@ class GameState:
     """
     def _library_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'rosewood sliding door', 'rosewood door','sliding door'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -434,7 +434,7 @@ class GameState:
     """
     def _garage_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'heavy wooden door','heavy door','wooden door','door'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
@@ -496,7 +496,7 @@ class GameState:
     """
     def _familyroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -575,7 +575,7 @@ class GameState:
     """
     def _panicroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'massive steel door', 'massive door', 'steel door', 'door'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
@@ -618,7 +618,7 @@ class GameState:
     """
     def _veranda_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'elegant wooden double french doors','wooden double french doors','double french doors','french doors','doors','elegant double french doors','elegant wooden doors','elegant french doors','wooden french doors'}:
                 cmd.direction = 'south'
                 self.json_move(cmd.direction)
@@ -665,7 +665,7 @@ class GameState:
     """
     def _study_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'oaken panel door', 'oaken door','panel door','oak door', 'oak panel door'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
@@ -708,7 +708,7 @@ class GameState:
     """
     def _secondfloorfoyer_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
@@ -769,7 +769,7 @@ class GameState:
     """
     def _winecellar_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'opaque glass door','glass door','opaque door'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -847,7 +847,7 @@ class GameState:
     """
     def _grandroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'sliding glass door','glass door','sliding door'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
@@ -894,7 +894,7 @@ class GameState:
     """
     def _secretroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'disguised hidden stone door','hidden stone door','stone door','door','disguised stone door','disguised door','hidden door'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
@@ -939,6 +939,7 @@ class GameState:
                 if object_name in self.main_player.inventory:
                     print_split(self.main_player.inventory['bolt cutters'].use['correct'])
                     self.secretroom_chain_broke = True
+                    self.current_room.is_locked = False
                     return self
 
         elif cmd.verb in ['rescue']:
@@ -961,7 +962,7 @@ class GameState:
     """
     def _sarahsroom_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'decorated door','picture door','decorative door', 'door with pictures'}:
                 cmd.direction = 'east'
                 self.json_move(cmd.direction)
@@ -1031,7 +1032,7 @@ class GameState:
     """
     def _mastersuite_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'intricately carved mahogany door', 'carved mahogany door','mahogany door', 'carved door', 'intricately carved door'}:
                 cmd.direction = 'north'
                 self.json_move(cmd.direction)
@@ -1129,7 +1130,7 @@ class GameState:
     """
     def _basement_features(self, cmd):
         object_name = cmd.obj
-        if cmd.verb == 'go':
+        if cmd.verb == 'go' or cmd.verb == '':
             if object_name in {'dimly lit staircase','dimly lit stair case','staircase','stair case','stairs', 'dimly lit stairs','upstairs'}:
                 cmd.direction = 'west'
                 self.json_move(cmd.direction)
@@ -1173,6 +1174,7 @@ class GameState:
                 print_split("You shine the light around the room and notice an opaque glass door previously shrouded in darkness on the south wall. It appears to lead to the Wine Cellar.  You also notice a trunk and some footprints.")
                 self.current_room.exits.update({"south": "Wine Cellar"})
                 self.current_room.linked_rooms['south'] = self.json_Mansion["Wine Cellar"]
+                self.current_room.is_locked = False
             else:
                 print "You can't use %s in the %s." % (object_name, self.current_room.name)
         else:
@@ -1293,57 +1295,57 @@ class GameState:
         #####################################################
         #   Process action commands
         #####################################################
-        elif cmd.num_verbs == 1:
-            if cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
-                self.last_command = "take"
-                self._add_to_inventory(cmd.obj)
+        #elif cmd.num_verbs == 1:
+        elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
+            self.last_command = "take"
+            self._add_to_inventory(cmd.obj)
 
-            elif cmd.verb == 'drop':
-                self.last_command = "drop"
-                self._drop_from_inventory(cmd.obj)
+        elif cmd.verb == 'drop':
+            self.last_command = "drop"
+            self._drop_from_inventory(cmd.obj)
 
-            elif cmd.verb == 'talk to':
-                if self.current_room.name.lower() == 'secret room':
-                    if cmd.obj in {'sarah', 'daughter', 'her'}:
-                        print_split(self.current_room.look_at['sarah'])
-                    else:
-                        print("This person does not appear to be within this room.") 
+        elif cmd.verb == 'talk to':
+            if self.current_room.name.lower() == 'secret room':
+                if cmd.obj in {'sarah', 'daughter', 'her'}:
+                    print_split(self.current_room.look_at['sarah'])
                 else:
-                    print("There does not appear to be anyone to talk with in this room.") 
-
-            elif self.current_room.name.lower() == 'first floor foyer':
-                self._firstfloorfoyer_features(cmd)
-            elif self.current_room.name.lower() == 'dining room':
-                self._diningroom_features(cmd)
-            elif self.current_room.name.lower() == 'garage':
-                 self._garage_features(cmd)
-            elif self.current_room.name.lower() == 'library':
-                self._library_features(cmd)       
-            elif self.current_room.name.lower() == 'family room':
-                self._familyroom_features(cmd)
-            elif self.current_room.name.lower() == 'panic room':
-                self._panicroom_features(cmd)    
-            elif self.current_room.name.lower() == 'veranda':
-                self._veranda_features(cmd)
-            elif self.current_room.name.lower() == 'study':
-                self._study_features(cmd)    
-            elif self.current_room.name.lower() == 'second floor foyer':
-                self._secondfloorfoyer_features(cmd)
-            elif self.current_room.name.lower() == 'wine cellar':
-                self._winecellar_features(cmd)                  
-            elif self.current_room.name.lower() == 'grand room':
-                self._grandroom_features(cmd)
-            elif self.current_room.name.lower() == 'secret room':
-                self._secretroom_features(cmd)         
-            elif self.current_room.name.lower() == 'sarahs room':
-                self._sarahsroom_features(cmd)
-            elif self.current_room.name.lower() == 'master suite':
-                self._mastersuite_features(cmd)    
-            elif self.current_room.name.lower() == 'basement':
-                self._basement_features(cmd)
-                                      
+                    print("This person does not appear to be within this room.") 
             else:
-                print 'DEFAULT: You can\'t %s in the %s' % (cmd.verb, self.current_room.name)
+                print("There does not appear to be anyone to talk with in this room.") 
+
+        elif self.current_room.name.lower() == 'first floor foyer':
+            self._firstfloorfoyer_features(cmd)
+        elif self.current_room.name.lower() == 'dining room':
+            self._diningroom_features(cmd)
+        elif self.current_room.name.lower() == 'garage':
+                self._garage_features(cmd)
+        elif self.current_room.name.lower() == 'library':
+            self._library_features(cmd)       
+        elif self.current_room.name.lower() == 'family room':
+            self._familyroom_features(cmd)
+        elif self.current_room.name.lower() == 'panic room':
+            self._panicroom_features(cmd)    
+        elif self.current_room.name.lower() == 'veranda':
+            self._veranda_features(cmd)
+        elif self.current_room.name.lower() == 'study':
+            self._study_features(cmd)    
+        elif self.current_room.name.lower() == 'second floor foyer':
+            self._secondfloorfoyer_features(cmd)
+        elif self.current_room.name.lower() == 'wine cellar':
+            self._winecellar_features(cmd)                  
+        elif self.current_room.name.lower() == 'grand room':
+            self._grandroom_features(cmd)
+        elif self.current_room.name.lower() == 'secret room':
+            self._secretroom_features(cmd)         
+        elif self.current_room.name.lower() == 'sarahs room':
+            self._sarahsroom_features(cmd)
+        elif self.current_room.name.lower() == 'master suite':
+            self._mastersuite_features(cmd)    
+        elif self.current_room.name.lower() == 'basement':
+            self._basement_features(cmd)
+                                    
+        else:
+            print 'DEFAULT: You can\'t %s in the %s' % (cmd.verb, self.current_room.name)
             
 
 
@@ -1449,6 +1451,8 @@ class GameState:
 
             if self.last_command == "look":
                 self._render_room()
+                self.last_command == ""
+                
                 
             print("")
             cmd.get_input()
