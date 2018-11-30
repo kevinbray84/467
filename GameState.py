@@ -1446,6 +1446,8 @@ class GameState:
 
             if self.last_command == "look":
                 self._render_room()
+                self.last_command = ""
+
                 
             print("")
             cmd.get_input()
