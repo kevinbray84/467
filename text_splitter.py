@@ -5,10 +5,10 @@ import sys
 
 def set_width():
     if os.name == "posix":
-        rows, columns = os.popen('stty size', 'r').read().split()
-        if columns > 120:
-            columns = 120
-        return int(columns)
+        os.system("printf '\e[8;50;130t'")
+        columns = 120
+        return columns
+
     else:
         os.system("mode con cols=130")
         return int(120)
