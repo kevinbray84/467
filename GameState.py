@@ -1440,7 +1440,7 @@ class GameState:
         #########################################
 
         if self.is_new_game:
-            #self.beginning_text()
+            self.beginning_text()
             self.is_new_game = False
             
         while self.secretroom_sarah_free == False:
