@@ -3,14 +3,16 @@ import time
 import sys
 
 
-
 def set_width():
     if os.name == "posix":
         rows, columns = os.popen('stty size', 'r').read().split()
+        if columns > 120:
+            columns = 120
         return int(columns)
     else:
         os.system("mode con cols=130")
         return int(120)
+
 
 TEXT_WIDTH = set_width()
 
@@ -56,5 +58,3 @@ def animate_text(split_text, speed):
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-
