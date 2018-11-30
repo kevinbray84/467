@@ -261,7 +261,11 @@ class GameState:
             else:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -319,7 +323,11 @@ class GameState:
             else:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -426,7 +434,11 @@ class GameState:
             else:
                 print("You try to use the {} but it seems to have no effect".format(object_name))
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -488,7 +500,11 @@ class GameState:
             elif not self.main_player.inventory.has_key('keys'):
                 print_split('You don\'t have the keys')
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -567,7 +583,11 @@ class GameState:
             elif self.familyroom_code_taken == True:
                 print_split(self.current_room.look_at[object_name]['trying jacket on after taking combination'])
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -610,7 +630,11 @@ class GameState:
                 print_split("You can't examine the %s in the %s." % (object_name, self.current_room.name))
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
     
     """
@@ -657,7 +681,11 @@ class GameState:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -700,7 +728,11 @@ class GameState:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -761,7 +793,11 @@ class GameState:
             else:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -839,7 +875,11 @@ class GameState:
             else:
                 print "You can't %s the %s in the %s." % (cmd.verb, object_name, self.current_room.name)
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -886,7 +926,11 @@ class GameState:
                 print "You can't examine the %s in the %s." % (object_name, self.current_room.name)
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -954,7 +998,11 @@ class GameState:
                 print_split("The person or object you are trying to interact with does not seem to be in this room. Please try rescuing a different person.")
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -1024,7 +1072,11 @@ class GameState:
 
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
@@ -1122,7 +1174,11 @@ class GameState:
                 return self
 
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self
 
     """
@@ -1178,7 +1234,11 @@ class GameState:
             else:
                 print "You can't use %s in the %s." % (object_name, self.current_room.name)
         else:
-            print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
+            if cmd.verb == "":
+                print_split("You can\'t do that in the %s " % (self.current_room.name))
+
+            else:
+                print_split("You can\'t %s that in the %s " % (cmd.verb, self.current_room.name))
             return self 
 
     """
