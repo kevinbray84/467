@@ -1248,19 +1248,21 @@ class GameState:
         print "    get/take/grab/pick up <item name> - adds the specified item to inventory"
         print "    drop <item name> - drops the specified item in the current room"
         print "GAME ACTIONS"
-        print "    activate <item name> - start or turn on specified item"
-        print "    look at <item name> - examine an object"   
-        print "    unlock <item name> - unlock the specified item"   
-        print "    try on <item name> - wear the specified item"
-        print "    move <item name> - move the specified item"
-        print "    open <item name> - open the specified item"
-        print "    enter <code> - enter the specified code"
-        print "    watch <item name> - watch the specified item"
-        print "    turn on <item name> - turn on the specified item"
-        print "    use <item name> - use the specified item"
-        print "    cut <item name> - cut the specified item"
+        print "    unlock <object> - unlock the specified object"   
+        print "    try <object> - attempt to use the specified object"   
+        print "    move <object> - move the specified object"
+        print "    enter code - enter the specified code"
+        print "    try on <object> - wear the specified object"
+        print "    open <object> - open the specified object"
+        print "    activate <object> - start or turn on specified object"
+        print "    cut <object> - cut the specified object"
+        print "    read <object> - read the specified object"
+        print "    watch <object> - watch the specified object"
         print "    talk to <character> - talk to a character"
-        print "    rescue <character name> - rescue the specified person"
+        print "    rescue <character> - rescue the specified person"
+        print "    look at <object> - examine an object"   
+        print "    use <item name> - use the specified item"
+        print "    turn on <item name> - turn on the specified item"
 
 
     """
@@ -1292,7 +1294,7 @@ class GameState:
         elif cmd.num_room_names == 1 and cmd.verb == 'go':
             self.last_command = "move"
             self.move_to(cmd.room_name)
-#testing
+
         elif cmd.num_directions == 1 and cmd.verb == '':
             self.last_command = "move"
             self.json_move(cmd.direction)
@@ -1401,8 +1403,6 @@ class GameState:
 
         print("")
 
-        #prompt_width = 90
-        #text_width = 80
         text_main = "Its a dark and stormy night. Looking up through the oak tree branches, you see a storm brewing overhead. The cloudy sky seems to mirror the inner turmoil you are currently feeling. Almost subconsciously, your hand reaches into your pocket to touch your detective badge. From its presence, you seem to find renewed determination and resolve within yourself. As you wait in the shadow of the tree, watching the mansion across the field, you reflect on what a whirlwind the last few days have been. Several days ago, the mayors daughter, Sarah, was kidnapped. Over the course of your investigation, you began to feel that something was off with this case. There were simply too many aspects that didnt add up. A crazy thought began to form in the back of your mind. Maybe this wasnt just some high-profile kidnapping, maybe, this was an inside job. Perhaps this poor little girl was right under everyones noses, in the mayors mansion. You know no one would believe you, but you cant just sit on the sidelines any more. There must be some clues hidden within the mansion, and you intend to find them. Sudden movement of the garage door snaps you out of your thoughts. You see the Mayor and his wife pull out of the driveway in one of their many cars and head off into town. Now or never you tell yourself. You quickly cross the field and make your way to the door. You lockpick the front door and step inside the mansion."
 
         text_secondary = "Good Luck..."
