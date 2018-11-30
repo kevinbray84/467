@@ -1299,7 +1299,6 @@ class GameState:
         #####################################################
         #   Process action commands
         #####################################################
-        #elif cmd.num_verbs == 1:
         elif cmd.verb == 'take' or cmd.verb == 'get' or cmd.verb == 'grab' or cmd.verb == 'pick up':
             self.last_command = "take"
             self._add_to_inventory(cmd.obj)
@@ -1351,14 +1350,6 @@ class GameState:
         else:
             print 'DEFAULT: You can\'t %s in the %s' % (cmd.verb, self.current_room.name)
             
-
-
-    # def action_check(self, room_name, feature_name):
-    #     if room_name.lower() == "foyer":
-    #         if feature_name == "keys":
-    #             print("Keys are now available in room")
-    #             self.current_room.add_item(keys)
-
 
     """
     This function displayes the player's current inventory
@@ -1431,7 +1422,7 @@ class GameState:
     """
     This function starts the main loop of the game.  It returns 3 status flags:
     1) savegame - has the user selected the savaegame option?
-    2) loadgaem - has the user selected the loadgame option?
+    2) loadgame - has the user selected the loadgame option?
     3) donegame - has the user finished the game?
     """
     def play(self):
